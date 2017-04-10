@@ -1,0 +1,41 @@
+# Save in ~/.lldbinit
+
+###### Breakpoint Shortcuts #####
+# break on function/method/selector: b -n name
+# break on C/C++ method: b -M method
+# break on selector: b -S selector:here:
+# break on address: b -a 0xfeedface
+command alias b breakpoint set
+command alias bd breakpoint disable
+command alias be breakpoint enable
+command alias bdel breakpoint delete
+command alias bcommand breakpoint command add
+command alias commands breakpoint command list
+
+##### View Hierarchy #####
+# Swift
+command alias vh expr -l objc++ -O -- [[[UIWindow keyWindow] rootViewController] _printHierarchy]
+# Objective-C
+command alias vhc po [[[UIWindow keyWindow] rootViewController] _printHierarchy]
+
+##### Auto Layout Debugging #####
+# Swift
+command alias alt expr -l objc++ -O -- [[UIWindow keyWindow] _autolayoutTrace]
+# Objective-C
+command alias altc po [[UIWindow keyWindow] _autolayoutTrace]
+
+##### Extra #####
+
+# Swift (Xcode <= 7)
+command alias uikit expr import UIKit
+command alias foundation expr import Foundation
+
+# Objective-C (Xcode <= 7)
+command alias uikitc expr @import UIKit
+command alias foundationc expr @import Foundation
+
+# Memory Breakpoint
+# use: "br e memory"
+breakpoint set -n malloc -N memory
+breakpoint set -n free -N memory
+breakpoint disable memory
