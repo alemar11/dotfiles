@@ -1,1 +1,7 @@
 # dotfiles
+
+Run 🚀
+
+```
+./install.sh
+```
