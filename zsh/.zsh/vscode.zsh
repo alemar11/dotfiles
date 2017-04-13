@@ -2,13 +2,9 @@
 
 #Usage
 #If vs command is called without an argument, launch Visual Studio Code
-
 #If vs is passed a directory, cd to it and open it in Visual Studio Code
-
 #If vs is passed a file, open it in Visual Studio Code
-
 #If vsf command is called, it is equivalent to vs ., opening the current folder in Visual Studio Code
-
 #If svs command is called, it is like sudo vs, opening the file or folder in Visual Studio Code. Useful for editing system protected files.
 
 if [[ $('uname') == 'Linux' ]]; then

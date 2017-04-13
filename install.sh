@@ -1,8 +1,5 @@
-echo "Changing shell…"
-chsh -s /bin/zsh
-
-echo "Moving zsh configuration files…"
-cp -a zsh/ ~/
+echo "ZSH setup…"
+./scripts/zsh.sh
 
 echo "Moving Xcode .lldbinit configuration file…"
 cp -a lldbinit/ ~/

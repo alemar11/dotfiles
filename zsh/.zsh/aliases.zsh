@@ -8,13 +8,19 @@ alias ls='ls -F'
 alias ll='ls -l'
 
 # Git
-alias gsu='git submodule update --init --recursive'
-alias gs='git status'
-alias gp='git push'
-alias gu='git up'
-alias gc='git commit -a'
+alias g='git'
 alias ga='git add .'
+alias gb='git branch'
+alias gc='git commit -a'
+alias gf='git fetch'
+alias gl='git log --graph --decorate --all'
+alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 compdef _git gs=git-status
+alias gp='git push'
+alias gs='git status'
+alias gsu='git submodule update --init --recursive'
+alias gu='git up'
+alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 alias cleanup_branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 # Ruby

@@ -4,8 +4,7 @@ brew upgrade
 FORMULAS=(
     carthage
     rbenv
-    wget
-    
+    wget   
 )
 brew install ${FORMULAS[@]}
 
