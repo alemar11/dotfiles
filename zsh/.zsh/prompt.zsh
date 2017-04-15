@@ -22,5 +22,5 @@ function git_prompt_info() {
   echo " $(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}"
 }
 
-PROMPT='%{$fg[blue]%}%c%{$reset_color%}$ '
+PROMPT='%{$fg[magenta]%}%c%{$reset_color%}$ '
 RPROMPT='$(git_prompt_info)'
