@@ -26,11 +26,11 @@ zstyle ':completion:*' insert-tab pending
 export EDITOR='vim'
 
 # Paths
-export PATH="$HOME/bin:$HOME/.rbenv/plugins/ruby-build/bin:$HOME/Code/go/bin:/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:/usr/local/heroku/bin:/usr/local/foreman/bin:/usr/local/bin:/System/Library/CoreServices:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export GOPATH=$HOME/Code/go
+#export PATH=""
+
 
 # Colors
+# https://geoff.greer.fm/lscolors/
 export CLICOLOR=1
 autoload colors; colors;
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
