@@ -10,7 +10,7 @@ alias ll='ls -l'
 # Git
 alias g='git'
 alias ga='git add .'
-alias gb='git branch'
+alias gb='git branch -a'
 alias gc='git commit -a'
 alias gf='git fetch'
 alias gl='git log --graph --decorate --all'
@@ -21,7 +21,7 @@ alias gs='git status'
 alias gsu='git submodule update --init --recursive'
 alias gu='git up'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
-alias cleanup_branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
 # Ruby
 alias b='bundle exec'
