@@ -1,10 +1,13 @@
-echo "ZSH setup…"
+echo “Setup…"
 
 echo "Changing shell…"
 chsh -s /bin/zsh
 
 echo "Moving zsh configuration files…"
 cp -a zsh/ ~/
+
+echo "Moving Vim .vimrc configuration file…"
+cp -a vim/ ~/
 
 echo "Moving Xcode .lldbinit configuration file…"
 cp -a lldbinit/ ~/
