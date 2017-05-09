@@ -23,9 +23,6 @@ alias gu='git up'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
-# Ruby
-alias b='bundle exec'
-
 # macOS
 alias o='open .'
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
@@ -36,3 +33,9 @@ alias $=' '
 
 # Homebrew
 alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
+
+# Ruby
+alias b='bundle exec'
+
+# Ruby Gems
+alias gemup='gem cleanup & gem update'
