@@ -38,4 +38,4 @@ alias brewup='brew update && brew doctor && brew outdated && brew upgrade && bre
 alias b='bundle exec'
 
 # Ruby Gems
-alias gemup='gem cleanup & gem update'
+alias gemup='gem update --system && gem cleanup && gem update'
