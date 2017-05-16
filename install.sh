@@ -2,7 +2,9 @@ echo "Setup…"
 
 echo "Changing shell…"
 chsh -s /bin/zsh
-echo "\ndone"
+echo "done"
+
+echo "\n"
 
 echo "Moving zsh configuration files…"
 cp -a zsh/ ~/
