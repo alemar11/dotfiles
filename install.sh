@@ -1,30 +1,42 @@
-echo “Setup…"
+echo "Setup…"
 
 echo "Changing shell…"
 chsh -s /bin/zsh
+echo "\ndone"
 
 echo "Moving zsh configuration files…"
 cp -a zsh/ ~/
+echo "done"
+
+echo "\n"
 
 echo "Moving Vim .vimrc configuration file…"
 cp -a vim/ ~/
+echo "done"
 
-echo "Moving Xcode .lldbinit configuration file…"
+echo "\n"
+
+echo "Moving Xcode .lldbinit configuration file"
 cp -a lldbinit/ ~/
+echo "done"
+
+echo "\n"
 
 echo "Installing Homebrew…"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ./scripts/homebrew.sh
+echo "\ndone"
 
-echo "Installing latest Ruby version (stable)…"
+echo "Installing the latest stable Ruby version…"
 latest_ruby_version=$(rbenv install -l | sed -n '/^[[:space:]]*[0-9]\{1,\}\.[0-9]\{1,\}\.[0-9]\{1,\}[[:space:]]*$/ h;${g;p;}')
 echo "$latest_ruby_version"
-
 rbenv install $latest_ruby_version
 rbenv global $latest_ruby_version
+echo "done"
+
+echo "\n"
 
 echo "Installing Bundler…"
-gem install bundler
+sudo gem install bundler
 rbenv rehash
-
 echo "done"
