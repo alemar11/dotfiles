@@ -35,7 +35,7 @@ alias $=' '
 alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
 
 # Ruby
-alias b='bundle exec'
+alias b='bundle'
 
 # Ruby Gems
 alias gemup='gem cleanup & gem update'
