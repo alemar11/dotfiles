@@ -20,6 +20,7 @@ alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgr
 compdef _git gs=git-status
 alias gp='git push'
 alias gs='git status'
+alias gt='git checkout -t'
 alias gsu='git submodule update --init --recursive'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
