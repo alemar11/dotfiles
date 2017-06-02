@@ -17,7 +17,6 @@ alias gD='git branch -D'
 alias gf='git fetch'
 alias gl='git log --graph --decorate --all'
 alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-compdef _git gs=git-status
 alias gp='git push'
 alias gs='git status'
 alias gsb='git status -sb'
