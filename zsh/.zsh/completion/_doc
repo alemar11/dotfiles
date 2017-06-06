@@ -1,2 +1,2 @@
-#compdef desk
+#compdef doc
 _files -W ~/Documents -/
