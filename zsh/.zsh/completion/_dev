@@ -1,2 +1,0 @@
-#compdef dev
-_files -W ~/Developer -/

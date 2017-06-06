@@ -1,17 +1,23 @@
+# reload zsh config
+alias reload!='RELOAD=1 source ~/.zshrc'
+
 # cd
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....='cd ../../..'
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
 
 # ls
 alias ls='ls -F'
-alias ll='ls -l'
+alias ll='ls -la'
 
 # Git
 alias g='git'
 alias ga='git add .'
 alias gb='git branch -a'
+alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gc='git commit -a'
+alias gcount='git shortlog -sn'
 alias gd='git branch -d'
 alias gD='git branch -D'
 alias gf='git fetch'
@@ -20,10 +26,17 @@ alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgr
 alias gp='git push'
 alias gs='git status'
 alias gsb='git status -sb'
-alias gt='git checkout -t'
 alias gsu='git submodule update --init --recursive'
+alias gt='git checkout -t'
+alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
-alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 
 # macOS
 alias o='open .'
@@ -42,3 +55,6 @@ alias be='bundle exec'
 
 # Ruby Gems
 alias gemup='gem update --system && gem cleanup && gem update'
+
+## SSH
+alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null'

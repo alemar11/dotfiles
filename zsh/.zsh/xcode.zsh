@@ -59,16 +59,16 @@ function xcselv {
     echo "xcselv: see 'xcselv -h' for help" >&2
     return 1
   elif [[ $1 == "-p" ]]; then
-    _omz_xcode_print_active_version
+    xcode_print_active_version
     return
   elif [[ $1 == "-l" ]]; then
-    _omz_xcode_list_versions
+    xcode_list_versions
     return
   elif [[ $1 == "-L" ]]; then
-    _omz_xcode_list_versions short
+    xcode_list_versions short
     return
   elif [[ $1 == "-h" ]]; then
-    _omz_xcode_print_xcselv_usage
+    xcode_print_xcselv_usage
     return 0
   elif [[ $1 == -* && $1 != "-" ]]; then
     echo "xcselv: error: unrecognized option: $1" >&2
@@ -78,7 +78,7 @@ function xcselv {
   # Main case: "xcselv <version>" to select a version
   local version=$1
   local -A xcode_versions
-  _omz_xcode_locate_versions
+  xcode_locate_versions
   if [[ -z ${xcode_versions[$version]} ]]; then
     echo "xcselv: error: Xcode version '$version' not found" >&2
     return 1
@@ -88,7 +88,7 @@ function xcselv {
   xcsel "$app"
 }
 
-function _omz_xcode_print_xcselv_usage {
+function xcode_print_xcselv_usage {
   cat << EOF >&2
 Usage: 
   xcselv <version>
@@ -104,8 +104,8 @@ EOF
 }
 
 # Parses the Xcode version from a filename based on our conventions
-# Only meaningful when called from other _omz_xcode functions
-function _omz_xcode_parse_versioned_file {
+# Only meaningful when called from other xcode functions
+function xcode_parse_versioned_file {
   local file=$1
   local basename=${app:t}
   local dir=${app:h}
@@ -138,11 +138,11 @@ function _omz_xcode_parse_versioned_file {
 }
 
 # Print the active version, using xcselv's notion of versions
-function _omz_xcode_print_active_version {
+function xcode_print_active_version {
   emulate -L zsh
   local -A xcode_versions
   local versions version active_path
-  _omz_xcode_locate_versions
+  xcode_locate_versions
   active_path=$(xcode-select -p)
   active_path=${active_path%%/Contents/Developer*}
   versions=(${(kni)xcode_versions})
@@ -159,7 +159,7 @@ function _omz_xcode_print_active_version {
 # plugin's internal use.
 # Populates the $xcode_versions associative array variable
 # Caller should local-ize $xcode_versions with `local -A xcode_versions`
-function _omz_xcode_locate_versions {
+function xcode_locate_versions {
   emulate -L zsh
   local -a app_dirs
   local app_dir apps app xcode_ver
@@ -168,7 +168,7 @@ function _omz_xcode_locate_versions {
   for app_dir ($app_dirs); do
     apps=( $app_dir/Xcode*.app(N) $app_dir/Xcode*/Xcode.app(N) )
     for app ($apps); do
-      xcode_ver=$(_omz_xcode_parse_versioned_file $app)
+      xcode_ver=$(xcode_parse_versioned_file $app)
       if [[ $? != 0 ]]; then
         continue
       fi
@@ -177,10 +177,10 @@ function _omz_xcode_locate_versions {
   done
 }
 
-function _omz_xcode_list_versions {
+function xcode_list_versions {
   emulate -L zsh
   local -A xcode_versions
-  _omz_xcode_locate_versions
+  xcode_locate_versions
   local width=1 width_i versions do_short=0
   if [[ $1 == "short" ]]; then
     do_short=1
