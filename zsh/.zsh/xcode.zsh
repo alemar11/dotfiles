@@ -1,4 +1,3 @@
-alias xcb='xcodebuild'
 alias xcdd='rm -rf ~/Library/Developer/Xcode/DerivedData/*'
 alias xcp='xcode-select --print-path'
 alias xcsel='sudo xcode-select --switch'
@@ -14,6 +13,26 @@ function xc {
     xcode_proj=($1/*.{xcworkspace,xcodeproj}(N))
   fi
 
+  if [[ ${#xcode_proj} -eq 0 ]]; then
+    if [[ $# == 0 ]]; then
+      echo "No xcworkspace/xcodeproj file found in the current directory."
+    else
+      echo "No xcworkspace/xcodeproj file found in $1."
+    fi
+    return 1
+  else
+    echo "Found ${xcode_proj[1]}, opening with Xcode"
+    open -a "Xcode" "${xcode_proj[1]}"
+  fi
+}
+
+function xcb {
+  local xcode_proj
+  if [[ $# == 0 ]]; then
+    xcode_proj=(*.{xcworkspace,xcodeproj}(N))
+  else
+    xcode_proj=($1/*.{xcworkspace,xcodeproj}(N))
+  fi
 
   if [[ ${#xcode_proj} -eq 0 ]]; then
     if [[ $# == 0 ]]; then
@@ -23,8 +42,8 @@ function xc {
     fi
     return 1
   else
-    echo "Found ${xcode_proj[1]}"
-    open "${xcode_proj[1]}"
+    echo "Found ${xcode_proj[1]}, opening with Xcode Beta"
+    open -a "Xcode-beta" "${xcode_proj[1]}"
   fi
 }
 
@@ -181,18 +200,3 @@ function _omz_xcode_list_versions {
   done
 }
 
-function simulator {
-  local devfolder
-  devfolder="$(xcode-select -p)"
-
-  # Xcode ≤ 5.x
-  if [[ -d "${devfolder}/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone Simulator.app" ]]; then
-    open "${devfolder}/Platforms/iPhoneSimulator.platform/Developer/Applications/iPhone Simulator.app"
-  # Xcode ≥ 6.x
-  elif [[ -d "${devfolder}/Applications/iOS Simulator.app" ]]; then
-    open "${devfolder}/Applications/iOS Simulator.app"
-  # Xcode ≥ 7.x
-  else
-    open "${devfolder}/Applications/Simulator.app"
-  fi
-}
