@@ -8,20 +8,20 @@ alias xcv=xcselv
 function xc {
   local xcode_proj
   if [[ $# == 0 ]]; then
-    xcode_proj=(*.{xcworkspace,xcodeproj}(N))
+    xcode_proj=(*.{xcworkspace,xcodeproj,playground}(N))
   else
-    xcode_proj=($1/*.{xcworkspace,xcodeproj}(N))
+    xcode_proj=($1/*.{xcworkspace,xcodeproj,playground}(N))
   fi
 
   if [[ ${#xcode_proj} -eq 0 ]]; then
     if [[ $# == 0 ]]; then
-      echo "No xcworkspace/xcodeproj file found in the current directory."
+      echo "⚠️  No xcworkspace/xcodeproj/playground file found in the current directory."
     else
-      echo "No xcworkspace/xcodeproj file found in $1."
+      echo "⚠️  No xcworkspace/xcodeproj/playground file found in $1."
     fi
     return 1
   else
-    echo "Found ${xcode_proj[1]}, opening with Xcode"
+    echo "✅  Found ${xcode_proj[1]}, opening with Xcode."
     open -a "Xcode" "${xcode_proj[1]}"
   fi
 }
@@ -29,20 +29,20 @@ function xc {
 function xcb {
   local xcode_proj
   if [[ $# == 0 ]]; then
-    xcode_proj=(*.{xcworkspace,xcodeproj}(N))
+    xcode_proj=(*.{xcworkspace,xcodeproj,playground}(N))
   else
-    xcode_proj=($1/*.{xcworkspace,xcodeproj}(N))
+    xcode_proj=($1/*.{xcworkspace,xcodeproj,playground}(N))
   fi
 
   if [[ ${#xcode_proj} -eq 0 ]]; then
     if [[ $# == 0 ]]; then
-      echo "No xcworkspace/xcodeproj file found in the current directory."
+      echo "⚠️  No xcworkspace/xcodeproj/playground file found in the current directory."
     else
-      echo "No xcworkspace/xcodeproj file found in $1."
+      echo "⚠️  No xcworkspace/xcodeproj/playground file found in $1."
     fi
     return 1
   else
-    echo "Found ${xcode_proj[1]}, opening with Xcode Beta"
+    echo "✅  Found ${xcode_proj[1]}, opening with Xcode Beta."
     open -a "Xcode-beta" "${xcode_proj[1]}"
   fi
 }
