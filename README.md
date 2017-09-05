@@ -6,4 +6,4 @@ Run 🚀
 ./install.sh
 ```
 
-Custom terminal theme: double click on AM.terminal.
+To install the custom terminal theme just double click on AM.terminal.
