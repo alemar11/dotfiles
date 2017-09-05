@@ -1,5 +1,3 @@
-echo "Configuring Xcode..."
-
 XCODE_CODESNIPPETS_FOLDER="$HOME/Library/Developer/Xcode/UserData/CodeSnippets"
 XCODE_THEMES_FOLDER="$HOME/Library/Developer/Xcode/UserData/FontAndColorThemes"
 
@@ -16,5 +14,3 @@ if [ ! -d $XCODE_THEMES_FOLDER ]; then
 fi
 
 cp -a ../xcode/FontAndColorThemes/ $XCODE_THEMES_FOLDER
-
-echo "Done."

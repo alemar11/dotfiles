@@ -41,4 +41,8 @@ echo "\n"
 echo "Installing Bundler…"
 sudo gem install bundler
 rbenv rehash
-echo "done"
+echo "\ndone"
+
+echo "Configuring Xcode…"
+./scripts/xcode.sh
+echo "\ndone"
