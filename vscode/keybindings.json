@@ -1,0 +1,21 @@
+// Inserire i tasti di scelta rapida in questo file per sovrascrivere i valori predefiniti
+[
+    {
+        "key": "ctrl+shift+i",
+        "command": "editor.action.formatDocument"
+    },
+    {
+        "key": "ctrl+i",
+        "command": "format.standard"
+    },
+    {
+        "key": "ctrl+shift+u",
+        "command": "editor.action.transformToUppercase",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "editor.action.transformToLowercase",
+        "when": "editorTextFocus"
+    }
+]
