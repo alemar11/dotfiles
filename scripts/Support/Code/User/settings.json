@@ -1,0 +1,5 @@
+// Inserire le impostazioni in questo file per sovrascrivere quelle predefinite
+{
+    "window.zoomLevel": 1,
+    "editor.tabSize": 2
+}
