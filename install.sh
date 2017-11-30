@@ -46,3 +46,7 @@ echo "\ndone"
 echo "Configuring Xcode…"
 ./scripts/xcode.sh
 echo "\ndone"
+
+echo "Configuring VSCode…"
+./scripts/vscode.sh
+echo "\ndone"
