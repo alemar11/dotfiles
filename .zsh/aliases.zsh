@@ -3,9 +3,6 @@ alias reload!='RELOAD=1 source ~/.zshrc'
 
 # cd
 alias ..='cd ..'
-alias ...='cd ../..'
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
 
 # ls
 alias ls='ls -F'

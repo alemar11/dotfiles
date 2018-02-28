@@ -1,8 +1,0 @@
-VSCODE_SETTINGS_AND_KEYBINDINGS_FOLDER="$HOME/Library/Application\ Support/Code/User"
-
-echo "Visual Studio Code"
-if [ ! -d '$VSCODE_SETTINGS_AND_KEYBINDINGS_FOLDER' ]; then
-  mkdir -p $VSCODE_SETTINGS_AND_KEYBINDINGS_FOLDER;
-fi
-
-cp -a ../vscode/ $VSCODE_SETTINGS_AND_KEYBINDINGS_FOLDER
