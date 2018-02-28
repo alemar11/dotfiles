@@ -7,6 +7,12 @@ alias ..='cd ..'
 # ls
 alias ls='ls -F'
 alias ll='ls -la'
+alias cpwd='pwd | pbcopy' #copy working directory
+alias cpdir=cpwd
+
+#Processes
+alias tu='top -o cpu' # processes sorted by CPU
+alias tm='top -o vsize' # processes sorted by Memory
 
 # Git
 alias g='git'
@@ -27,6 +33,21 @@ alias gsu='git submodule update --init --recursive'
 alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
+
+#create a new branch & switch to it
+function gcb() {
+  git checkout -b $*
+}
+
+#move to a branch
+function gco() {
+  git checkout $*
+}
+
+#commit pending changes and quote args
+function gg() {
+  git commit -v -a -m "$*"
+}
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
