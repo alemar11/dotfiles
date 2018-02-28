@@ -71,10 +71,8 @@ function git_prompt_info() {
 
   # Get the branch name and color
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX%{$reset_color%}"
 }
-
-PROMPT='[%{$fg_bold[white]%}%c%{$reset_color%}@%{$fg_bold[red]%}%m%{$reset_color%} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)%{$reset_color%}]$ '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"
