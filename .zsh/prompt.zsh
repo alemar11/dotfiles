@@ -6,22 +6,6 @@ parse_git_dirty() {
   fi
 }
 
-function git_prompt_info() {
-  # Ignore directorys that aren't in git
-  if ! git ls-files >& /dev/null; then
-    return;
-  fi;
-
-  # Ignore the home directory
-  if [ "$(git rev-parse --quiet --show-toplevel)" '==' $HOME ]; then
-    return;
-  fi;
-
-  # Get the branch name and color
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo " $(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}"
-}
-
 # Colors vary depending on time lapsed.
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
 ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
@@ -61,18 +45,40 @@ function git_time_since_commit() {
             fi
 
             if [ "$HOURS" -gt 24 ]; then
-                echo "($COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+                echo "$COLOR${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m%{$reset_color%}"
             elif [ "$MINUTES" -gt 60 ]; then
-                echo "($COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}|"
+                echo "$COLOR${HOURS}h${SUB_MINUTES}m%{$reset_color%}"
             else
-                echo "($COLOR${MINUTES}m%{$reset_color%}|"
+                echo "$COLOR${MINUTES}m%{$reset_color%}"
             fi
         else
             COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL"
-            echo "($COLOR~|"
+            echo "$COLOR"
         fi
     fi
 }
 
-PROMPT='%{$fg[magenta]%}%c%{$reset_color%}$ %{$reset_color%}$(git_time_since_commit) %{$reset_color%$(git_prompt_info)'
+function git_prompt_info() {
+  # Ignore directorys that aren't in git
+  if ! git ls-files >& /dev/null; then
+    return;
+  fi;
+
+  # Ignore the home directory
+  if [ "$(git rev-parse --quiet --show-toplevel)" '==' $HOME ]; then
+    return;
+  fi;
+
+  # Get the branch name and color
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
+
+PROMPT='[%{$fg_bold[white]%}%c%{$reset_color%}@%{$fg_bold[red]%}%m%{$reset_color%} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)%{$reset_color%}]$ '
+
+ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
+
+PROMPT='%{$fg[magenta]%}%c%{$reset_color%}$%{$reset_color%}$(git_prompt_info) '
 #RPROMPT='$(git_prompt_info)'
