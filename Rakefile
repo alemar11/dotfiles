@@ -12,7 +12,7 @@ def all_files
 end
 
 def ignore_files
-  [ '.DS_Store', '.git', '.gitignore', '.rake_tasks~', '.', '..' ]
+  [ '.DS_Store', '.git', '.gitignore', '.rake_tasks~', 'extra', '.', '..' ]
 end
 
 def already_symlinked?(source_path, target_path)
