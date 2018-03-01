@@ -33,9 +33,9 @@ function git_time_since_commit() {
             SUB_MINUTES=$((MINUTES % 60))
 
             if [[ -n $(git status -s 2> /dev/null) ]]; then
-                if [ "$MINUTES" -gt 60 ]; then
+                if [ "$MINUTES" -gt 120 ]; then
                     COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG"
-                elif [ "$MINUTES" -gt 30 ]; then
+                elif [ "$MINUTES" -gt 60 ]; then
                     COLOR="$ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM"
                 else
                     COLOR="$ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT"
