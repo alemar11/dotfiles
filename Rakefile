@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'colored'
 
-desc "Create symlinks for each of the files. Prompts before overwriting"
+desc "Create symlinks for each of the files. Prompts before overwriting."
 task :symlink do
   create_symlinks
 end

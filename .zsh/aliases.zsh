@@ -67,10 +67,6 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias o='open .'
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
 
-# Commands starting with % for pasting from web
-alias %=' '
-alias $=' '
-
 # Homebrew
 alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
 
