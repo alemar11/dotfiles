@@ -36,7 +36,7 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # formatting and messages
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format "$fg[yellow]%B%d%b"
+zstyle ':completion:*:descriptions' format "$fg[yellow]%B%d%b$reset_color"
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
