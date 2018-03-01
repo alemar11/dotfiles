@@ -16,7 +16,6 @@ export EDITOR='vim'
 # Paths
 #export PATH=""
 
-
 # Colors
 # https://geoff.greer.fm/lscolors/
 export CLICOLOR=1
