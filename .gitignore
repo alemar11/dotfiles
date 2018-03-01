@@ -4,3 +4,4 @@
 ._*
 Thumbs.db
 .cache
+.rake_tasks~
