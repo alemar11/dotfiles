@@ -4,7 +4,7 @@ autoload -U compinit
 compinit
 autoload -U ~/.zsh/functions/*(:t)
 
-cdpath=($HOME/Developer $HOME/Documents $HOME/Downloads)
+cdpath=($HOME/Developer $HOME/Documents)
 
 # Editor
 export EDITOR='vim'
