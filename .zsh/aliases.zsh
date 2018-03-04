@@ -21,6 +21,10 @@ alias gb='git branch -a'
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gc='git commit -a'
 alias gcount='git shortlog -sn'
+alias gcb='git checkout -b'
+alias gco='git checkout'
+alias gcd='git branch -d'
+alias gcD='git branch -D'
 alias gf='git fetch'
 alias gl='git log --graph --decorate --all'
 alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
@@ -33,23 +37,23 @@ alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 
-function gcd() {
-  git branch -d $*
-}
+# function gcd() {
+#   git branch -d $*
+# }
 
-function gcD() {
-  git branch -D $*
-}
+# function gcD() {
+#   git branch -D $*
+# }
 
 #create a new branch & switch to it
-function gcb() {
-  git checkout -b $*
-}
+# function gcb() {
+#   git checkout -b $*
+# }
 
 #move to a branch
-function gco() {
-  git checkout $*
-}
+# function gco() {
+#   git checkout $*
+# }
 
 #commit pending changes and quote args
 function gg() {
