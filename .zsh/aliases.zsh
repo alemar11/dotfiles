@@ -26,6 +26,7 @@ alias gco='git checkout'
 alias gcd='git branch -d'
 alias gcD='git branch -D'
 alias gf='git fetch'
+alias gfp='git fetch --prune'
 alias gl='git log --graph --decorate --all'
 alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 alias gm="git mergetool"
