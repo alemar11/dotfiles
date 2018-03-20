@@ -82,6 +82,7 @@ alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/R
 
 # Homebrew
 alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
+#alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
 
 # Ruby
 alias b='bundle'
