@@ -56,6 +56,14 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 #   git checkout $*
 # }
 
+# Swift Package Manager
+alias spi='swift package init'
+alias spf='swift package fetch'
+alias spu='swift package update'
+alias spx='swift package generate-xcodeproj'
+alias sps='swift package show-dependencies'
+alias spd='swift package dump-package'
+
 #commit pending changes and quote args
 function gg() {
   git commit -v -a -m "$*"
