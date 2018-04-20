@@ -348,6 +348,7 @@ _swift_test() {
         "--enable-build-manifest-caching[Enable llbuild manifest caching [Experimental]]"
         "--skip-build[Skip building the test target]"
         "(--list-tests -l)"{--list-tests,-l}"[Lists test methods in specifier format]"
+        "--generate-linuxmain[Generate LinuxMain.swift entries for the package]"
         "--parallel[Run the tests in parallel.]"
         "(--specifier -s)"{--specifier,-s}"[]: : "
         "--filter[Run test cases matching regular expression, Format: <test-target>.<test-case> or <test-target>.<test-case>/<test>]:Run test cases matching regular expression, Format: <test-target>.<test-case> or <test-target>.<test-case>/<test>: "
