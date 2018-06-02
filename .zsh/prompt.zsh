@@ -1,4 +1,4 @@
-parse_git_dirty() {
+git_parse_dirty() {
   if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
     echo "%{$fg[red]%}"
   else
@@ -70,8 +70,8 @@ function git_prompt_info() {
   fi;
 
   # Get the branch name and color
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX%{$reset_color%}"
+  ref=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/') || return
+  echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(git_parse_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX%{$reset_color%}"
 }
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
