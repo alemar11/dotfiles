@@ -28,7 +28,7 @@ def create_symlinks
     target_path = File.join homedir, file
     unless already_symlinked?(source_path, target_path)
       if File.exists?(target_path)
-        puts "File #{target_path} exists.  Overwrite it (y/n)?"
+        puts "File #{target_path} exists. Overwrite it (y/n)?"
         if STDIN.gets.chomp.downcase == 'y'
           puts "#{"DELETING".red} #{target_path}"
           raise "This shouldn't happen, but if it does, I'm refusing to delete /" if target_path == "/"
