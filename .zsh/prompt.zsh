@@ -71,6 +71,10 @@ function git_prompt_info() {
 
   # Get the branch name and color
   ref=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/') || return
+  if [ -z "$ref" ]; then
+      echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(git_parse_dirty)No branch%{$reset_color%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+      return;
+  fi;
   echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(git_parse_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX%{$reset_color%}"
 }
 
