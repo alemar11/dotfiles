@@ -3,10 +3,11 @@
 Run 🚀
 
 ```
-rake symlink
+bundle install
+bundle exec rake symlink
 ```
 
-## Swift Package Manager Completion (Swift 4.1)
+## Swift Package Manager Completion (Swift 4.2)
 
 If you want to update the current auto completion run:
 `swift package completion-tool generate-zsh-script > ~/.zsh/functions/_swift`
