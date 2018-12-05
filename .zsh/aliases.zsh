@@ -25,6 +25,7 @@ alias gcb='git checkout -b'
 alias gco='git checkout'
 alias gd='git branch -d'
 alias gD='git branch -D'
+alias gexport='git archive --format zip --output'
 alias gf='git fetch'
 alias gfp='git fetch --prune'
 alias gl='git log --graph --decorate --all'
@@ -38,23 +39,10 @@ alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 
-# function gcd() {
-#   git branch -d $*
-# }
-
-# function gcD() {
-#   git branch -D $*
-# }
-
-#create a new branch & switch to it
-# function gcb() {
-#   git checkout -b $*
-# }
-
-#move to a branch
-# function gco() {
-#   git checkout $*
-# }
+## commit pending changes and quote args
+function gg() {
+  git commit -v -a -m "$*"
+}
 
 # Swift Package Manager
 alias spi='swift package init'
@@ -64,10 +52,12 @@ alias spx='swift package generate-xcodeproj'
 alias sps='swift package show-dependencies'
 alias spd='swift package dump-package'
 
-#commit pending changes and quote args
-function gg() {
-  git commit -v -a -m "$*"
-}
+# Simulators
+## directory
+alias sim='cd ~/Library/Developer/CoreSimulator'
+
+## list
+alias sim-list='xcrun simctl list --json'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
