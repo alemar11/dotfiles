@@ -7,6 +7,13 @@ bundle install
 bundle exec rake symlink
 ```
 
+## ZSH
+
+```
+brew install zsh
+chsh -s /bin/zsh
+```
+
 ## Swift Package Manager Completion (Swift 4.2)
 
 If you want to update the current auto completion run:
