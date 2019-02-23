@@ -7,6 +7,13 @@ bundle install
 bundle exec rake symlink
 ```
 
+## Show hidden files
+
+```
+defaults write com.apple.finder AppleShowAllFiles YES
+killall -KILL Finder
+```
+
 ## ZSH
 
 ```
