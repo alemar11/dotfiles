@@ -3,8 +3,7 @@
 Run 🚀
 
 ```
-bundle install
-bundle exec rake symlink
+./script.swift
 ```
 
 ## Show hidden files
