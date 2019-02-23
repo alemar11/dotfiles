@@ -158,92 +158,75 @@ _swift_package() {
         (command)
             local modes
             modes=(
-                'resolve:Resolve package dependencies'
-                'update:Update package dependencies'
-                'unedit:Remove a package from editable mode'
-                'generate-xcodeproj:Generates an Xcode project'
-                'dump-package:Print parsed Package.swift as JSON'
-                'reset:Reset the complete cache/build directory'
-                'tools-version:Manipulate tools version of the current package'
-                'edit:Put a package in editable mode'
-                'init:Initialize a new package'
                 'completion-tool:Completion tool (for shell completions)'
+                'generate-xcodeproj:Generates an Xcode project'
+                'tools-version:Manipulate tools version of the current package'
+                'reset:Reset the complete cache/build directory'
                 'describe:Describe the current package'
-                'show-dependencies:Print the resolved dependency graph'
+                'update:Update package dependencies'
+                'resolve:Resolve package dependencies'
+                'init:Initialize a new package'
+                'dump-package:Print parsed Package.swift as JSON'
                 'clean:Delete build artifacts'
+                'unedit:Remove a package from editable mode'
+                'edit:Put a package in editable mode'
                 'fetch:'
+                'show-dependencies:Print the resolved dependency graph'
             )
             _describe "mode" modes
             ;;
         (arg)
             case ${words[1]} in
-                (resolve)
-                    _swift_package_resolve
-                    ;;
-                (update)
-                    _swift_package_update
-                    ;;
-                (unedit)
-                    _swift_package_unedit
+                (completion-tool)
+                    _swift_package_completion-tool
                     ;;
                 (generate-xcodeproj)
                     _swift_package_generate-xcodeproj
                     ;;
-                (dump-package)
-                    _swift_package_dump-package
+                (tools-version)
+                    _swift_package_tools-version
                     ;;
                 (reset)
                     _swift_package_reset
                     ;;
-                (tools-version)
-                    _swift_package_tools-version
+                (describe)
+                    _swift_package_describe
                     ;;
-                (edit)
-                    _swift_package_edit
+                (update)
+                    _swift_package_update
+                    ;;
+                (resolve)
+                    _swift_package_resolve
                     ;;
                 (init)
                     _swift_package_init
                     ;;
-                (completion-tool)
-                    _swift_package_completion-tool
-                    ;;
-                (describe)
-                    _swift_package_describe
-                    ;;
-                (show-dependencies)
-                    _swift_package_show-dependencies
+                (dump-package)
+                    _swift_package_dump-package
                     ;;
                 (clean)
                     _swift_package_clean
                     ;;
+                (unedit)
+                    _swift_package_unedit
+                    ;;
+                (edit)
+                    _swift_package_edit
+                    ;;
                 (fetch)
                     _swift_package_fetch
+                    ;;
+                (show-dependencies)
+                    _swift_package_show-dependencies
                     ;;
             esac
             ;;
     esac
 }
 
-_swift_package_resolve() {
+_swift_package_completion-tool() {
     arguments=(
-        ":The name of the package to resolve:_swift_dependency"
-        "--version[The version to resolve at]:The version to resolve at: "
-        "--branch[The branch to resolve at]:The branch to resolve at: "
-        "--revision[The revision to resolve at]:The revision to resolve at: "
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_update() {
-    arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_unedit() {
-    arguments=(
-        ":The name of the package to unedit:_swift_dependency"
-        "--force[Unedit the package even if it has uncommited and unpushed changes.]"
+        ": :{_values '' 'generate-bash-script[generate Bash completion script]' 'generate-zsh-script[generate Bash completion script]' 'list-dependencies[list all dependencies' names]' 'list-executables[list all executables' names]'}"
     )
     _arguments $arguments && return
 }
@@ -259,8 +242,10 @@ _swift_package_generate-xcodeproj() {
     _arguments $arguments && return
 }
 
-_swift_package_dump-package() {
+_swift_package_tools-version() {
     arguments=(
+        "--set[Set tools version of package to the given value]:Set tools version of package to the given value: "
+        "--set-current[Set tools version of package to the current tools version in use]"
     )
     _arguments $arguments && return
 }
@@ -271,10 +256,52 @@ _swift_package_reset() {
     _arguments $arguments && return
 }
 
-_swift_package_tools-version() {
+_swift_package_describe() {
     arguments=(
-        "--set[Set tools version of package to the given value]:Set tools version of package to the given value: "
-        "--set-current[Set tools version of package to the current tools version in use]"
+        "--type[json|text]: :{_values '' 'text[describe using text format]' 'json[describe using JSON format]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_update() {
+    arguments=(
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_resolve() {
+    arguments=(
+        ":The name of the package to resolve:_swift_dependency"
+        "--version[The version to resolve at]:The version to resolve at: "
+        "--branch[The branch to resolve at]:The branch to resolve at: "
+        "--revision[The revision to resolve at]:The revision to resolve at: "
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_init() {
+    arguments=(
+        "--type[empty|library|executable|system-module]: :{_values '' 'empty[generates an empty project]' 'library[generates project for a dynamic library]' 'executable[generates a project for a cli executable]' 'system-module[generates a project for a system module]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_dump-package() {
+    arguments=(
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_clean() {
+    arguments=(
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_unedit() {
+    arguments=(
+        ":The name of the package to unedit:_swift_dependency"
+        "--force[Unedit the package even if it has uncommited and unpushed changes.]"
     )
     _arguments $arguments && return
 }
@@ -289,23 +316,8 @@ _swift_package_edit() {
     _arguments $arguments && return
 }
 
-_swift_package_init() {
+_swift_package_fetch() {
     arguments=(
-        "--type[empty|library|executable|system-module]: :{_values '' 'empty[generates an empty project]' 'library[generates project for a dynamic library]' 'executable[generates a project for a cli executable]' 'system-module[generates a project for a system module]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_completion-tool() {
-    arguments=(
-        ": :{_values '' 'generate-bash-script[generate Bash completion script]' 'generate-zsh-script[generate Bash completion script]' 'list-dependencies[list all dependencies' names]' 'list-executables[list all executables' names]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_describe() {
-    arguments=(
-        "--type[json|text]: :{_values '' 'text[describe using text format]' 'json[describe using JSON format]'}"
     )
     _arguments $arguments && return
 }
@@ -313,18 +325,6 @@ _swift_package_describe() {
 _swift_package_show-dependencies() {
     arguments=(
         "--format[text|dot|json|flatlist]: :{_values '' 'text[list dependencies using text format]' 'dot[list dependencies using dot format]' 'json[list dependencies using JSON format]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_clean() {
-    arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_fetch() {
-    arguments=(
     )
     _arguments $arguments && return
 }

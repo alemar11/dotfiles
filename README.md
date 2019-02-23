@@ -33,6 +33,8 @@ To install the custom terminal theme just double click on AM.terminal.
 
 ## Setup SSH
 
+If you're using macOS Sierra 10.12.2 or later, you will need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.
+
 `touch ~/.ssh/config`
 
 ```
