@@ -1,8 +1,10 @@
+
+# Completion functions for commands are stored in files with names beginning with an underscore _, 
+# and these files should be placed in a directory listed in the $fpath variable. 
+# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
+fpath=(~/.zsh/completions ~/.zsh/functions $fpath)
 autoload -U compinit && compinit
 zmodload -i zsh/complist
-
-# # Add path to my completions
-# fpath=(~/.zsh/completion.local $fpath)
 
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on

@@ -7,10 +7,10 @@ git_parse_dirty() {
 }
 
 # Colors vary depending on time lapsed.
-readonly ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
-readonly ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
-readonly ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
-readonly ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
 
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
@@ -78,9 +78,9 @@ function git_prompt_info() {
   echo " $ZSH_THEME_GIT_PROMPT_PREFIX$(git_parse_dirty)${ref#refs/heads/}%{$reset_color%}|$(git_time_since_commit)$ZSH_THEME_GIT_PROMPT_SUFFIX%{$reset_color%}"
 }
 
-readonly ZSH_THEME_GIT_PROMPT_PREFIX="("
-readonly ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-readonly ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
 
-readonly PROMPT='%{$fg[magenta]%}%c%{$reset_color%}$%{$reset_color%}$(git_prompt_info) '
+PROMPT='%{$fg[magenta]%}%c%{$reset_color%}$%{$reset_color%}$(git_prompt_info) '
 #RPROMPT='$(git_prompt_info)'

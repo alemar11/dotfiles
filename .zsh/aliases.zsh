@@ -53,6 +53,7 @@ alias sps='swift package show-dependencies'
 alias spd='swift package dump-package'
 
 # Simulators
+
 ## directory
 alias sim='cd ~/Library/Developer/CoreSimulator'
 
