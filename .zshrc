@@ -6,7 +6,7 @@
 fpath=(~/.zsh/completions ~/.zsh/functions $fpath)
 
 # enable autocomplete function
-autoload -U compinit
+autoload -U compaudit compinit
 compinit
 
 autoload -U ~/.zsh/functions/*(:t)
