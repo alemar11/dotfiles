@@ -1,52 +1,54 @@
+autoload -U compinit
+compinit -i
 
-# Completion functions for commands are stored in files with names beginning with an underscore _, 
-# and these files should be placed in a directory listed in the $fpath variable. 
-# https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
-fpath=(~/.zsh/completions ~/.zsh/functions $fpath)
-autoload -U compinit && compinit
-zmodload -i zsh/complist
+zmodload zsh/complist
 
-# Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+setopt complete_in_word
+# setopt MENU_COMPLETE # immediatelly insert first match
 
-# Fallback to built in ls colors
-#zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' completer _complete _prefix
+zstyle ':completion:*' add-space true
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
 
-# Make the selection prompt friendly when there are a lot of choices
-#zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+# Smart case matching && match inside filenames
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+#zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-# Add simple colors to kill
-#zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:*:*:*' menu select
 
-# list of completers to use
-zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+# Rehash when completing commands
+zstyle ":completion:*:commands" rehash 1
 
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate
+# Process completion shows all processes with colors
+zstyle ':completion:*:*:*:*:processes' menu yes select
+zstyle ':completion:*:*:*:*:processes' force-list always
+zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,cmd'
+zstyle ':completion:*:*:*:*:processes' list-colors "=(#b) #([0-9]#)*=0=${color[green]}"
+zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tty,cmd'
+# zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
-# insert all expansions for expand completer
-# zstyle ':completion:*:expand:*' tag-order all-expansions
- 
-# match uppercase from lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
- 
-# offer indexes before parameters in subscripts
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+# Colors in completion
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# formatting and messages
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format "$fg[yellow]%B%d%b$reset_color"
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
- 
-# ignore completion functions (until the _ignored completer)
+# Display message when no matches are found
+zstyle ':completion:*:warnings' format '%BNo matches.'
+
+# Ignore internal zsh functions
 zstyle ':completion:*:functions' ignored-patterns '_*'
-zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
-zstyle '*' single-ignored show
+
+# Grouping for completion types (trial)
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:descriptions' format "%{${fg_bold[yellow]}%}∙︎ %d%{$reset_color%}"
+# zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*' group-name ""
+
+# Speedup path completion
+zstyle ':completion:*' accept-exact '*(N)'
+
+# Cache expensive completions
+# Enable completion caching, use rehash to clear
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+
