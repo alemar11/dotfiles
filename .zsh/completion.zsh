@@ -1,5 +1,10 @@
-autoload -U compinit
-compinit -i
+# folder of all of the autocomplete functions
+# Completion functions for commands are stored in files with names beginning with an underscore _, 
+# and these files should be placed in a directory listed in the $fpath variable. 
+fpath=($HOME/.zsh/completions $fpath)
+
+# enable autocomplete functions
+autoload -Uz compinit && compinit -i
 
 zmodload zsh/complist
 
@@ -28,9 +33,6 @@ zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,cmd'
 zstyle ':completion:*:*:*:*:processes' list-colors "=(#b) #([0-9]#)*=0=${color[green]}"
 zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tty,cmd'
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-
-# Colors in completion
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # Display message when no matches are found
 zstyle ':completion:*:warnings' format '%BNo matches.'
