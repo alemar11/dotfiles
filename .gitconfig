@@ -5,8 +5,10 @@
 	sslVerify = true
 [core]
 	editor = vim
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
 	hookspath = ~/.git_template/hooks
+[push]
+  default = upstream
 [github]
   user = alemar11
 [hub]
