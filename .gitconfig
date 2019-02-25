@@ -6,6 +6,7 @@
 [core]
 	editor = vim
   excludesfile = ~/.gitignore_global
+	hookspath = ~/.git_template/hooks
 [github]
   user = alemar11
 [hub]
