@@ -21,6 +21,7 @@ PACKAGES=(
     wget
     geoip
     ctags
+    youtube-dl
 )
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
