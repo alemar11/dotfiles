@@ -1,4 +1,3 @@
-# folder of all of the autocomplete functions
 # Completion functions for commands are stored in files with names beginning with an underscore _, 
 # and these files should be placed in a directory listed in the $fpath variable. 
 fpath=($HOME/.zsh/completions $fpath)
