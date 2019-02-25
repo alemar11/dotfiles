@@ -20,6 +20,7 @@ PACKAGES=(
     cloc
     wget
     geoip
+    ctags
 )
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
