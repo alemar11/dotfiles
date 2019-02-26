@@ -20,7 +20,6 @@ PACKAGES=(
     cloc
     wget
     geoip
-    ctags
     youtube-dl
 )
 echo "🍺 Installing brew packages..."
