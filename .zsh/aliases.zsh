@@ -15,7 +15,7 @@ alias tu='top -o cpu' # processes sorted by CPU
 alias tm='top -o vsize' # processes sorted by Memory
 
 # Git
-#alias g='git'
+alias g='git'
 alias ga='git add .'
 alias gb='git branch -a'
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
@@ -39,7 +39,7 @@ alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 
-## commit pending changes and quote args
+# Commit pending changes and quote all args as message
 function gg() {
   git commit -v -a -m "$*"
 }
@@ -54,10 +54,10 @@ alias spd='swift package dump-package'
 
 # Simulators
 
-## directory
+## Directory
 alias sim='cd ~/Library/Developer/CoreSimulator'
 
-## list
+## List
 alias sim-list='xcrun simctl list --json'
 
 # IP addresses
@@ -71,16 +71,16 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias o='open .'
 alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
 
-# Homebrew
-alias brewup='brew update && brew doctor && brew outdated && brew upgrade && brew cleanup -s --prune=1'
-#alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
-
 # Ruby
 alias b='bundle'
 alias be='bundle exec'
 
-# Ruby Gems
-alias gemup='gem update --system && gem cleanup && gem update'
-
 ## SSH
 alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null'
+
+# Update commands
+alias brewup="brew update && brew doctor && brew outdated && brew upgrade && brew cleanup"
+alias gemup='gem update --system && gem update && gem cleanup'
+#alias npmup='npm -g cache clean && npm -g update && npm-check-updates -u && npm install'
+alias sysup='sudo softwareupdate -i -a'
+alias upall='sysup && brewup && gemup'
