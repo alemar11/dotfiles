@@ -1,4 +1,5 @@
 " Runtime Paths
+" see: https://morimori.tokyo/2016/01/two-steps-for-highlighting-and-indenting-swift-code-in-vim/
 
 set runtimepath+=~/.vim/bundle/swift.vim
 set runtimepath+=~/.vim/bundle/markdown.vim
