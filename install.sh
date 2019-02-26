@@ -2,7 +2,7 @@
 
 # https://max-itup.github.io/mac/
 
-# echo "🚀 Starting setup"
+echo "🚀 Starting setup"
 
 # Install Homebrew if not already installed
 if test ! $(which brew); then
@@ -57,6 +57,7 @@ echo "🧼 Cleaning up..."
 brew cleanup -s
 
 #TODO: symlink here
+#TODO: symlink VS Code and Xcode key bindings
 #TOO: configure macos defaults
 
 # If this user's login shell is not already "zsh", attempt to switch.
@@ -66,6 +67,7 @@ if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
     if hash chsh >/dev/null 2>&1; then
       echo "🐚 Time to change your default shell to zsh!"
       chsh -s $(grep /zsh$ /etc/shells | tail -1)
+      # launches zsh
       env zsh -l
     else
       echo "🐚 I can't change your shell automatically because this system does not have chsh."
