@@ -15,7 +15,7 @@ alias tu='top -o cpu' # processes sorted by CPU
 alias tm='top -o vsize' # processes sorted by Memory
 
 # Git
-alias g='git'
+#alias g='git'
 alias ga='git add .'
 alias gb='git branch -a'
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
@@ -34,7 +34,7 @@ alias gm="git mergetool"
 alias gp='git push'
 alias gs='git status'
 alias gsb='git status -sb'
-alias gsu='git submodule update --init --recursive'
+alias gsub='git submodule update --init --recursive'
 alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
