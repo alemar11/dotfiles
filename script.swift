@@ -12,6 +12,7 @@ let ignoredFiles = [
 										"Rakefile", 
 										"README.md", 
 										"script.swift", 
+										"script.dSYM", 
 										"Gemfile.lock", 
 										"script", 
 										"install.sh"
@@ -26,12 +27,12 @@ let cyan = "\u{001B}[0;36m"
 let white = "\u{001B}[0;37m"
 
 extension String {
-	func isAlreadySymlinked(to path: String) -> Bool {
-		guard FileManager.default.fileExists(atPath: path) else { return false }
+	func isAlreadySymlinked(to path: String) -> Bool {		
 		let symlinkPath = try? FileManager.default.destinationOfSymbolicLink(atPath: self)
-		if let symlinkPath = symlinkPath, symlinkPath == path {
-			return true
+		if let symlinkPath = symlinkPath, symlinkPath == path { 
+			return true 
 		}
+		
 		return false
 	}
 }
@@ -45,13 +46,15 @@ let files = Set(allFiles.map { $0.lastPathComponent }).subtracting(ignoredFiles)
 for file in files {
 	let sourcePath = sourceURL.appendingPathComponent(file).absoluteString
 	let destinationPath = homeURL.appendingPathComponent(file).absoluteString
+	let fileExists = FileManager.default.fileExists(atPath: sourcePath)
 	
-	if !destinationPath.isAlreadySymlinked(to: sourcePath) {
-		try! FileManager.default.createSymbolicLink(atPath: destinationPath, withDestinationPath: sourcePath)
-		print("\(green)\(file) has been symlinked.")
-		
-	} else {
-		print("\(white)File \(file) exists. Overwrite it (y/n)?")
+	if fileExists {
+		if destinationPath.isAlreadySymlinked(to: sourcePath) {
+			print("\(white)File \(file) exists and is already symlinked. Overwrite it (y/n)?")
+		} else {
+			print("\(white)File \(file) exists but is not symlinked. Overwrite it (y/n)?")	
+		}
+
 		if let response = readLine(), response == "y" {
 			try! FileManager.default.removeItem(atPath: destinationPath)
 			try! FileManager.default.createSymbolicLink(atPath: destinationPath, withDestinationPath: sourcePath)
@@ -60,8 +63,12 @@ for file in files {
 		} else {
 			print("\(cyan)Skipped.")
 		}
+		
+	} else {
+		try! FileManager.default.createSymbolicLink(atPath: destinationPath, withDestinationPath: sourcePath)
+		print("\(green)\(file) has been symlinked.")
 	}
 }
 
 print("\n\(white)Completed 🎉")
-
+	
