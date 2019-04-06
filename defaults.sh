@@ -44,3 +44,10 @@ defaults write com.apple.Safari HomePage -string "about:blank"
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+###############################################################################
+# Xcode                                                             #
+###############################################################################
+
+# Show build duration
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
