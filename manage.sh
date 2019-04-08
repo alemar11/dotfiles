@@ -13,17 +13,6 @@ FILES=(\
   zshrc \
 )
 
-custom_path() {
-  for i in "${!PATHS[@]}"
-  do
-    if [[ "$1" == "$i" ]]; then
-      return 0
-    fi
-  done
-
-  return 1
-}
-
 new_path() {
   echo "$HOME/.$1"
 }
