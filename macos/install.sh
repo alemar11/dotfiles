@@ -24,6 +24,8 @@ PACKAGES=(
 )
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
+echo "🍺 Upgrading installed brew packages..."
+brew upgrade
 
 CASKS=(
     google-chrome
@@ -42,6 +44,8 @@ CASKS=(
 )
 echo "🍺 Installing cask apps..."
 brew cask install ${CASKS[@]}
+echo "🍺 Updating installed cask apps..."
+brew cask upgrade
 
 GEMS=(
     bundler
@@ -52,13 +56,11 @@ GEMS=(
 )
 echo "💎 Installing Ruby gems..."
 sudo gem install ${GEMS[@]} -N
+echo "Updating already installed gems..."
+sudo gem update
 
 echo "🧼 Cleaning up..."
 brew cleanup -s
-
-#TODO: symlink here
-#TODO: symlink VS Code and Xcode key bindings
-#TOO: configure macos defaults
 
 # If this user's login shell is not already "zsh", attempt to switch.
 TEST_CURRENT_SHELL=$(basename "$SHELL")

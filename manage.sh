@@ -6,7 +6,8 @@ FILES=(\
   gitconfig \
   gitignore_global \
   hushlogin \
-  lldbinit \
+  lldb_helpers \
+  lldbinit-Xcode \
   vimrc \
   zsh \
   zshenv \

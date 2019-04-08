@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# Credits:
 # https://github.com/bramus/freshinstall/blob/master/steps/1.macos-settings.sh
+# https://github.com/keith/dotfiles/blob/master/osx/defaults.sh
 
 ###############################################################################
 # HOUSEKEEPING                                                                #
@@ -9,6 +11,31 @@
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
+
+###############################################################################
+# General Preferences                                                         #
+###############################################################################
+
+# Show Battery Percentage
+defaults write com.apple.menuextra.battery ShowPercent -bool true
+
+# Dark UI
+defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+
+###############################################################################
+# Terminal                                                                    #
+###############################################################################
+
+# Setup the correct theme
+defaults write com.apple.Terminal "Default Window Settings" -string "AM"
+defaults write com.apple.Terminal "Startup Window Settings" -string "AM"
+
+###############################################################################
+# Desktop and Screensaver                                                     #
+###############################################################################
+
+# Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
 ###############################################################################
 # Finder                                                                      #
@@ -51,3 +78,16 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 
 # Show build duration
 defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
+
+# Trim trailing whitespace
+defaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool true
+
+# Trim whitespace only lines
+defaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool true
+
+# Show line numbers
+defaults write com.apple.dt.Xcode DVTTextShowLineNumbers -bool true
+
+# Set custom colorscheme
+defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string AM.xccolortheme
+defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string AM.xccolortheme

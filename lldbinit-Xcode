@@ -1,4 +1,4 @@
-# Save in ~/.lldbinit
+command script import ~/.lldb_helpers/nudge.py
 
 ###### Breakpoint Shortcuts #####
 # break on function/method/selector: b -n name
