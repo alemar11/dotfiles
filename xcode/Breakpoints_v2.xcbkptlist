@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+    type = "2"
+    version = "2.0">
+    <Breakpoints>
+        <!-- All Objective-C exceptions -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "Yes"
+                ignoreCount = "0"
+                continueAfterRunningActions = "No"
+                scope = "1"
+                stopOnStyle = "0">
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- All C++ exceptions -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "No"
+                ignoreCount = "0"
+                continueAfterRunningActions = "No"
+                scope = "2"
+                stopOnStyle = "0">
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- All Swift errors -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SwiftErrorBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "Yes"
+                ignoreCount = "0"
+                continueAfterRunningActions = "No">
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- Import Foundation and UIKit -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "Yes"
+                ignoreCount = "0"
+                continueAfterRunningActions = "Yes"
+                symbolName = "UIApplicationMain"
+                moduleName = "">
+                <Actions>
+                    <BreakpointActionProxy
+                        ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                        <ActionContent
+                            consoleCommand = "expr @import Foundation">
+                        </ActionContent>
+                    </BreakpointActionProxy>
+                    <BreakpointActionProxy
+                        ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                        <ActionContent
+                            consoleCommand = "expr @import UIKit">
+                        </ActionContent>
+                    </BreakpointActionProxy>
+                </Actions>
+                <Locations>
+                </Locations>
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- Unsatisfiable Auto Layout constraints -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "No"
+                ignoreCount = "0"
+                continueAfterRunningActions = "No"
+                symbolName = "UIViewAlertForUnsatisfiableConstraints"
+                moduleName = "">
+                <Actions>
+                    <BreakpointActionProxy
+                        ActionExtensionID = "Xcode.BreakpointAction.Log">
+                        <ActionContent
+                            message = ""
+                            conveyanceType = "0">
+                        </ActionContent>
+                    </BreakpointActionProxy>
+                </Actions>
+                <Locations>
+                </Locations>
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- KVO complains about observers still being in place -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "Yes"
+                ignoreCount = "0"
+                continueAfterRunningActions = "No"
+                symbolName = "NSKVODeallocateBreak"
+                moduleName = "">
+                <Locations>
+                </Locations>
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- An already initialized NSData object gets initialized again -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "Yes"
+                ignoreCount = "0"
+                continueAfterRunningActions = "No"
+                symbolName = "_NSDataReinitializationBreak"
+                moduleName = "">
+                <Locations>
+                </Locations>
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- Informs when deallocation of view controller happens  -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "Yes"
+                ignoreCount = "0"
+                condition = "!(BOOL)([[$arg1 description] containsString:@&quot;Input&quot;])"
+                continueAfterRunningActions = "Yes"
+                symbolName = "-[UIViewController dealloc]"
+                moduleName = "UIKit">
+                <Actions>
+                    <BreakpointActionProxy
+                        ActionExtensionID = "Xcode.BreakpointAction.Log">
+                        <ActionContent
+                            message = "--- dealloc @(id)[$arg1 description]@ @(id)[$arg1 title]@"
+                            conveyanceType = "0">
+                        </ActionContent>
+                    </BreakpointActionProxy>
+                    <BreakpointActionProxy
+                        ActionExtensionID = "Xcode.BreakpointAction.Sound">
+                        <ActionContent
+                            soundName = "Pop">
+                        </ActionContent>
+                    </BreakpointActionProxy>
+                </Actions>
+            </BreakpointContent>
+        </BreakpointProxy>
+
+        <!-- Informs when initialization of view controller happens  -->
+        <BreakpointProxy
+            BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+            <BreakpointContent
+                shouldBeEnabled = "No"
+                ignoreCount = "0"
+                continueAfterRunningActions = "Yes"
+                symbolName = "-[UIViewController initWithNibName:bundle:]"
+                moduleName = "">
+                <Actions>
+                    <BreakpointActionProxy
+                        ActionExtensionID = "Xcode.BreakpointAction.Log">
+                        <ActionContent
+                            message = "--- init @(id)[$arg1 description]@"
+                            conveyanceType = "0">
+                        </ActionContent>
+                    </BreakpointActionProxy>
+                </Actions>
+            </BreakpointContent>
+        </BreakpointProxy>
+    </Breakpoints>
+</Bucket>

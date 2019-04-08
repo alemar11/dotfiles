@@ -1,4 +1,4 @@
-// Inserire i tasti di scelta rapida in questo file per sovrascrivere i valori predefiniti
+// Custom Key Bindings
 [
     {
         "key": "ctrl+shift+i",

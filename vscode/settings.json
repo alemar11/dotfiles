@@ -1,5 +1,5 @@
-// Inserire le impostazioni in questo file per sovrascrivere quelle predefinite
+// Custom Settings
 {
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "editor.tabSize": 2
 }
