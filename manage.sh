@@ -1,13 +1,12 @@
 #!/bin/bash
 
-files=(\
+FILES=(\
   curlrc \
   git_template \
   gitconfig \
   gitignore_global \
   hushlogin \
   lldbinit \
-  vim \
   vimrc \
   zsh \
   zshenv \
@@ -57,7 +56,7 @@ unlink() {
 
 # Loops through and link all files without links
 install_links() {
-  for file in "${files[@]}"
+  for file in "${FILES[@]}"
   do
     link "$file"
   done
@@ -65,7 +64,7 @@ install_links() {
 
 # Function to remove all linked files
 remove_links() {
-  for file in "${files[@]}"
+  for file in "${FILES[@]}"
   do
     unlink "$file"
   done
