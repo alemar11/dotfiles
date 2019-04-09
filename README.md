@@ -9,7 +9,7 @@ Run 🚀
 ## Update Swift Package Manager Completion
 
 If you want to update the current auto completion run:
-`swift package completion-tool generate-zsh-script > ~/.zsh/functions/_swift`
+`swift package completion-tool generate-zsh-script > ~/.zsh/completions/_swift`
 
 ## Setup SSH
 
