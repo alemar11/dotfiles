@@ -43,9 +43,9 @@ CASKS=(
     wwdc
 )
 echo "🍺 Installing cask apps..."
-brew cask install ${CASKS[@]}
-echo "🍺 Updating installed cask apps..."
-brew cask upgrade
+brew cask install --force ${CASKS[@]}
+#echo "🍺 Updating installed cask apps..."
+#brew cask upgrade
 
 GEMS=(
     bundler
@@ -56,7 +56,7 @@ GEMS=(
 )
 echo "💎 Installing Ruby gems..."
 sudo gem install ${GEMS[@]} -N
-echo "Updating already installed gems..."
+echo "💎 Updating already installed gems..."
 sudo gem update
 
 echo "🧼 Cleaning up..."

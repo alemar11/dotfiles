@@ -1,10 +1,10 @@
 #command script import ~/.lldb_helpers/nudge.py
 
 # List registers, in order of calling convention.
-alias args register read arg1 arg2 arg3 arg4 arg5 arg6
+#alias args register read arg1 arg2 arg3 arg4 arg5 arg6
 
 # Tell lldb to assume swift, not objc
-settings set target.language swift
+#settings set target.language swift
 command alias clear-lang settings clear target.language
 
 # The `load_swift` command is used to load helpers written in Swift
