@@ -73,8 +73,14 @@ defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool 
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
 ###############################################################################
-# Xcode                                                             #
+# Xcode                                                                       #
 ###############################################################################
+
+# 2 spaces indentation
+defaults write com.apple.dt.Xcode DVTTextIndentTabWidth -int 2
+defaults write com.apple.dt.Xcode DVTTextIndentWidth -int 2
+
+defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 100
 
 # Show build duration
 defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
