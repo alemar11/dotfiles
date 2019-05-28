@@ -76,10 +76,11 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Xcode                                                                       #
 ###############################################################################
 
-# 2 spaces indentation
+# Use 2 spaces for indentation
 defaults write com.apple.dt.Xcode DVTTextIndentTabWidth -int 2
 defaults write com.apple.dt.Xcode DVTTextIndentWidth -int 2
 
+# Page guide
 defaults write com.apple.dt.Xcode DVTTextPageGuideLocation -int 100
 
 # Show build duration
