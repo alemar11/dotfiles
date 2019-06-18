@@ -28,6 +28,7 @@ echo "🍺 Upgrading installed brew packages..."
 brew upgrade
 
 CASKS=(
+    safari-technology-preview
     google-chrome
     whatsapp
     iina
@@ -43,6 +44,7 @@ CASKS=(
     wwdc
 )
 echo "🍺 Installing cask apps..."
+brew tap homebrew/cask-versions
 brew cask install --force ${CASKS[@]}
 #echo "🍺 Updating installed cask apps..."
 #brew cask upgrade
@@ -52,7 +54,6 @@ GEMS=(
     cocoapods
     fastlane
     jazzy
-    xcpretty
 )
 echo "💎 Installing Ruby gems..."
 sudo gem install ${GEMS[@]} -N
