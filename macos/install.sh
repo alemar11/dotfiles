@@ -50,12 +50,18 @@ brew cask install --force ${CASKS[@]}
 #brew cask upgrade
 
 GEMS=(
+    doc
     bundler
     cocoapods
     fastlane
     jazzy
 )
 echo "💎 Installing Ruby gems..."
+
+# the doc GEM and this command solve a Mojave error when updating libxml-ruby
+https://stackoverflow.com/questions/52514791/after-upgrading-to-macos-mojave-gem-update-is-failing
+sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+
 sudo gem install ${GEMS[@]} -N
 echo "💎 Updating already installed gems..."
 sudo gem update
