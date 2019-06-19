@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# https://max-itup.github.io/mac/
-
 echo "🚀 Starting setup"
 
 # Install Homebrew if not already installed
@@ -22,50 +20,11 @@ PACKAGES=(
     youtube-dl
     rbenv
 )
+
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
 echo "🍺 Upgrading installed brew packages..."
 brew upgrade
-
-CASKS=(
-    safari-technology-preview
-    google-chrome
-    whatsapp
-    iina
-    vlc
-    visual-studio-code
-    virtualbox
-    docker
-    monodraw
-    coderunner
-    beyond-compare
-    battle-net
-    onyx
-    wwdc
-)
-echo "🍺 Installing cask apps..."
-brew tap homebrew/cask-versions
-brew cask install --force ${CASKS[@]}
-#echo "🍺 Updating installed cask apps..."
-#brew cask upgrade
-
-GEMS=(
-    doc
-    bundler
-    cocoapods
-    fastlane
-    jazzy
-)
-echo "💎 Installing Ruby gems..."
-
-# the doc GEM and this command solve a Mojave error when updating libxml-ruby
-https://stackoverflow.com/questions/52514791/after-upgrading-to-macos-mojave-gem-update-is-failing
-sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
-
-sudo gem install ${GEMS[@]} -N
-echo "💎 Updating already installed gems..."
-sudo gem update
-
 echo "🧼 Cleaning up..."
 brew cleanup -s
 
