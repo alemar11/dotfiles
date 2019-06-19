@@ -181,97 +181,74 @@ _swift_package() {
         (command)
             local modes
             modes=(
-                'show-dependencies:Print the resolved dependency graph'
-                'clean:Delete build artifacts'
-                'edit:Put a package in editable mode'
                 'fetch:'
-                'dump-package:Print parsed Package.swift as JSON'
-                'unedit:Remove a package from editable mode'
-                'tools-version:Manipulate tools version of the current package'
-                'describe:Describe the current package'
-                'completion-tool:Completion tool (for shell completions)'
-                'resolve:Resolve package dependencies'
                 'reset:Reset the complete cache/build directory'
-                'generate-xcodeproj:Generates an Xcode project'
-                'update:Update package dependencies'
                 'init:Initialize a new package'
+                'resolve:Resolve package dependencies'
+                'tools-version:Manipulate tools version of the current package'
+                'generate-xcodeproj:Generates an Xcode project'
+                'completion-tool:Completion tool (for shell completions)'
+                'clean:Delete build artifacts'
+                'update:Update package dependencies'
                 'config:Manipulate configuration of the package'
+                'show-dependencies:Print the resolved dependency graph'
+                'dump-package:Print parsed Package.swift as JSON'
+                'describe:Describe the current package'
+                'unedit:Remove a package from editable mode'
+                'edit:Put a package in editable mode'
             )
             _describe "mode" modes
             ;;
         (arg)
             case ${words[1]} in
-                (show-dependencies)
-                    _swift_package_show-dependencies
-                    ;;
-                (clean)
-                    _swift_package_clean
-                    ;;
-                (edit)
-                    _swift_package_edit
-                    ;;
                 (fetch)
                     _swift_package_fetch
-                    ;;
-                (dump-package)
-                    _swift_package_dump-package
-                    ;;
-                (unedit)
-                    _swift_package_unedit
-                    ;;
-                (tools-version)
-                    _swift_package_tools-version
-                    ;;
-                (describe)
-                    _swift_package_describe
-                    ;;
-                (completion-tool)
-                    _swift_package_completion-tool
-                    ;;
-                (resolve)
-                    _swift_package_resolve
                     ;;
                 (reset)
                     _swift_package_reset
                     ;;
+                (init)
+                    _swift_package_init
+                    ;;
+                (resolve)
+                    _swift_package_resolve
+                    ;;
+                (tools-version)
+                    _swift_package_tools-version
+                    ;;
                 (generate-xcodeproj)
                     _swift_package_generate-xcodeproj
+                    ;;
+                (completion-tool)
+                    _swift_package_completion-tool
+                    ;;
+                (clean)
+                    _swift_package_clean
                     ;;
                 (update)
                     _swift_package_update
                     ;;
-                (init)
-                    _swift_package_init
-                    ;;
                 (config)
                     _swift_package_config
+                    ;;
+                (show-dependencies)
+                    _swift_package_show-dependencies
+                    ;;
+                (dump-package)
+                    _swift_package_dump-package
+                    ;;
+                (describe)
+                    _swift_package_describe
+                    ;;
+                (unedit)
+                    _swift_package_unedit
+                    ;;
+                (edit)
+                    _swift_package_edit
                     ;;
             esac
             ;;
     esac
-}
-
-_swift_package_show-dependencies() {
-    arguments=(
-        "--format[text|dot|json|flatlist]: :{_values '' 'text[list dependencies using text format]' 'dot[list dependencies using dot format]' 'json[list dependencies using JSON format]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_clean() {
-    arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_edit() {
-    arguments=(
-        ":The name of the package to edit:_swift_dependency"
-        "--revision[The revision to edit]:The revision to edit: "
-        "--branch[The branch to create]:The branch to create: "
-        "--path[Create or use the checkout at this path]:Create or use the checkout at this path:_files"
-    )
-    _arguments $arguments && return
 }
 
 _swift_package_fetch() {
@@ -280,38 +257,16 @@ _swift_package_fetch() {
     _arguments $arguments && return
 }
 
-_swift_package_dump-package() {
+_swift_package_reset() {
     arguments=(
     )
     _arguments $arguments && return
 }
 
-_swift_package_unedit() {
+_swift_package_init() {
     arguments=(
-        ":The name of the package to unedit:_swift_dependency"
-        "--force[Unedit the package even if it has uncommited and unpushed changes.]"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_tools-version() {
-    arguments=(
-        "--set[Set tools version of package to the given value]:Set tools version of package to the given value: "
-        "--set-current[Set tools version of package to the current tools version in use]"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_describe() {
-    arguments=(
-        "--type[json|text]: :{_values '' 'text[describe using text format]' 'json[describe using JSON format]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_completion-tool() {
-    arguments=(
-        ": :{_values '' 'generate-bash-script[generate Bash completion script]' 'generate-zsh-script[generate Bash completion script]' 'list-dependencies[list all dependencies' names]' 'list-executables[list all executables' names]'}"
+        "--type[empty|library|executable|system-module]: :{_values '' 'empty[generates an empty project]' 'library[generates project for a dynamic library]' 'executable[generates a project for a cli executable]' 'system-module[generates a project for a system module]'}"
+        "--name[Provide custom package name]:Provide custom package name: "
     )
     _arguments $arguments && return
 }
@@ -326,8 +281,10 @@ _swift_package_resolve() {
     _arguments $arguments && return
 }
 
-_swift_package_reset() {
+_swift_package_tools-version() {
     arguments=(
+        "--set[Set tools version of package to the given value]:Set tools version of package to the given value: "
+        "--set-current[Set tools version of package to the current tools version in use]"
     )
     _arguments $arguments && return
 }
@@ -344,16 +301,21 @@ _swift_package_generate-xcodeproj() {
     _arguments $arguments && return
 }
 
-_swift_package_update() {
+_swift_package_completion-tool() {
+    arguments=(
+        ": :{_values '' 'generate-bash-script[generate Bash completion script]' 'generate-zsh-script[generate Bash completion script]' 'list-dependencies[list all dependencies' names]' 'list-executables[list all executables' names]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_clean() {
     arguments=(
     )
     _arguments $arguments && return
 }
 
-_swift_package_init() {
+_swift_package_update() {
     arguments=(
-        "--type[empty|library|executable|system-module]: :{_values '' 'empty[generates an empty project]' 'library[generates project for a dynamic library]' 'executable[generates a project for a cli executable]' 'system-module[generates a project for a system module]'}"
-        "--name[Provide custom package name]:Provide custom package name: "
     )
     _arguments $arguments && return
 }
@@ -368,26 +330,33 @@ _swift_package_config() {
         (command)
             local modes
             modes=(
+                'get-mirror:Print mirror configuration for the given package dependency'
                 'unset-mirror:Remove an existing mirror'
                 'set-mirror:Set a mirror for a dependency'
-                'get-mirror:Print mirror configuration for the given package dependency'
             )
             _describe "mode" modes
             ;;
         (arg)
             case ${words[1]} in
+                (get-mirror)
+                    _swift_package_config_get-mirror
+                    ;;
                 (unset-mirror)
                     _swift_package_config_unset-mirror
                     ;;
                 (set-mirror)
                     _swift_package_config_set-mirror
                     ;;
-                (get-mirror)
-                    _swift_package_config_get-mirror
-                    ;;
             esac
             ;;
     esac
+}
+
+_swift_package_config_get-mirror() {
+    arguments=(
+        "--package-url[The package dependency url]:The package dependency url: "
+    )
+    _arguments $arguments && return
 }
 
 _swift_package_config_unset-mirror() {
@@ -406,9 +375,40 @@ _swift_package_config_set-mirror() {
     _arguments $arguments && return
 }
 
-_swift_package_config_get-mirror() {
+_swift_package_show-dependencies() {
     arguments=(
-        "--package-url[The package dependency url]:The package dependency url: "
+        "--format[text|dot|json|flatlist]: :{_values '' 'text[list dependencies using text format]' 'dot[list dependencies using dot format]' 'json[list dependencies using JSON format]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_dump-package() {
+    arguments=(
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_describe() {
+    arguments=(
+        "--type[json|text]: :{_values '' 'text[describe using text format]' 'json[describe using JSON format]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_unedit() {
+    arguments=(
+        ":The name of the package to unedit:_swift_dependency"
+        "--force[Unedit the package even if it has uncommited and unpushed changes.]"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_edit() {
+    arguments=(
+        ":The name of the package to edit:_swift_dependency"
+        "--revision[The revision to edit]:The revision to edit: "
+        "--branch[The branch to create]:The branch to create: "
+        "--path[Create or use the checkout at this path]:Create or use the checkout at this path:_files"
     )
     _arguments $arguments && return
 }
