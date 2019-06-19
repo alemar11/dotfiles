@@ -3,6 +3,7 @@
 # Credits:
 # https://github.com/bramus/freshinstall/blob/master/steps/1.macos-settings.sh
 # https://github.com/keith/dotfiles/blob/master/osx/defaults.sh
+# https://github.com/herrbischoff/awesome-macos-command-line
 
 ### HouseKeeping
 
