@@ -1,0 +1,8 @@
+// Custom Settings
+{
+    "window.zoomLevel": 0,
+    "editor.tabSize": 2,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.jediEnabled": false
+}
