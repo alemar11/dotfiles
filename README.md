@@ -3,7 +3,13 @@
 Run 🚀
 
 ```
-./bootstrap.sh
+./dotfiles.sh
+```
+
+To customize `macOS`, `Terminal`, `Xcode`, `VScode`.
+
+```
+./macos/install.sh
 ```
 
 ## Update Swift Package Manager Completion

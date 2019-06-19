@@ -1,46 +1,41 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-echo "🚀 Starting setup"
+set -e
+set -o pipefail
+set -u
 
-# Install Homebrew if not already installed
-if test ! $(which brew); then
-    echo "🍺 Installing homebrew..."
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+# if [ ! -d macos ]; then
+#   echo "Must be run from root of dotfiles"
+#   exit 1
+# fi
 
-echo "🍺 Updating homebrew..."
-brew update
-
-PACKAGES=(
-    carthage
-    swiftlint
-    cloc
-    wget
-    geoip
-    youtube-dl
-    rbenv
-)
-
-echo "🍺 Installing brew packages..."
-brew install ${PACKAGES[@]}
-echo "🍺 Upgrading installed brew packages..."
-brew upgrade
-echo "🧼 Cleaning up..."
-brew cleanup -s
+### Zsh
 
 # If this user's login shell is not already "zsh", attempt to switch.
 TEST_CURRENT_SHELL=$(basename "$SHELL")
 if [ "$TEST_CURRENT_SHELL" != "zsh" ]; then
-    # If this platform provides a "chsh" command (not Cygwin), do it, man!
-    if hash chsh >/dev/null 2>&1; then
-      echo "🐚 Time to change your default shell to zsh!"
-      chsh -s $(grep /zsh$ /etc/shells | tail -1)
-      # launches zsh
-      env zsh -l
-    else
-      echo "🐚 I can't change your shell automatically because this system does not have chsh."
-      echo "Please manually change your default shell to zsh!"
-    fi
+  # If this platform provides a "chsh" command (not Cygwin), do it, man!
+  if hash chsh >/dev/null 2>&1; then
+    echo "🐚 Time to change your default shell to zsh!"
+    chsh -s $(grep /zsh$ /etc/shells | tail -1)
+    # launches zsh
+    env zsh -l
+  else
+    echo "🐚 I can't change your shell automatically because this system does not have chsh."
+    echo "Please manually change your default shell to zsh!"
   fi
+fi
 
- echo "🎉 Setup complete!" 
+open "$DOTFILES/macos/AM.terminal"
+
+echo "Configuring macOS defaults."
+sh "$DOTFILES/macos/defaults.sh"
+echo "Done. Note that some of these changes require a logout/restart to take effect."
+
+echo "Configuring Xcode."
+sh "$DOTFILES/macos/xcode/link.sh"
+echo "Done."
+
+echo "Configuring VSCode."
+sh "$DOTFILES/macos/vscode/link.sh"
+echo "Done."

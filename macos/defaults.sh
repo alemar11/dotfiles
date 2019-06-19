@@ -4,8 +4,6 @@
 # https://github.com/bramus/freshinstall/blob/master/steps/1.macos-settings.sh
 # https://github.com/keith/dotfiles/blob/master/osx/defaults.sh
 
-echo "Configuring macOS defaults"
-
 ### HouseKeeping
 
 # Close any open System Preferences panes, to prevent them from overriding
@@ -84,5 +82,3 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock show-process-indicators -bool true
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
-
-echo "Done. Note that some of these changes require a logout/restart to take effect."
