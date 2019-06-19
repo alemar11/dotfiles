@@ -98,3 +98,28 @@ defaults write com.apple.dt.Xcode DVTTextShowLineNumbers -bool true
 # Set custom colorscheme
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string AM.xccolortheme
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string AM.xccolortheme
+
+
+###############################################################################
+# Dock                                                                       #
+###############################################################################
+
+# Set the icon size of Dock items to 36 pixels
+defaults write com.apple.dock tilesize -int 36
+
+defaults write com.apple.dock largesize -int 72
+
+# Disable dock magification
+defaults write com.apple.dock magnification -bool true
+
+# Put the dock on left side
+defaults write com.apple.dock orientation -string "left"
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+# Show indicator lights for open applications in the Dock
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Make Dock icons of hidden applications translucent
+defaults write com.apple.dock showhidden -bool true
