@@ -1,5 +1,8 @@
 # Completion functions for commands are stored in files with names beginning with an underscore _, 
 # and these files should be placed in a directory listed in the $fpath variable. 
+# These functions whose name begins with an underscore are part of the programmable completion engine. 
+# Bash follows zsh's convention here, where the function that generates completions for somecommand is called _somecommand, 
+# and if that function requires auxiliary functions, they are called _somecommand_stuff.
 fpath=($HOME/.zsh/completions $fpath)
 
 # enable autocomplete functions

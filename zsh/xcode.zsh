@@ -104,6 +104,20 @@ Options:
 EOF
 }
 
+function find_xcode_projects() {
+  cat <<EOF | ruby -rfileutils
+  files = Dir.glob('**/*.{xcworkspace,xcodeproj}')
+    .reject { |p|
+      p.include?('Pods') ||
+      p.include?('xcodeproj/project.xcworkspace')
+    }
+    .map { |x| { path: x, depth: x.scan(/\//).count, workspace: x.include?('workspace')} }
+    .sort_by { |a|[a[:depth], a[:workspace] ? 0 : 1] }
+    .map { |x| x[:path] }
+  puts files
+EOF
+}
+
 # Parses the Xcode version from a filename based on our conventions
 # Only meaningful when called from other xcode functions
 function xcode_parse_versioned_file {

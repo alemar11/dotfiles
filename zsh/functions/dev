@@ -1,1 +1,5 @@
-cd ~/Developer/$1;
+
+
+function dev() {
+  cd ~/Developer/$1;
+}
