@@ -4,7 +4,6 @@
 ./dotfiles.sh
 ```
 
-
 ---
 
 # macOS
