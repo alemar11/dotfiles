@@ -19,7 +19,8 @@ alias g='git'
 alias ga='git add .'
 alias gb='git branch -a'
 alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
-alias gc='git commit -a'
+alias gc='git commit -v'
+alias gca="git commit -v -a"
 alias gcount='git shortlog -sn'
 alias gcb='git checkout -b'
 alias gco='git checkout'
@@ -42,6 +43,12 @@ alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commi
 # Commit pending changes and quote all args as message
 function gg() {
   git commit -v -a -m "$*"
+}
+
+# Fetch gitignore from gitignore.io. Usage:
+# gi xcode
+function gi() {
+  curl https://www.gitignore.io/api/$1
 }
 
 # Swift Package Manager
