@@ -1,9 +1,11 @@
+ ../zsh/xcode.zsh
 #!/usr/bin/env bash
 
 # Credits:
 # https://github.com/bramus/freshinstall/blob/master/steps/1.macos-settings.sh
 # https://github.com/keith/dotfiles/blob/master/osx/defaults.sh
 # https://github.com/herrbischoff/awesome-macos-command-line
+# https://github.com/ctreffs/xcode-defaults
 
 ### HouseKeeping
 
@@ -67,6 +69,8 @@ defaults write com.apple.dt.Xcode DVTTextShowLineNumbers -bool true
 # Set custom colorscheme
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string AM.xccolortheme
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string AM.xccolortheme
+# Enable concurrency when building - Requires RAM!
+defaults write com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively -bool YES
 
 ### Dock
 
