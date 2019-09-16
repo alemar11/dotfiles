@@ -1,4 +1,4 @@
-git_parse_dirty() {
+function git_parse_dirty() {
   if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
     echo "%{$fg[red]%}"
   else
