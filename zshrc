@@ -21,3 +21,7 @@ export PATH=$DOTFILES/bin:$PATH
 if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
+
+# Add rbenv to path to access command-line utility
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
