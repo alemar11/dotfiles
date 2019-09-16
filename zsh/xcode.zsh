@@ -200,7 +200,3 @@ function xcode_list_versions {
     fi
   done
 }
-
-function xcode_version_number {
-	echo `plutil -p \`xcode-select -p\`/../Info.plist | grep -e CFBundleShortVersionString | sed 's/[^0-9\.]*//g'`
-}
