@@ -1,3 +1,9 @@
+# Colors vary depending on time lapsed.
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
+ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
+
 function git_parse_dirty() {
   if [[ -n $(git status -s --ignore-submodules=dirty 2> /dev/null) ]]; then
     echo "%{$fg[red]%}"
@@ -5,12 +11,6 @@ function git_parse_dirty() {
     echo "%{$fg[green]%}"
   fi
 }
-
-# Colors vary depending on time lapsed.
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
-ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[cyan]%}"
 
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
