@@ -1,6 +1,6 @@
 [user]
-  name = Alessandro Marzoli
-  email = alessandromarzoli@gmail.com
+	name = Alessandro Marzoli
+	email = alessandromarzoli@gmail.com
 [http]
   sslVerify = true
 [core]
