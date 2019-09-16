@@ -1,7 +1,7 @@
 #compdef xcv
 #autoload
 
-function _xcselv_compl_list_versions() {
+function _xcv_compl_list_versions() {
   xcode_list_versions short
 }
 
@@ -13,7 +13,7 @@ _arguments \
   && ret=0
 
 local _xcode_versions
-_xcode_versions=($(_xcselv_compl_list_versions))
+_xcode_versions=($(_xcv_compl_list_versions))
 _describe -t _xcode_versions 'version' _xcode_versions
 
 return 1

@@ -2,7 +2,6 @@
 alias xcdd='rm -rf ~/Library/Developer/Xcode/DerivedData/*'
 alias xcp='xcode-select --print-path'
 alias xcsel='sudo xcode-select --switch'
-alias xcv=xcselv
 
 # original author: @subdigital
 # source: http://gist.github.com/subdigital/5420709
@@ -48,16 +47,16 @@ function xcb {
   fi
 }
 
-# "XCode-SELect by Version" - select Xcode by just version number
+# "XCcde select by version" - select Xcode by just version number
 # Uses naming convention:
 #  - different versions of Xcode are named Xcode-<version>.app or stored
 #     in a folder named Xcode-<version>
 #  - the special version name "default" refers to the "default" Xcode.app with no suffix
-function xcselv {
+function xcv {
   emulate -L zsh
   if [[ $# == 0 ]]; then
-    echo "xcselv: error: no option or argument given" >&2
-    echo "xcselv: see 'xcselv -h' for help" >&2
+    echo "xcv: error: no option or argument given" >&2
+    echo "xcv: see 'xcv -h' for help" >&2
     return 1
   elif [[ $1 == "-p" ]]; then
     xcode_print_active_version
@@ -69,19 +68,19 @@ function xcselv {
     xcode_list_versions short
     return
   elif [[ $1 == "-h" ]]; then
-    xcode_print_xcselv_usage
+    xcode_print_xcv_usage
     return 0
   elif [[ $1 == -* && $1 != "-" ]]; then
-    echo "xcselv: error: unrecognized option: $1" >&2
-    echo "xcselv: see 'xcselv -h' for help" >&2
+    echo "xcv: error: unrecognized option: $1" >&2
+    echo "xcv: see 'xcv -h' for help" >&2
     return 1
   fi
-  # Main case: "xcselv <version>" to select a version
+  # Main case: "xcv <version>" to select a version
   local version=$1
   local -A xcode_versions
   xcode_locate_versions
   if [[ -z ${xcode_versions[$version]} ]]; then
-    echo "xcselv: error: Xcode version '$version' not found" >&2
+    echo "xcv: error: Xcode version '$version' not found" >&2
     return 1
   fi
   app="${xcode_versions[$version]}"
@@ -89,11 +88,11 @@ function xcselv {
   xcsel "$app"
 }
 
-function xcode_print_xcselv_usage {
+function xcode_print_xcv_usage {
   cat << EOF >&2
 Usage: 
-  xcselv <version>
-  xcselv [options]
+  xcv <version>
+  xcv [options]
 
 Options:
   <version> set the active Xcode version
@@ -138,7 +137,7 @@ function xcode_parse_versioned_file {
   print -- "$ver"
 }
 
-# Print the active version, using xcselv's notion of versions
+# Print the active version, using xcv's notion of versions
 function xcode_print_active_version {
   emulate -L zsh
   local -A xcode_versions
