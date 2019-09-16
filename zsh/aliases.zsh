@@ -40,17 +40,6 @@ alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 
-# Commit pending changes and quote all args as message
-function gg() {
-  git commit -v -a -m "$*"
-}
-
-# Fetch gitignore from gitignore.io. Usage:
-# gi xcode
-function gi() {
-  curl https://www.gitignore.io/api/$1
-}
-
 # Swift Package Manager
 alias spi='swift package init'
 alias spf='swift package fetch'
@@ -76,7 +65,6 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 
 # macOS
 alias o='open .'
-alias screensaver='/System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine'
 
 # Ruby
 alias b='bundle'
