@@ -1,4 +1,3 @@
- ../zsh/xcode.zsh
 #!/usr/bin/env bash
 
 # Credits:
