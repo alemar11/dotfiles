@@ -78,6 +78,7 @@ if [[ $1 == "install" ]]; then
 elif [[ $1 == "remove" ]]; then
   remove_links
 elif [[ $1 == "clean" ]]; then
+  # remove broken symbolic link.  
   find -L "$HOME" -maxdepth 1 -type l -exec rm -i {} \;
 else
   die
