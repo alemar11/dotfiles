@@ -1,4 +1,4 @@
-# dotfiles
+# Install dotfiles
 
 ```
 ./dotfiles.sh
@@ -8,7 +8,7 @@
 
 # macOS
 
-In the */macos* folder there are some scripts to customize some `macOS` defaults, `Terminal`, `Xcode`, `VScode`.
+In the *setup/macos* folder there are some scripts to customize some `macOS` defaults, `Terminal`, `Xcode`, `VScode`.
 
 Double click “AM.terminal” file.  
 This is the specific Theme file for Terminal.app.   
@@ -16,6 +16,18 @@ Note: If you get a warning that this is from an unidentified developer, Right-cl
 
 ```
 ./macos/install.sh
+```
+
+# Xcode configuration
+
+```
+./macos/xcode/link.sh
+```
+
+# Vistual Studio Code configuration
+
+```
+./macos/vscode/link.sh
 ```
 
 ---
