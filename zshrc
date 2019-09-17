@@ -12,7 +12,7 @@ cdpath=($HOME/Developer $HOME/Documents)
 REPORTTIME=10
 
 # Load all the .zsh files
-for file (~/.zsh/*.zsh) source $file
+for file (~/.zsh/configurations/*.zsh) source $file
 
 # Adding path directory for custom scripts
 export PATH=$DOTFILES/bin:$PATH
