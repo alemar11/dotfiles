@@ -19,14 +19,14 @@ command alias autocontinue breakpoint modify --auto-continue true
 ## View Hierarchy
 # Swift
 command alias vh expr -l objc++ -O -- [[[UIWindow keyWindow] rootViewController] _printHierarchy]
-# Objective-C
-command alias vhc po [[[UIWindow keyWindow] rootViewController] _printHierarchy]
+# Objective-C (Disabled)
+#command alias vhc po [[[UIWindow keyWindow] rootViewController] _printHierarchy]
 
 ## Auto Layout Debugging
 # Swift
 command alias al expr -l objc++ -O -- [[UIWindow keyWindow] _autolayoutTrace]
-# Objective-C
-command alias alc po [[UIWindow keyWindow] _autolayoutTrace]
+# Objective-C (Disabled)
+#command alias alc po [[UIWindow keyWindow] _autolayoutTrace]
 
 ## Running a command in objective C mode
 # use: poc 0x7fb3afc3f480
