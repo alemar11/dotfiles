@@ -1,7 +1,0 @@
-# Ignore OS or Editor folders
-
-.DS_Store
-._*
-Thumbs.db
-.cache
-.rake_tasks~

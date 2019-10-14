@@ -1,39 +1,45 @@
-# dotfiles for macOS
-
-Run 🚀
+# Install dotfiles
 
 ```
-bundle install
-bundle exec rake symlink
+./dotfiles.sh
 ```
 
-## Show hidden files
+---
+
+# macOS
+
+In the *setup/macos* folder there are some scripts to customize some `macOS` defaults, `Terminal`, `Xcode`, `VScode`.
+
+Double click “AM.terminal” file.  
+This is the specific Theme file for Terminal.app.   
+Note: If you get a warning that this is from an unidentified developer, Right-click on the file and select “Open with” > Terminal option.
 
 ```
-defaults write com.apple.finder AppleShowAllFiles YES
-killall -KILL Finder
+./macos/install.sh
 ```
 
-## ZSH
+# Xcode configuration
 
 ```
-brew install zsh
-chsh -s /bin/zsh
+./macos/xcode/link.sh
 ```
 
-## Swift Package Manager Completion (Swift 4.2)
+# Vistual Studio Code configuration
+
+```
+./macos/vscode/link.sh
+```
+
+---
+
+## Update Swift Package Manager Completion
 
 If you want to update the current auto completion run:
-`swift package completion-tool generate-zsh-script > ~/.zsh/functions/_swift`
-
-## Extra configuration
-
-To install the custom terminal theme just double click on AM.terminal.
-
+`swift package completion-tool generate-zsh-script > ~/.zsh/completions/_swift`
 
 ## Setup SSH
 
-If you're using macOS Sierra 10.12.2 or later, you will need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.
+You need to modify your ~/.ssh/config file to automatically load keys into the ssh-agent and store passphrases in your keychain.
 
 `touch ~/.ssh/config`
 
@@ -43,3 +49,8 @@ Host *
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_rsa
 ```
+
+More info can be found here:
+
+- [Connecting to Github with ssh](https://help.github.com/en/articles/connecting-to-github-with-ssh)
+- [Generating a new ssh key and adding it to the ssh agent](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)

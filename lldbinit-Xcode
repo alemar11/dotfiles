@@ -1,0 +1,38 @@
+#command script import ~/.lldb_helpers/nudge.py
+
+# List registers, in order of calling convention.
+#alias args register read arg1 arg2 arg3 arg4 arg5 arg6
+
+# Tell lldb to assume swift, not objc
+#settings set target.language swift
+command alias clear-lang settings clear target.language
+
+# The `load_swift` command is used to load helpers written in Swift
+command script import ~/.lldb_helpers/load_swift.py
+
+## Load Swift helpers
+command alias lh load_swift ~/.lldb_helpers/helpers.swift
+
+command alias action breakpoint command add
+command alias autocontinue breakpoint modify --auto-continue true
+
+## View Hierarchy
+# Swift
+command alias vh expr -l objc++ -O -- [[[UIWindow keyWindow] rootViewController] _printHierarchy]
+# Objective-C (Disabled)
+#command alias vhc po [[[UIWindow keyWindow] rootViewController] _printHierarchy]
+
+## Auto Layout Debugging
+# Swift
+command alias al expr -l objc++ -O -- [[UIWindow keyWindow] _autolayoutTrace]
+# Objective-C (Disabled)
+#command alias alc po [[UIWindow keyWindow] _autolayoutTrace]
+
+## Running a command in objective C mode
+# use: poc 0x7fb3afc3f480
+command alias poc expression -l objc -O --
+
+## Updating animation from LLDB
+command alias flush expression -l objc -- (void)[CATransaction flush]
+
+command source ~/.lldbinit
