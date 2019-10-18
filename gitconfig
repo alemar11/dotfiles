@@ -14,12 +14,12 @@
 [hub]
   protocol = https
 [alias]
-  a           = add
-  last        = diff HEAD^ HEAD
-  last-msg    = !git --no-pager log --format=format:%B -1
-  last-sha    = !git --no-pager log --format=format:%H -1
-  pul         = pull
-  sub         = submodule update --init --recursive
-  undo        = reset --soft HEAD^
+  a        = add
+  last     = diff HEAD^ HEAD
+  last-msg = !git --no-pager log --format=format:%B -1
+  last-sha = !git --no-pager log --format=format:%H -1
+  pul      = pull
+  sub      = submodule update --init --recursive
+  undo     = reset --soft HEAD^
 [fetch]
   prune = true
