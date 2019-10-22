@@ -74,8 +74,4 @@ alias be='bundle exec'
 alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null'
 
 # Update commands
-alias brewup="brew update && brew doctor && brew outdated && brew upgrade && brew cleanup"
-alias gemup='gem update --system && gem update && gem cleanup'
-#alias npmup='npm -g cache clean && npm -g update && npm-check-updates -u && npm install'
 alias sysup='sudo softwareupdate -i -a'
-alias upall='sysup && brewup && gemup'
