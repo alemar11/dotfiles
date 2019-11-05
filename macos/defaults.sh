@@ -70,6 +70,8 @@ defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string AM.xccolort
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string AM.xccolortheme
 # Enable concurrency when building - Requires RAM!
 defaults write com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively -bool YES
+# Enable full screen mode for the simulator
+defaults write com.apple.iphonesimulator AllowFullscreenMode -bool YES
 
 ### Dock
 
