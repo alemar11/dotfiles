@@ -27,6 +27,7 @@ CASKS=(
     iina
     monodraw
     onyx
+    paw
     proxyman
     sketch
     visual-studio-code
