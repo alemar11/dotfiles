@@ -70,6 +70,11 @@ alias o='open .'
 alias b='bundle'
 alias be='bundle exec'
 
+# Python
+alias python='python3'
+alias py='python'
+alias pip='pip3'
+
 ## SSH
 alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null'
 

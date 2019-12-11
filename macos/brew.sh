@@ -15,6 +15,7 @@ PACKAGES=(
     cloc
     wget
     rbenv
+    python
 )
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
