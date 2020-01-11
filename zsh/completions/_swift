@@ -82,13 +82,15 @@ _swift_build() {
         "(--verbose -v)"{--verbose,-v}"[Increase verbosity of informational output]"
         "--no-static-swift-stdlib[Do not link Swift stdlib statically \[default\]]"
         "--static-swift-stdlib[Link Swift stdlib statically]"
-        "--enable-llbuild-library[Enable building with the llbuild library]"
         "--force-resolved-versions[]"
         "--disable-automatic-resolution[Disable automatic resolution if Package.resolved file is out-of-date]"
         "--enable-index-store[Enable indexing-while-building feature]"
         "--disable-index-store[Disable indexing-while-building feature]"
         "--enable-pubgrub-resolver[\[Experimental\] Enable the new Pubgrub dependency resolver]"
         "--enable-parseable-module-interfaces[]"
+        "--trace-resolver[]"
+        "(--jobs -j)"{--jobs,-j}"[The number of jobs to spawn in parallel during the build process]:The number of jobs to spawn in parallel during the build process: "
+        "--enable-test-discovery[Enable test discovery on platforms without Objective-C runtime]"
         "--build-tests[Build both source and test targets]"
         "--product[Build the specified product]:Build the specified product: "
         "--target[Build the specified target]:Build the specified target: "
@@ -125,13 +127,15 @@ _swift_run() {
         "(--verbose -v)"{--verbose,-v}"[Increase verbosity of informational output]"
         "--no-static-swift-stdlib[Do not link Swift stdlib statically \[default\]]"
         "--static-swift-stdlib[Link Swift stdlib statically]"
-        "--enable-llbuild-library[Enable building with the llbuild library]"
         "--force-resolved-versions[]"
         "--disable-automatic-resolution[Disable automatic resolution if Package.resolved file is out-of-date]"
         "--enable-index-store[Enable indexing-while-building feature]"
         "--disable-index-store[Disable indexing-while-building feature]"
         "--enable-pubgrub-resolver[\[Experimental\] Enable the new Pubgrub dependency resolver]"
         "--enable-parseable-module-interfaces[]"
+        "--trace-resolver[]"
+        "(--jobs -j)"{--jobs,-j}"[The number of jobs to spawn in parallel during the build process]:The number of jobs to spawn in parallel during the build process: "
+        "--enable-test-discovery[Enable test discovery on platforms without Objective-C runtime]"
         "--skip-build[Skip building the executable product]"
         "--build-tests[Build both source and test targets]"
         "--repl[Launch Swift REPL for the package]"
@@ -166,13 +170,15 @@ _swift_package() {
         "(--verbose -v)"{--verbose,-v}"[Increase verbosity of informational output]"
         "--no-static-swift-stdlib[Do not link Swift stdlib statically \[default\]]"
         "--static-swift-stdlib[Link Swift stdlib statically]"
-        "--enable-llbuild-library[Enable building with the llbuild library]"
         "--force-resolved-versions[]"
         "--disable-automatic-resolution[Disable automatic resolution if Package.resolved file is out-of-date]"
         "--enable-index-store[Enable indexing-while-building feature]"
         "--disable-index-store[Disable indexing-while-building feature]"
         "--enable-pubgrub-resolver[\[Experimental\] Enable the new Pubgrub dependency resolver]"
         "--enable-parseable-module-interfaces[]"
+        "--trace-resolver[]"
+        "(--jobs -j)"{--jobs,-j}"[The number of jobs to spawn in parallel during the build process]:The number of jobs to spawn in parallel during the build process: "
+        "--enable-test-discovery[Enable test discovery on platforms without Objective-C runtime]"
         '(-): :->command'
         '(-)*:: :->arg'
     )
@@ -181,92 +187,80 @@ _swift_package() {
         (command)
             local modes
             modes=(
-                'fetch:'
-                'reset:Reset the complete cache/build directory'
-                'init:Initialize a new package'
-                'resolve:Resolve package dependencies'
                 'tools-version:Manipulate tools version of the current package'
-                'generate-xcodeproj:Generates an Xcode project'
-                'completion-tool:Completion tool (for shell completions)'
-                'clean:Delete build artifacts'
-                'update:Update package dependencies'
-                'config:Manipulate configuration of the package'
+                'resolve:Resolve package dependencies'
                 'show-dependencies:Print the resolved dependency graph'
+                'clean:Delete build artifacts'
+                'config:Manipulate configuration of the package'
                 'dump-package:Print parsed Package.swift as JSON'
-                'describe:Describe the current package'
-                'unedit:Remove a package from editable mode'
                 'edit:Put a package in editable mode'
+                'init:Initialize a new package'
+                'completion-tool:Completion tool (for shell completions)'
+                'describe:Describe the current package'
+                'update:Update package dependencies'
+                'generate-xcodeproj:Generates an Xcode project'
+                'reset:Reset the complete cache/build directory'
+                'fetch:'
+                'unedit:Remove a package from editable mode'
             )
             _describe "mode" modes
             ;;
         (arg)
             case ${words[1]} in
-                (fetch)
-                    _swift_package_fetch
-                    ;;
-                (reset)
-                    _swift_package_reset
-                    ;;
-                (init)
-                    _swift_package_init
+                (tools-version)
+                    _swift_package_tools-version
                     ;;
                 (resolve)
                     _swift_package_resolve
                     ;;
-                (tools-version)
-                    _swift_package_tools-version
-                    ;;
-                (generate-xcodeproj)
-                    _swift_package_generate-xcodeproj
-                    ;;
-                (completion-tool)
-                    _swift_package_completion-tool
+                (show-dependencies)
+                    _swift_package_show-dependencies
                     ;;
                 (clean)
                     _swift_package_clean
                     ;;
-                (update)
-                    _swift_package_update
-                    ;;
                 (config)
                     _swift_package_config
-                    ;;
-                (show-dependencies)
-                    _swift_package_show-dependencies
                     ;;
                 (dump-package)
                     _swift_package_dump-package
                     ;;
+                (edit)
+                    _swift_package_edit
+                    ;;
+                (init)
+                    _swift_package_init
+                    ;;
+                (completion-tool)
+                    _swift_package_completion-tool
+                    ;;
                 (describe)
                     _swift_package_describe
                     ;;
+                (update)
+                    _swift_package_update
+                    ;;
+                (generate-xcodeproj)
+                    _swift_package_generate-xcodeproj
+                    ;;
+                (reset)
+                    _swift_package_reset
+                    ;;
+                (fetch)
+                    _swift_package_fetch
+                    ;;
                 (unedit)
                     _swift_package_unedit
-                    ;;
-                (edit)
-                    _swift_package_edit
                     ;;
             esac
             ;;
     esac
 }
 
-_swift_package_fetch() {
+_swift_package_tools-version() {
     arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_reset() {
-    arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_init() {
-    arguments=(
-        "--type[empty|library|executable|system-module]: :{_values '' 'empty[generates an empty project]' 'library[generates project for a dynamic library]' 'executable[generates a project for a cli executable]' 'system-module[generates a project for a system module]'}"
-        "--name[Provide custom package name]:Provide custom package name: "
+        "--set[Set tools version of package to the given value]:Set tools version of package to the given value: "
+        "--set-current[Set tools version of package to the current tools version in use]"
     )
     _arguments $arguments && return
 }
@@ -281,10 +275,114 @@ _swift_package_resolve() {
     _arguments $arguments && return
 }
 
-_swift_package_tools-version() {
+_swift_package_show-dependencies() {
     arguments=(
-        "--set[Set tools version of package to the given value]:Set tools version of package to the given value: "
-        "--set-current[Set tools version of package to the current tools version in use]"
+        "--format[text|dot|json|flatlist]: :{_values '' 'text[list dependencies using text format]' 'dot[list dependencies using dot format]' 'json[list dependencies using JSON format]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_clean() {
+    arguments=(
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_config() {
+    arguments=(
+        '(-): :->command'
+        '(-)*:: :->arg'
+    )
+    _arguments $arguments && return
+    case $state in
+        (command)
+            local modes
+            modes=(
+                'set-mirror:Set a mirror for a dependency'
+                'unset-mirror:Remove an existing mirror'
+                'get-mirror:Print mirror configuration for the given package dependency'
+            )
+            _describe "mode" modes
+            ;;
+        (arg)
+            case ${words[1]} in
+                (set-mirror)
+                    _swift_package_config_set-mirror
+                    ;;
+                (unset-mirror)
+                    _swift_package_config_unset-mirror
+                    ;;
+                (get-mirror)
+                    _swift_package_config_get-mirror
+                    ;;
+            esac
+            ;;
+    esac
+}
+
+_swift_package_config_set-mirror() {
+    arguments=(
+        "--package-url[The package dependency url]:The package dependency url: "
+        "--mirror-url[The mirror url]:The mirror url: "
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_config_unset-mirror() {
+    arguments=(
+        "--package-url[The package dependency url]:The package dependency url: "
+        "--mirror-url[The mirror url]:The mirror url: "
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_config_get-mirror() {
+    arguments=(
+        "--package-url[The package dependency url]:The package dependency url: "
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_dump-package() {
+    arguments=(
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_edit() {
+    arguments=(
+        ":The name of the package to edit:_swift_dependency"
+        "--revision[The revision to edit]:The revision to edit: "
+        "--branch[The branch to create]:The branch to create: "
+        "--path[Create or use the checkout at this path]:Create or use the checkout at this path:_files"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_init() {
+    arguments=(
+        "--type[empty|library|executable|system-module|manifest]: :{_values '' 'empty[generates an empty project]' 'library[generates project for a dynamic library]' 'executable[generates a project for a cli executable]' 'system-module[generates a project for a system module]'}"
+        "--name[Provide custom package name]:Provide custom package name: "
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_completion-tool() {
+    arguments=(
+        ": :{_values '' 'generate-bash-script[generate Bash completion script]' 'generate-zsh-script[generate Bash completion script]' 'list-dependencies[list all dependencies' names]' 'list-executables[list all executables' names]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_describe() {
+    arguments=(
+        "--type[json|text]: :{_values '' 'text[describe using text format]' 'json[describe using JSON format]'}"
+    )
+    _arguments $arguments && return
+}
+
+_swift_package_update() {
+    arguments=(
     )
     _arguments $arguments && return
 }
@@ -301,96 +399,14 @@ _swift_package_generate-xcodeproj() {
     _arguments $arguments && return
 }
 
-_swift_package_completion-tool() {
-    arguments=(
-        ": :{_values '' 'generate-bash-script[generate Bash completion script]' 'generate-zsh-script[generate Bash completion script]' 'list-dependencies[list all dependencies' names]' 'list-executables[list all executables' names]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_clean() {
+_swift_package_reset() {
     arguments=(
     )
     _arguments $arguments && return
 }
 
-_swift_package_update() {
+_swift_package_fetch() {
     arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_config() {
-    arguments=(
-        '(-): :->command'
-        '(-)*:: :->arg'
-    )
-    _arguments $arguments && return
-    case $state in
-        (command)
-            local modes
-            modes=(
-                'get-mirror:Print mirror configuration for the given package dependency'
-                'unset-mirror:Remove an existing mirror'
-                'set-mirror:Set a mirror for a dependency'
-            )
-            _describe "mode" modes
-            ;;
-        (arg)
-            case ${words[1]} in
-                (get-mirror)
-                    _swift_package_config_get-mirror
-                    ;;
-                (unset-mirror)
-                    _swift_package_config_unset-mirror
-                    ;;
-                (set-mirror)
-                    _swift_package_config_set-mirror
-                    ;;
-            esac
-            ;;
-    esac
-}
-
-_swift_package_config_get-mirror() {
-    arguments=(
-        "--package-url[The package dependency url]:The package dependency url: "
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_config_unset-mirror() {
-    arguments=(
-        "--package-url[The package dependency url]:The package dependency url: "
-        "--mirror-url[The mirror url]:The mirror url: "
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_config_set-mirror() {
-    arguments=(
-        "--package-url[The package dependency url]:The package dependency url: "
-        "--mirror-url[The mirror url]:The mirror url: "
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_show-dependencies() {
-    arguments=(
-        "--format[text|dot|json|flatlist]: :{_values '' 'text[list dependencies using text format]' 'dot[list dependencies using dot format]' 'json[list dependencies using JSON format]'}"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_dump-package() {
-    arguments=(
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_describe() {
-    arguments=(
-        "--type[json|text]: :{_values '' 'text[describe using text format]' 'json[describe using JSON format]'}"
     )
     _arguments $arguments && return
 }
@@ -399,16 +415,6 @@ _swift_package_unedit() {
     arguments=(
         ":The name of the package to unedit:_swift_dependency"
         "--force[Unedit the package even if it has uncommited and unpushed changes.]"
-    )
-    _arguments $arguments && return
-}
-
-_swift_package_edit() {
-    arguments=(
-        ":The name of the package to edit:_swift_dependency"
-        "--revision[The revision to edit]:The revision to edit: "
-        "--branch[The branch to create]:The branch to create: "
-        "--path[Create or use the checkout at this path]:Create or use the checkout at this path:_files"
     )
     _arguments $arguments && return
 }
@@ -440,13 +446,15 @@ _swift_test() {
         "(--verbose -v)"{--verbose,-v}"[Increase verbosity of informational output]"
         "--no-static-swift-stdlib[Do not link Swift stdlib statically \[default\]]"
         "--static-swift-stdlib[Link Swift stdlib statically]"
-        "--enable-llbuild-library[Enable building with the llbuild library]"
         "--force-resolved-versions[]"
         "--disable-automatic-resolution[Disable automatic resolution if Package.resolved file is out-of-date]"
         "--enable-index-store[Enable indexing-while-building feature]"
         "--disable-index-store[Disable indexing-while-building feature]"
         "--enable-pubgrub-resolver[\[Experimental\] Enable the new Pubgrub dependency resolver]"
         "--enable-parseable-module-interfaces[]"
+        "--trace-resolver[]"
+        "(--jobs -j)"{--jobs,-j}"[The number of jobs to spawn in parallel during the build process]:The number of jobs to spawn in parallel during the build process: "
+        "--enable-test-discovery[Enable test discovery on platforms without Objective-C runtime]"
         "--skip-build[Skip building the test target]"
         "(--list-tests -l)"{--list-tests,-l}"[Lists test methods in specifier format]"
         "--generate-linuxmain[Generate LinuxMain.swift entries for the package]"
