@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Bump the Xcode Project version
+xcrun agvtool new-marketing-version "$1"
