@@ -1,3 +1,6 @@
 #!/bin/sh
 
+# Get an HTTP Code description
+# Usage: http-code 404
+
 curl http://httpcode.info/"$1" | less

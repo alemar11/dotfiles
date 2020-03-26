@@ -1,4 +1,11 @@
 #!/bin/sh
 
-# Bump the Xcode Project version
+# Bump a Xcode Project Version number to a specified value
+# Usage: bump 1.3.0
+
+if which xcrun >/dev/null; then
 xcrun agvtool new-marketing-version "$1"
+else
+echo "warning: Xcode not installed"
+fi
+
