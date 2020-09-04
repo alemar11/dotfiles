@@ -2,6 +2,7 @@
 alias xcdd='rm -rf ~/Library/Developer/Xcode/DerivedData/*'
 alias xcp='xcode-select --print-path'
 alias xcsel='sudo xcode-select --switch'
+#alias xc='xed .'
 
 # original author: @subdigital
 # source: http://gist.github.com/subdigital/5420709
@@ -9,19 +10,25 @@ function xc {
   local xcode_proj
   if [[ $# == 0 ]]; then
     xcode_proj=(*.{xcworkspace,xcodeproj,playground}(N))
+    if [ -f "Package.swift" ]; then
+      xcode_proj+=("Package.swift")
+    fi
   else
     xcode_proj=($1/*.{xcworkspace,xcodeproj,playground}(N))
+    if [ -f $1/"Package.swift" ]; then
+      xcode_proj+=( $1/"Package.swift")
+    fi
   fi
 
   if [[ ${#xcode_proj} -eq 0 ]]; then
     if [[ $# == 0 ]]; then
-      echo "⚠️  No xcworkspace/xcodeproj/playground file found in the current directory."
+      echo "⚠️  No Xcode entrypoint file found in the current directory."
     else
-      echo "⚠️  No xcworkspace/xcodeproj/playground file found in $1."
+      echo "⚠️  No Xcode entrypoint file found in $1."
     fi
     return 1
   else
-    echo "✅  Found ${xcode_proj[1]}, opening with Xcode."
+    echo "✅ Found ${xcode_proj[1]}, opening with Xcode."
     open -a "Xcode" "${xcode_proj[1]}"
   fi
 }
@@ -30,19 +37,25 @@ function xcb {
   local xcode_proj
   if [[ $# == 0 ]]; then
     xcode_proj=(*.{xcworkspace,xcodeproj,playground}(N))
+    if [ -f "Package.swift" ]; then
+      xcode_proj+=("Package.swift")
+    fi
   else
     xcode_proj=($1/*.{xcworkspace,xcodeproj,playground}(N))
+    if [ -f $1/"Package.swift" ]; then
+      xcode_proj+=( $1/"Package.swift")
+    fi
   fi
 
   if [[ ${#xcode_proj} -eq 0 ]]; then
     if [[ $# == 0 ]]; then
-      echo "⚠️  No xcworkspace/xcodeproj/playground file found in the current directory."
+      echo "⚠️  No Xcode entrypoint file found in the current directory."
     else
-      echo "⚠️  No xcworkspace/xcodeproj/playground file found in $1."
+      echo "⚠️  No Xcode entrypoint file found in $1."
     fi
     return 1
   else
-    echo "✅  Found ${xcode_proj[1]}, opening with Xcode Beta."
+    echo "✅ Found ${xcode_proj[1]}, opening with Xcode Beta."
     open -a "Xcode-beta" "${xcode_proj[1]}"
   fi
 }
