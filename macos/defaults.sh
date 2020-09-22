@@ -27,7 +27,7 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "AM"
 
 ### Finder
 
-# Finder: show hidden files by default
+# Show hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool true
 # Disable the warning when changing a file extension
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
@@ -38,6 +38,12 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 chflags nohidden ~/Library
 # Show the /Volumes folder
 sudo chflags nohidden /Volumes
+
+### Mouse and Trackpad
+# Set mouse speed
+defaults write -g com.apple.mouse.scaling 1.2
+# Set trackpad speed
+defaults write -g com.apple.trackpad.scaling 1.2
 
 ### Safari & WebKit
 
