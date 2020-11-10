@@ -11,11 +11,12 @@ brew update
 
 PACKAGES=(
     carthage
-    swiftlint
     cloc
-    wget
-    rbenv
     python
+    rbenv
+    swiftlint
+    tree
+    wget
 )
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
