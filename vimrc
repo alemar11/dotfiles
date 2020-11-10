@@ -16,7 +16,7 @@ set backspace=indent,eol,start      "allow backspacing over everything in insert
 set history=1000                    "store lots of :cmdline history
 set showcmd                         "show incomplete cmds down the bottom
 set showmode                        "show current mode down the bottom
-set visualbell                      "no sounds
+set belloff=all                     "disable beeping (bell sound or visual/flash)
 set autoread                        "reload files changed outside vim
 set laststatus=2                    "always display the status bar
 set ignorecase                      "case-insensitive search
