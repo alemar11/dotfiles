@@ -13,6 +13,14 @@
             continueAfterRunningActions = "No"
             scope = "1"
             stopOnStyle = "0">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "po $arg1">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -59,6 +67,26 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
+               <Location
+                  uuid = "FBF4F070-F928-4479-AED9-FB43221B969B - ca8a62ba89de0751"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UIKit.UIApplicationMain(Swift.Int32, Swift.Optional&lt;Swift.UnsafeMutablePointer&lt;Swift.UnsafeMutablePointer&lt;Swift.Int8&gt;&gt;&gt;, Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; Swift.Int32"
+                  moduleName = "libswiftUIKit.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "FBF4F070-F928-4479-AED9-FB43221B969B - dc2f8c5e001177f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UIApplicationMain"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,41 +138,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
-            uuid = "05E32847-B009-4717-9E85-B66718580E1D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            symbolName = "_NSDataReinitializationBreak"
-            moduleName = "">
-            <Locations>
-               <Location
-                  uuid = "05E32847-B009-4717-9E85-B66718580E1D - 7f67292beb66e73b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "_NSDataReinitializationBreak"
-                  moduleName = "Foundation"
-                  usesParentBreakpointCondition = "Yes"
-                  offsetFromSymbolStart = "0">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
-         <BreakpointContent
             uuid = "B1C248B4-EF4C-4113-9C86-DF2770B89BB4"
             shouldBeEnabled = "No"
-            condition = "!(BOOL)([[$arg1 description] containsString:@&quot;Input&quot;])"
+            condition = "!(BOOL)([[$arg1 description] containsString:@&quot;UIInputWindowController&quot;]) &amp;&amp; !(BOOL)([[$arg1 description] containsString:@&quot;UIEditingOverlayViewController&quot;])"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
-            symbolName = "-[UIViewController dealloc]"
-            moduleName = "UIKit">
+            symbolName = "-[UIViewController dealloc]">
             <Actions>
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Log">
                   <ActionContent
-                     message = "--- dealloc @(id)[$arg1 description]@ @(id)[$arg1 title]@"
+                     message = "&#x1f538; dealloc @(id)[$arg1 description]@ @(id)[$arg1 title]@"
                      conveyanceType = "0">
                   </ActionContent>
                </BreakpointActionProxy>
@@ -156,6 +160,16 @@
                </BreakpointActionProxy>
             </Actions>
             <Locations>
+               <Location
+                  uuid = "B1C248B4-EF4C-4113-9C86-DF2770B89BB4 - d678e86d6b527609"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIViewController dealloc]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -164,6 +178,7 @@
          <BreakpointContent
             uuid = "BBB91B35-C7A4-48E1-8B75-F73A4A0E78A1"
             shouldBeEnabled = "No"
+            condition = "!(BOOL)([[$arg1 description] containsString:@&quot;UIInputWindowController&quot;]) &amp;&amp; !(BOOL)([[$arg1 description] containsString:@&quot;UIEditingOverlayViewController&quot;])"
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             symbolName = "-[UIViewController initWithNibName:bundle:]"
@@ -172,12 +187,55 @@
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Log">
                   <ActionContent
-                     message = "--- init @(id)[$arg1 description]@"
+                     message = "&#x1f539; init @(id)[$arg1 description]@"
                      conveyanceType = "0">
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
             <Locations>
+               <Location
+                  uuid = "BBB91B35-C7A4-48E1-8B75-F73A4A0E78A1 - 3ce226f82277e33d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIViewController initWithNibName:bundle:]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "8B078FBC-082E-4C3D-9DF0-070F92413AC5"
+            shouldBeEnabled = "No"
+            condition = "!(BOOL)([[$arg1 description] containsString:@&quot;UIInputWindowController&quot;]) &amp;&amp; !(BOOL)([[$arg1 description] containsString:@&quot;UIEditingOverlayViewController&quot;])"
+            ignoreCount = "0"
+            continueAfterRunningActions = "Yes"
+            symbolName = "-[UIViewController initWithCoder:]"
+            moduleName = "">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.Log">
+                  <ActionContent
+                     message = "&#x1f539; init @(id)[$arg1 description]@"
+                     conveyanceType = "0">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
+            <Locations>
+               <Location
+                  uuid = "8B078FBC-082E-4C3D-9DF0-070F92413AC5 - ec86f1d2d06811bf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[UIViewController initWithCoder:]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
