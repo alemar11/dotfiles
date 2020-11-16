@@ -1,6 +1,13 @@
 /// Every method or variable must start with $ so that lldb gives them a global scope.
 /// On extensions the $ is not required at the moment.
 
+/// po $helloWorld()
+func $welcome() {
+  print("UIKit helpers loaded")
+}
+
+$welcome()
+
 extension UIView {
   /// Example: call someView.nudge(0, 30)
   func nudge(_ dx: CGFloat, _ dy: CGFloat) {
