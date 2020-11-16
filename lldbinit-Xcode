@@ -3,7 +3,7 @@
 # List registers, in order of calling convention.
 #alias args register read arg1 arg2 arg3 arg4 arg5 arg6
 
-# Tell lldb to assume swift, not objc
+# Tell lldb to assume Swift, not Objective-C
 #settings set target.language swift
 command alias clear-lang settings clear target.language
 
@@ -34,5 +34,8 @@ command alias poc expression -l objc -O --
 
 ## Updating animation from LLDB
 command alias flush expression -l objc -- (void)[CATransaction flush]
+
+## JSON
+command regex json 's/(.+)/expr let input = %1; print(String(data: try! JSONSerialization.data(withJSONObject: (input is Data ? (try! JSONSerialization.jsonObject(with: input as! Data, options: [])) : input as! Any), options: [.prettyPrinted]), encoding: .utf8)!)/'
 
 command source ~/.lldbinit
