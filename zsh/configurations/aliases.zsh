@@ -80,3 +80,6 @@ alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &
 
 # Update commands
 alias sysup='sudo softwareupdate -i -a'
+
+# Caffeinate
+alias caffe='caffeinate'
