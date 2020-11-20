@@ -31,6 +31,7 @@ alias gf='git fetch'
 alias gfp='git fetch --prune'
 alias gl='git log --graph --decorate --all'
 alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+alias glr="git log --pretty=oneline --abbrev-commit --first-parent"
 alias gm="git mergetool"
 alias gp='git push'
 alias gs='git status'
