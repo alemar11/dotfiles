@@ -10,11 +10,11 @@ echo "🍺 Updating homebrew..."
 brew update
 
 PACKAGES=(
-    carthage
     cloc
     python
     rbenv
     swiftlint
+    swift-format
     tree
     wget
 )
@@ -24,14 +24,14 @@ brew install ${PACKAGES[@]}
 CASKS=(
     appcleaner
     battle-net
-    beyond-compare
-    fork
     iina
     monodraw
     onyx
     paw
     proxyman
     sketch
+    sf-symbols
+    tower
     visual-studio-code
     wwdc
 )
