@@ -84,3 +84,6 @@ alias sysup='sudo softwareupdate -i -a'
 
 # Caffeinate
 alias caffe='caffeinate'
+
+# JSON::PP
+alias jsonpp='json_pp -json_opt pretty,utf8'
