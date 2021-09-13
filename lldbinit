@@ -3,7 +3,6 @@ command alias alias command alias
 alias unalias command unalias
 alias import command script import
 alias shell platform shell
-alias history command history
 
 # Set breakpoint in a file at a given line
 # ie: bfl foo.c 12
