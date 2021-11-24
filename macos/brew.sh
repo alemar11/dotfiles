@@ -20,7 +20,6 @@ PACKAGES=(
     swift-format
     tree
     wget
-    robotsandpencils/made/xcodes:
   )
 echo "🍺 Installing brew packages..."
 brew install ${PACKAGES[@]}
@@ -36,6 +35,7 @@ CASKS=(
     sf-symbols
     tower
     visual-studio-code
+    xcodes
     wwdc
 )
 
