@@ -60,6 +60,7 @@ More info can be found here:
 ## VIM Plugins (Optional)
 
 ### PATHOGEN
+
 Pathogen is an easy way to manage VIM plugins contained at ~/.vim/bundle/[name-of-plug-in]. 
 Otherwise, VIM tends to spread these files out in different directories (~/.vim/plugin, ~/.vim/syntax, ~/.vim/doc, etc.). 
 In general, if you want to know about customizing VIM, see http://learnvimscriptthehardway.stevelosh.com/.
@@ -77,6 +78,7 @@ execute pathogen#infect()
 ```
 
 ### NerdTree (Vim Plugin)
+
 Nerdtree gives you a little window to navigate a directory structure.
 
 To add it, run:
