@@ -24,4 +24,7 @@ fi
 
 # Add rbenv to path to access command-line utility
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#eval "$(rbenv init -)"
+
+# Add brew to path
+export PATH=/opt/homebrew/bin:$PATH 
