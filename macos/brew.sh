@@ -34,6 +34,7 @@ CASKS=(
     tower
     visual-studio-code
     wwdc
+    xcodes
 )
 
 echo "🍺 Installing cask apps..."
