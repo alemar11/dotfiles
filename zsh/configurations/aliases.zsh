@@ -66,6 +66,7 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 
 # macOS
 alias o='open .'
+alias speedtest='networkquality'
 
 # Python (`type python3` to find the path)
 alias python='/opt/homebrew/bin/python3'
