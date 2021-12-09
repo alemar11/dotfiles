@@ -101,3 +101,8 @@ defaults write com.apple.dock show-recents -bool false
 
 # Start TextEdit with a blank document instead of the default file picker
 defaults write com.apple.TextEdit NSShowAppCentricOpenPanelInsteadOfUntitledFile -bool false
+
+### Mix
+
+# Makes crash reports on macOS show up as a notification instead of a modal alert
+defaults write com.apple.CrashReporter UseUNC 1
