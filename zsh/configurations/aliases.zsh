@@ -66,6 +66,7 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 
 # macOS
 alias o='open .'
+alias speedtest='networkquality'
 
 # Ruby
 alias b='bundle'
