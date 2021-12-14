@@ -18,6 +18,8 @@ osascript -e 'tell application "System Preferences" to quit'
 defaults write com.apple.menuextra.battery ShowPercent -bool true
 # Dark UI
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+# Disable natural scrolling direction
+defaults write -g com.apple.swipescrolldirection -bool NO
 
 ### Terminal
 
