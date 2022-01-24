@@ -14,6 +14,7 @@ PACKAGES=(
     cloc
     cocoapods
     fastlane
+    hyperfine
     python
     rbenv
     swiftlint
