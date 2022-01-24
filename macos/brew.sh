@@ -11,6 +11,7 @@ brew update
 
 PACKAGES=(
     cloc
+    hyperfine
     python
     rbenv
     swiftlint
