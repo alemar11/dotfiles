@@ -20,6 +20,8 @@ defaults write com.apple.menuextra.battery ShowPercent -bool true
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 # Disable natural scrolling direction
 defaults write -g com.apple.swipescrolldirection -bool NO
+# Enable key repeats
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 ### Terminal
 
