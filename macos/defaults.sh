@@ -18,6 +18,8 @@ osascript -e 'tell application "System Preferences" to quit'
 defaults write com.apple.menuextra.battery ShowPercent -bool true
 # Dark UI
 defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+# Enable key repeats
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 ### Terminal
 
