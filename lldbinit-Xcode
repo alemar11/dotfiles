@@ -35,10 +35,9 @@ command alias poc expression -l objc -O --
 ## Updating animation from LLDB
 command alias flush expression -l objc -- (void)[CATransaction flush]
 
-## 
+## Vars and Methods
 command regex ivars 's/(.+)/expression -lobjc -O -- [%1 _ivarDescription]/'
 command regex methods 's/(.+)/expression -lobjc -O -- [%1 _shortMethodDescription]/'
-
 
 ## JSON
 command regex json 's/(.+)/expr let input = %1; print(String(data: try! JSONSerialization.data(withJSONObject: (input is Data ? (try! JSONSerialization.jsonObject(with: input as! Data, options: [])) : input as! Any), options: [.prettyPrinted]), encoding: .utf8)!)/'
