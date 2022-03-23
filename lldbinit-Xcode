@@ -35,7 +35,7 @@ command alias poc expression -l objc -O --
 ## Updating animation from LLDB
 command alias flush expression -l objc -- (void)[CATransaction flush]
 
-##  Vars and Methods
+## Vars and Methods
 command regex ivars 's/(.+)/expression -lobjc -O -- [%1 _ivarDescription]/'
 command regex methods 's/(.+)/expression -lobjc -O -- [%1 _shortMethodDescription]/'
 
