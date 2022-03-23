@@ -6,7 +6,6 @@
 [core]
   editor = vim
   excludesfile = ~/.gitignore_global
-  hookspath = ~/.git_template/hooks
 [push]
   default = upstream
 [github]
