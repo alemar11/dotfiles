@@ -54,6 +54,7 @@ More info can be found here:
 
 - [Connecting to Github with ssh](https://help.github.com/en/articles/connecting-to-github-with-ssh)
 - [Generating a new ssh key and adding it to the ssh agent](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- [Managing multiple github SSH keys on mac](https://samwize.com/2022/04/06/managing-multiple-github-ssh-keys-on-mac/)
 
 ---
 
