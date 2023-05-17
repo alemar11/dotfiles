@@ -57,6 +57,8 @@ _swift_run() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
+        specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--disable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--enable-build-manifest-caching'
@@ -65,9 +67,10 @@ _swift_run() {
         '(--verbose -v)'{--verbose,-v}'[Increase verbosity to include informational output]'
         '(--very-verbose --vv)'{--very-verbose,--vv}'[Increase verbosity to include debug output]'
         '--disable-sandbox[Disable using the sandbox when executing subprocesses]'
-        '--enable-netrc[Load credentials from a .netrc file]'
-        '--disable-netrc[Load credentials from a .netrc file]'
-        '--netrc-file[Specify the .netrc file path.]:netrc-file:_files'
+        '--netrc[Use netrc file even in cases where other credential stores are preferred]'
+        '--enable-netrc[Load credentials from a netrc file]'
+        '--disable-netrc[Load credentials from a netrc file]'
+        '--netrc-file[Specify the netrc file path]:netrc-file:_files'
         '--enable-keychain[Search credentials in macOS keychain]'
         '--disable-keychain[Search credentials in macOS keychain]'
         '--resolver-fingerprint-checking:resolver-fingerprint-checking:'
@@ -94,8 +97,8 @@ _swift_run() {
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
         '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
+        '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
-        '--print-manifest-job-graph[Write the command graph for the build manifest as a graphviz file]'
         '--build-system:build-system:(native xcode)'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
@@ -125,6 +128,8 @@ _swift_build() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
+        specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--disable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--enable-build-manifest-caching'
@@ -133,9 +138,10 @@ _swift_build() {
         '(--verbose -v)'{--verbose,-v}'[Increase verbosity to include informational output]'
         '(--very-verbose --vv)'{--very-verbose,--vv}'[Increase verbosity to include debug output]'
         '--disable-sandbox[Disable using the sandbox when executing subprocesses]'
-        '--enable-netrc[Load credentials from a .netrc file]'
-        '--disable-netrc[Load credentials from a .netrc file]'
-        '--netrc-file[Specify the .netrc file path.]:netrc-file:_files'
+        '--netrc[Use netrc file even in cases where other credential stores are preferred]'
+        '--enable-netrc[Load credentials from a netrc file]'
+        '--disable-netrc[Load credentials from a netrc file]'
+        '--netrc-file[Specify the netrc file path]:netrc-file:_files'
         '--enable-keychain[Search credentials in macOS keychain]'
         '--disable-keychain[Search credentials in macOS keychain]'
         '--resolver-fingerprint-checking:resolver-fingerprint-checking:'
@@ -162,8 +168,8 @@ _swift_build() {
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
         '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
+        '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
-        '--print-manifest-job-graph[Write the command graph for the build manifest as a graphviz file]'
         '--build-system:build-system:(native xcode)'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
@@ -171,6 +177,7 @@ _swift_build() {
         '--no-static-swift-stdlib[Link Swift stdlib statically]'
         '--build-tests[Build both source and test targets]'
         '--show-bin-path[Print the binary output path]'
+        '--print-manifest-job-graph[Write the command graph for the build manifest as a graphviz file]'
         '--target[Build the specified target]:target:'
         '--product[Build the specified product]:product:'
         '--version[Show the version.]'
@@ -190,6 +197,8 @@ _swift_test() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
+        specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--disable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--enable-build-manifest-caching'
@@ -198,9 +207,10 @@ _swift_test() {
         '(--verbose -v)'{--verbose,-v}'[Increase verbosity to include informational output]'
         '(--very-verbose --vv)'{--very-verbose,--vv}'[Increase verbosity to include debug output]'
         '--disable-sandbox[Disable using the sandbox when executing subprocesses]'
-        '--enable-netrc[Load credentials from a .netrc file]'
-        '--disable-netrc[Load credentials from a .netrc file]'
-        '--netrc-file[Specify the .netrc file path.]:netrc-file:_files'
+        '--netrc[Use netrc file even in cases where other credential stores are preferred]'
+        '--enable-netrc[Load credentials from a netrc file]'
+        '--disable-netrc[Load credentials from a netrc file]'
+        '--netrc-file[Specify the netrc file path]:netrc-file:_files'
         '--enable-keychain[Search credentials in macOS keychain]'
         '--disable-keychain[Search credentials in macOS keychain]'
         '--resolver-fingerprint-checking:resolver-fingerprint-checking:'
@@ -227,27 +237,75 @@ _swift_test() {
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
         '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
+        '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
-        '--print-manifest-job-graph[Write the command graph for the build manifest as a graphviz file]'
         '--build-system:build-system:(native xcode)'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--static-swift-stdlib[Link Swift stdlib statically]'
         '--no-static-swift-stdlib[Link Swift stdlib statically]'
         '--skip-build[Skip building the test target]'
+        '--test-product[Test the specified product.]:test-product:'
         '--parallel[Run the tests in parallel.]'
         '--num-workers[Number of tests to execute in parallel.]:num-workers:'
         '(--list-tests -l)'{--list-tests,-l}'[Lists test methods in specifier format]'
-        '--show-codecov-path[Print the path of the exported code coverage JSON file]'
+        '(--show-codecov-path --show-code-coverage-path --show-coverage-path)'{--show-codecov-path,--show-code-coverage-path,--show-coverage-path}'[Print the path of the exported code coverage JSON file]'
         '(-s --specifier)'{-s,--specifier}':specifier:'
         '--filter[Run test cases matching regular expression, Format: <test-target>.<test-case> or <test-target>.<test-case>/<test>]:filter:'
         '--skip[Skip test cases matching regular expression, Example: --skip PerformanceTests]:skip:'
         '--xunit-output[Path where the xUnit xml file should be generated.]:xunit-output:_files -/'
-        '--test-product[Test the specified product.]:test-product:'
         '--enable-testable-imports[Enable or disable testable imports. Enabled by default.]'
         '--disable-testable-imports[Enable or disable testable imports. Enabled by default.]'
         '--enable-code-coverage[Enable code coverage]'
         '--disable-code-coverage[Enable code coverage]'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+        '(-): :->command'
+        '(-)*:: :->arg'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+    case $state in
+        (command)
+            local subcommands
+            subcommands=(
+                'list:Lists test methods in specifier format'
+                'generate-linuxmain:Generate LinuxMain.swift (deprecated)'
+            )
+            _describe "subcommand" subcommands
+            ;;
+        (arg)
+            case ${words[1]} in
+                (list)
+                    _swift_test_list
+                    ;;
+                (generate-linuxmain)
+                    _swift_test_generate-linuxmain
+                    ;;
+            esac
+            ;;
+    esac
+
+    return ret
+}
+
+_swift_test_list() {
+    integer ret=1
+    local -a args
+    args+=(
+        '--skip-build[Skip building the test target]'
+        '--test-product[Test the specified product.]:test-product:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+
+    return ret
+}
+
+_swift_test_generate-linuxmain() {
+    integer ret=1
+    local -a args
+    args+=(
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
     )
@@ -265,6 +323,8 @@ _swift_package() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
+        specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--disable-dependency-cache[Use a shared cache when fetching dependencies]'
         '--enable-build-manifest-caching'
@@ -273,9 +333,10 @@ _swift_package() {
         '(--verbose -v)'{--verbose,-v}'[Increase verbosity to include informational output]'
         '(--very-verbose --vv)'{--very-verbose,--vv}'[Increase verbosity to include debug output]'
         '--disable-sandbox[Disable using the sandbox when executing subprocesses]'
-        '--enable-netrc[Load credentials from a .netrc file]'
-        '--disable-netrc[Load credentials from a .netrc file]'
-        '--netrc-file[Specify the .netrc file path.]:netrc-file:_files'
+        '--netrc[Use netrc file even in cases where other credential stores are preferred]'
+        '--enable-netrc[Load credentials from a netrc file]'
+        '--disable-netrc[Load credentials from a netrc file]'
+        '--netrc-file[Specify the netrc file path]:netrc-file:_files'
         '--enable-keychain[Search credentials in macOS keychain]'
         '--disable-keychain[Search credentials in macOS keychain]'
         '--resolver-fingerprint-checking:resolver-fingerprint-checking:'
@@ -302,8 +363,8 @@ _swift_package() {
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
         '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
+        '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
-        '--print-manifest-job-graph[Write the command graph for the build manifest as a graphviz file]'
         '--build-system:build-system:(native xcode)'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
@@ -338,12 +399,11 @@ _swift_package() {
                 'fetch:'
                 'show-dependencies:Print the resolved dependency graph'
                 'tools-version:Manipulate tools version of the current package'
-                'generate-xcodeproj:Generates an Xcode project. This command will be deprecated soon.'
                 'compute-checksum:Compute the checksum for a binary artifact.'
                 'archive-source:Create a source archive for the package'
                 'completion-tool:Completion tool (for shell completions)'
                 'plugin:Invoke a command plugin or perform other actions on command plugins'
-                ':'
+                'default-command:'
             )
             _describe "subcommand" subcommands
             ;;
@@ -406,9 +466,6 @@ _swift_package() {
                 (tools-version)
                     _swift_package_tools-version
                     ;;
-                (generate-xcodeproj)
-                    _swift_package_generate-xcodeproj
-                    ;;
                 (compute-checksum)
                     _swift_package_compute-checksum
                     ;;
@@ -421,8 +478,8 @@ _swift_package() {
                 (plugin)
                     _swift_package_plugin
                     ;;
-                ()
-                    _swift_package_
+                (default-command)
+                    _swift_package_default-command
                     ;;
             esac
             ;;
@@ -498,7 +555,7 @@ _swift_package_init() {
     integer ret=1
     local -a args
     args+=(
-        '--type[Package type: empty | library | executable | system-module | manifest]:type:'
+        '--type[Package type:]:type:'
         '--name[Provide custom package name]:name:'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
@@ -561,6 +618,8 @@ _swift_package_dump-symbol-graph() {
         '--minimum-access-level[Include symbols with this access level or more. Possible values: private | fileprivate | internal | public | open]:minimum-access-level:(private fileprivate internal public open)'
         '--skip-inherited-docs[Skip emitting doc comments for members inherited through classes or default implementations.]'
         '--include-spi-symbols[Add symbols with SPI information to the symbol graph.]'
+        '--emit-extension-block-symbols[Emit extension block symbols for extensions to external types or directly associate members and conformances with the extended nominal.]'
+        '--omit-extension-block-symbols[Emit extension block symbols for extensions to external types or directly associate members and conformances with the extended nominal.]'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
     )
@@ -766,25 +825,6 @@ _swift_package_tools-version() {
     return ret
 }
 
-_swift_package_generate-xcodeproj() {
-    integer ret=1
-    local -a args
-    args+=(
-        '--xcconfig-overrides[Path to xcconfig file]:xcconfig-overrides:_files'
-        '--output[Path where the Xcode project should be generated]:output:_files -/'
-        '--legacy-scheme-generator[Use the legacy scheme generator]'
-        '--watch[Watch for changes to the Package manifest to regenerate the Xcode project]'
-        '--skip-extra-files[Do not add file references for extra files to the generated Xcode project]'
-        '--enable-code-coverage[Enable code coverage]'
-        '--disable-code-coverage[Enable code coverage]'
-        '--version[Show the version.]'
-        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
-    )
-    _arguments -w -s -S $args[@] && ret=0
-
-    return ret
-}
-
 _swift_package_compute-checksum() {
     integer ret=1
     local -a args
@@ -841,7 +881,7 @@ _swift_package_plugin() {
     return ret
 }
 
-_swift_package() {
+_swift_package_default-command() {
     integer ret=1
     local -a args
     args+=(
