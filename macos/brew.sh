@@ -24,7 +24,6 @@ brew install ${PACKAGES[@]}
 
 CASKS=(
     appcleaner
-    battle-net
     iina
     monodraw
     onyx
