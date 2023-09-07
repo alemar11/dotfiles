@@ -30,8 +30,8 @@ CASKS=(
     iina
     monodraw
     onyx
-    paw
     proxyman
+    rapidapi
     sketch
     sf-symbols
     tower
