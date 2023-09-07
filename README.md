@@ -47,7 +47,14 @@ You need to modify your ~/.ssh/config file to automatically load keys into the s
 Host *
   UseKeychain yes
   AddKeysToAgent yes
-  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+Add your SSH private key to the ssh-agent and store your passphrase in the keychain.
+
+```
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+
 ```
 
 More info can be found here:
