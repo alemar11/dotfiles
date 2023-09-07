@@ -5,6 +5,7 @@
 # https://github.com/keith/dotfiles/blob/master/osx/defaults.sh
 # https://github.com/herrbischoff/awesome-macos-command-line
 # https://github.com/ctreffs/xcode-defaults
+# https://macos-defaults.com/xcode/showbuildoperationduration.html
 
 ### HouseKeeping
 
@@ -48,6 +49,10 @@ sudo chflags nohidden /Volumes
 defaults write -g com.apple.mouse.scaling 1.2
 # Set trackpad speed
 defaults write -g com.apple.trackpad.scaling 1.2
+# Disable natural scroll
+defaults write -g com.apple.swipescrolldirection -bool false
+# Enable right click, use "OneButton" to revert it
+defaults write com.apple.driver.AppleBluetoothMultitouch.mouse MouseButtonMode TwoButton
 
 ### Safari & WebKit
 
@@ -91,15 +96,28 @@ defaults write com.apple.dock tilesize -int 36
 defaults write com.apple.dock largesize -int 72
 defaults write com.apple.dock magnification -bool true
 # Put the dock on left side
-defaults write com.apple.dock orientation -string "left"
-# Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock orientation -string "bottom"
+# Disable autohide
+defaults write com.apple.dock autohide -bool false
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 # Hide recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
+
+### Mission Control
+
+# Group windows by application
+defaults write com.apple.dock "expose-group-apps" -bool "true"
+
+# Stage Manager
+# https://gist.github.com/GreyAsteroid/c73028e447d716b02063b0870c12c6be
+
+# Enable stage manager
+defaults write com.apple.WindowManager GloballyEnabled -bool "true"
+# "Hide recent Apps"
+defaults write com.apple.WindowManager AutoHide -bool "true"
 
 ### TextEdit
 
