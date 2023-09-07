@@ -12,6 +12,7 @@ brew update
 
 PACKAGES=(
     cloc
+    cmake
     cocoapods
     fastlane
     hyperfine
