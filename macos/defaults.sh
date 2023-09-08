@@ -115,7 +115,7 @@ defaults write com.apple.dock "expose-group-apps" -bool "true"
 # Enable stage manager
 defaults write com.apple.WindowManager GloballyEnabled -bool "true"
 # "Hide recent Apps"
-defaults write com.apple.WindowManager AutoHide -bool "true"
+defaults write com.apple.WindowManager AutoHide -bool "false"
 
 ### TextEdit
 
