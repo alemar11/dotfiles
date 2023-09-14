@@ -71,7 +71,7 @@ alias speedtest='networkquality'
 # Python (`type python3` to find the path)
 alias python='/opt/homebrew/bin/python3'
 alias py='python'
-alias pip='/opt/homebrew/bin/pip'
+alias pip='/opt/homebrew/bin/pip3'
 
 ## SSH
 alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null'
