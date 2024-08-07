@@ -28,3 +28,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 
 # Add brew to path
 export PATH=/opt/homebrew/bin:$PATH 
+
+# Add pipx to path
+export PATH=~/.local/bin:$PATH
