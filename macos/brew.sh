@@ -30,15 +30,11 @@ CASKS=(
     appcleaner
     iina
     monodraw
-    onyx
     proxyman
     rapidapi
     sketch
-    sf-symbols
     tower
-    visual-studio-code
     xcodes
-    wwdc
 )
 
 echo "🍺 Installing cask apps..."
