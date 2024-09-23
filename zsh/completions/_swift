@@ -57,6 +57,7 @@ _swift_run() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--swift-sdks-path[Path to the directory containing installed Swift SDKs]:swift-sdks-path:_files -/'
         '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
         specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
@@ -94,21 +95,21 @@ _swift_run() {
         '--triple:triple:'
         '--sdk:sdk:_files -/'
         '--toolchain:toolchain:_files -/'
+        '--swift-sdk[Filter for selecting a specific Swift SDK to build with]:swift-sdk:'
         '--sanitize[Turn on runtime checks for erroneous behavior, possible values: address, thread, undefined, scudo]:sanitize:(address thread undefined scudo)'
         '--auto-index-store[Enable or disable indexing-while-building feature]'
         '--enable-index-store[Enable or disable indexing-while-building feature]'
         '--disable-index-store[Enable or disable indexing-while-building feature]'
         '--enable-parseable-module-interfaces'
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
-        '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
         '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
         '--build-system:build-system:(native xcode)'
+        '-debug-info-format:debug-info-format:'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
-        '--static-swift-stdlib[Link Swift stdlib statically]'
-        '--no-static-swift-stdlib[Link Swift stdlib statically]'
+        '--disable-local-rpath[Disable adding $ORIGIN/@loader_path to the rpath by default]'
         '--repl[Launch Swift REPL for the package]'
         '--debugger[Launch the executable in a debugger session]'
         '--run[Launch the executable with the provided arguments]'
@@ -133,6 +134,7 @@ _swift_build() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--swift-sdks-path[Path to the directory containing installed Swift SDKs]:swift-sdks-path:_files -/'
         '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
         specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
@@ -170,26 +172,34 @@ _swift_build() {
         '--triple:triple:'
         '--sdk:sdk:_files -/'
         '--toolchain:toolchain:_files -/'
+        '--swift-sdk[Filter for selecting a specific Swift SDK to build with]:swift-sdk:'
         '--sanitize[Turn on runtime checks for erroneous behavior, possible values: address, thread, undefined, scudo]:sanitize:(address thread undefined scudo)'
         '--auto-index-store[Enable or disable indexing-while-building feature]'
         '--enable-index-store[Enable or disable indexing-while-building feature]'
         '--disable-index-store[Enable or disable indexing-while-building feature]'
         '--enable-parseable-module-interfaces'
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
-        '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
         '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
         '--build-system:build-system:(native xcode)'
+        '-debug-info-format:debug-info-format:'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
-        '--static-swift-stdlib[Link Swift stdlib statically]'
-        '--no-static-swift-stdlib[Link Swift stdlib statically]'
+        '--disable-local-rpath[Disable adding $ORIGIN/@loader_path to the rpath by default]'
         '--build-tests[Build both source and test targets]'
+        '--enable-code-coverage[Enable code coverage]'
+        '--disable-code-coverage[Enable code coverage]'
         '--show-bin-path[Print the binary output path]'
         '--print-manifest-job-graph[Write the command graph for the build manifest as a graphviz file]'
         '--target[Build the specified target]:target:'
         '--product[Build the specified product]:product:'
+        '--enable-xctest[Enable support for XCTest]'
+        '--disable-xctest[Enable support for XCTest]'
+        '--enable-swift-testing[Enable support for Swift Testing]'
+        '--disable-swift-testing[Enable support for Swift Testing]'
+        '--static-swift-stdlib[Link Swift stdlib statically]'
+        '--no-static-swift-stdlib[Link Swift stdlib statically]'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
     )
@@ -207,6 +217,7 @@ _swift_test() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--swift-sdks-path[Path to the directory containing installed Swift SDKs]:swift-sdks-path:_files -/'
         '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
         specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
@@ -244,24 +255,28 @@ _swift_test() {
         '--triple:triple:'
         '--sdk:sdk:_files -/'
         '--toolchain:toolchain:_files -/'
+        '--swift-sdk[Filter for selecting a specific Swift SDK to build with]:swift-sdk:'
         '--sanitize[Turn on runtime checks for erroneous behavior, possible values: address, thread, undefined, scudo]:sanitize:(address thread undefined scudo)'
         '--auto-index-store[Enable or disable indexing-while-building feature]'
         '--enable-index-store[Enable or disable indexing-while-building feature]'
         '--disable-index-store[Enable or disable indexing-while-building feature]'
         '--enable-parseable-module-interfaces'
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
-        '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
         '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
         '--build-system:build-system:(native xcode)'
+        '-debug-info-format:debug-info-format:'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
-        '--static-swift-stdlib[Link Swift stdlib statically]'
-        '--no-static-swift-stdlib[Link Swift stdlib statically]'
+        '--disable-local-rpath[Disable adding $ORIGIN/@loader_path to the rpath by default]'
         '--skip-build[Skip building the test target]'
-        '--test-product[Test the specified product.]:test-product:'
+        '--enable-xctest[Enable support for XCTest]'
+        '--disable-xctest[Enable support for XCTest]'
+        '--enable-swift-testing[Enable support for Swift Testing]'
+        '--disable-swift-testing[Enable support for Swift Testing]'
         '--parallel[Run the tests in parallel.]'
+        '--no-parallel[Run the tests in parallel.]'
         '--num-workers[Number of tests to execute in parallel.]:num-workers:'
         '(--list-tests -l)'{--list-tests,-l}'[Lists test methods in specifier format]'
         '(--show-codecov-path --show-code-coverage-path --show-coverage-path)'{--show-codecov-path,--show-code-coverage-path,--show-coverage-path}'[Print the path of the exported code coverage JSON file]'
@@ -284,7 +299,7 @@ _swift_test() {
             local subcommands
             subcommands=(
                 'list:Lists test methods in specifier format'
-                'generate-linuxmain:Generate LinuxMain.swift (deprecated)'
+                'last:'
             )
             _describe "subcommand" subcommands
             ;;
@@ -293,8 +308,8 @@ _swift_test() {
                 (list)
                     _swift_test_list
                     ;;
-                (generate-linuxmain)
-                    _swift_test_generate-linuxmain
+                (last)
+                    _swift_test_last
                     ;;
             esac
             ;;
@@ -308,7 +323,10 @@ _swift_test_list() {
     local -a args
     args+=(
         '--skip-build[Skip building the test target]'
-        '--test-product[Test the specified product.]:test-product:'
+        '--enable-xctest[Enable support for XCTest]'
+        '--disable-xctest[Enable support for XCTest]'
+        '--enable-swift-testing[Enable support for Swift Testing]'
+        '--disable-swift-testing[Enable support for Swift Testing]'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
     )
@@ -317,7 +335,7 @@ _swift_test_list() {
     return ret
 }
 
-_swift_test_generate-linuxmain() {
+_swift_test_last() {
     integer ret=1
     local -a args
     args+=(
@@ -338,6 +356,7 @@ _swift_package() {
         '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
         '--security-path[Specify the shared security directory path]:security-path:_files -/'
         '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--swift-sdks-path[Path to the directory containing installed Swift SDKs]:swift-sdks-path:_files -/'
         '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
         specify more than one path.]:pkg-config-path:_files -/'
         '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
@@ -375,21 +394,21 @@ _swift_package() {
         '--triple:triple:'
         '--sdk:sdk:_files -/'
         '--toolchain:toolchain:_files -/'
+        '--swift-sdk[Filter for selecting a specific Swift SDK to build with]:swift-sdk:'
         '--sanitize[Turn on runtime checks for erroneous behavior, possible values: address, thread, undefined, scudo]:sanitize:(address thread undefined scudo)'
         '--auto-index-store[Enable or disable indexing-while-building feature]'
         '--enable-index-store[Enable or disable indexing-while-building feature]'
         '--disable-index-store[Enable or disable indexing-while-building feature]'
         '--enable-parseable-module-interfaces'
         '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
-        '--emit-swift-module-separately'
         '--use-integrated-swift-driver'
         '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
         '--experimental-explicit-module-build'
         '--build-system:build-system:(native xcode)'
+        '-debug-info-format:debug-info-format:'
         '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
         '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
-        '--static-swift-stdlib[Link Swift stdlib statically]'
-        '--no-static-swift-stdlib[Link Swift stdlib statically]'
+        '--disable-local-rpath[Disable adding $ORIGIN/@loader_path to the rpath by default]'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
         '(-): :->command'
@@ -400,12 +419,18 @@ _swift_package() {
         (command)
             local subcommands
             subcommands=(
+                'add-dependency:Add a package dependency to the manifest'
+                'add-product:Add a new product to the manifest'
+                'add-target:Add a new target to the manifest'
+                'add-target-dependency:Add a new target dependency to the manifest'
                 'clean:Delete build artifacts'
                 'purge-cache:Purge the global repository cache.'
                 'reset:Reset the complete cache/build directory'
                 'update:Update package dependencies'
                 'describe:Describe the current package'
                 'init:Initialize a new package'
+                'experimental-install:Offers the ability to install executable products of the current package.'
+                'experimental-uninstall:Offers the ability to uninstall executable products previously installed by `swift package experimental-install`.'
                 'diagnose-api-breaking-changes:Diagnose API-breaking changes to Swift modules in a package'
                 'dump-symbol-graph:Dump Symbol Graph'
                 'dump-package:Print parsed Package.swift as JSON'
@@ -417,13 +442,25 @@ _swift_package() {
                 'tools-version:Manipulate tools version of the current package'
                 'compute-checksum:Compute the checksum for a binary artifact.'
                 'archive-source:Create a source archive for the package'
-                'completion-tool:Completion tool (for shell completions)'
+                'completion-tool:Completion command (for shell completions)'
                 'plugin:Invoke a command plugin or perform other actions on command plugins'
             )
             _describe "subcommand" subcommands
             ;;
         (arg)
             case ${words[1]} in
+                (add-dependency)
+                    _swift_package_add-dependency
+                    ;;
+                (add-product)
+                    _swift_package_add-product
+                    ;;
+                (add-target)
+                    _swift_package_add-target
+                    ;;
+                (add-target-dependency)
+                    _swift_package_add-target-dependency
+                    ;;
                 (clean)
                     _swift_package_clean
                     ;;
@@ -441,6 +478,12 @@ _swift_package() {
                     ;;
                 (init)
                     _swift_package_init
+                    ;;
+                (experimental-install)
+                    _swift_package_experimental-install
+                    ;;
+                (experimental-uninstall)
+                    _swift_package_experimental-uninstall
                     ;;
                 (diagnose-api-breaking-changes)
                     _swift_package_diagnose-api-breaking-changes
@@ -484,6 +527,74 @@ _swift_package() {
             esac
             ;;
     esac
+
+    return ret
+}
+
+_swift_package_add-dependency() {
+    integer ret=1
+    local -a args
+    args+=(
+        ':dependency:'
+        '--exact[The exact package version to depend on]:exact:'
+        '--revision[The specific package revision to depend on]:revision:'
+        '--branch[The branch of the package to depend on]:branch:'
+        '--from[The package version to depend on (up to the next major version)]:from:'
+        '--up-to-next-minor-from[The package version to depend on (up to the next minor version)]:up-to-next-minor-from:'
+        '--to[Specify upper bound on the package version range (exclusive)]:to:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+
+    return ret
+}
+
+_swift_package_add-product() {
+    integer ret=1
+    local -a args
+    args+=(
+        ':name:'
+        '--type[The type of target to add, which can be one of '"'"'executable'"'"', '"'"'library'"'"', '"'"'static-library'"'"', '"'"'dynamic-library'"'"', or '"'"'plugin'"'"']:type:'
+        '--targets[A list of targets that are part of this product]:targets:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+
+    return ret
+}
+
+_swift_package_add-target() {
+    integer ret=1
+    local -a args
+    args+=(
+        ':name:'
+        '--type[The type of target to add, which can be one of '"'"'library'"'"', '"'"'executable'"'"', '"'"'test'"'"', or '"'"'macro'"'"']:type:'
+        '--dependencies[A list of target dependency names]:dependencies:'
+        '--url[The URL for a remote binary target]:url:'
+        '--path[The path to a local binary target]:path:'
+        '--checksum[The checksum for a remote binary target]:checksum:'
+        '--testing-library[The testing library to use when generating test targets, which can be one of '"'"'xctest'"'"', '"'"'swift-testing'"'"', or '"'"'none'"'"']:testing-library:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+
+    return ret
+}
+
+_swift_package_add-target-dependency() {
+    integer ret=1
+    local -a args
+    args+=(
+        ':dependency-name:'
+        ':target-name:'
+        '--package[The package in which the dependency resides]:package:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
 
     return ret
 }
@@ -542,7 +653,7 @@ _swift_package_describe() {
     integer ret=1
     local -a args
     args+=(
-        '--type[json | text]:type:'
+        '--type[json | text | mermaid]:type:'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
     )
@@ -556,7 +667,153 @@ _swift_package_init() {
     local -a args
     args+=(
         '--type[Package type:]:type:'
+        '--enable-xctest[Enable support for XCTest]'
+        '--disable-xctest[Enable support for XCTest]'
+        '--enable-swift-testing[Enable support for Swift Testing]'
+        '--disable-swift-testing[Enable support for Swift Testing]'
         '--name[Provide custom package name]:name:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+
+    return ret
+}
+
+_swift_package_experimental-install() {
+    integer ret=1
+    local -a args
+    args+=(
+        '--package-path[Specify the package path to operate on (default current directory). This changes the working directory before any other operation]:package-path:_files -/'
+        '--cache-path[Specify the shared cache directory path]:cache-path:_files -/'
+        '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
+        '--security-path[Specify the shared security directory path]:security-path:_files -/'
+        '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--swift-sdks-path[Path to the directory containing installed Swift SDKs]:swift-sdks-path:_files -/'
+        '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
+        specify more than one path.]:pkg-config-path:_files -/'
+        '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
+        '--disable-dependency-cache[Use a shared cache when fetching dependencies]'
+        '--enable-build-manifest-caching'
+        '--disable-build-manifest-caching'
+        '--manifest-cache[Caching mode of Package.swift manifests (shared: shared cache, local: package'"'"'s build directory, none: disabled]:manifest-cache:'
+        '(--verbose -v)'{--verbose,-v}'[Increase verbosity to include informational output]'
+        '(--very-verbose --vv)'{--very-verbose,--vv}'[Increase verbosity to include debug output]'
+        '(--quiet -q)'{--quiet,-q}'[Decrease verbosity to only include error output.]'
+        '--disable-sandbox[Disable using the sandbox when executing subprocesses]'
+        '--netrc[Use netrc file even in cases where other credential stores are preferred]'
+        '--enable-netrc[Load credentials from a netrc file]'
+        '--disable-netrc[Load credentials from a netrc file]'
+        '--netrc-file[Specify the netrc file path]:netrc-file:_files'
+        '--enable-keychain[Search credentials in macOS keychain]'
+        '--disable-keychain[Search credentials in macOS keychain]'
+        '--resolver-fingerprint-checking:resolver-fingerprint-checking:'
+        '--resolver-signing-entity-checking:resolver-signing-entity-checking:'
+        '--enable-signature-validation[Validate signature of a signed package release downloaded from registry]'
+        '--disable-signature-validation[Validate signature of a signed package release downloaded from registry]'
+        '--enable-prefetching'
+        '--disable-prefetching'
+        '(--force-resolved-versions --disable-automatic-resolution --only-use-versions-from-resolved-file)'{--force-resolved-versions,--disable-automatic-resolution,--only-use-versions-from-resolved-file}'[Only use versions from the Package.resolved file and fail resolution if it is out-of-date]'
+        '--skip-update[Skip updating dependencies from their remote during a resolution]'
+        '--disable-scm-to-registry-transformation[disable source control to registry transformation]'
+        '--use-registry-identity-for-scm[look up source control dependencies in the registry and use their registry identity when possible to help deduplicate across the two origins]'
+        '--replace-scm-with-registry[look up source control dependencies in the registry and use the registry to retrieve them instead of source control when possible]'
+        '--default-registry-url[Default registry URL to use, instead of the registries.json configuration file]:default-registry-url:'
+        '(--configuration -c)'{--configuration,-c}'[Build with configuration]:configuration:(debug release)'
+        '-Xcc[Pass flag through to all C compiler invocations]:Xcc:'
+        '-Xswiftc[Pass flag through to all Swift compiler invocations]:Xswiftc:'
+        '-Xlinker[Pass flag through to all linker invocations]:Xlinker:'
+        '-Xcxx[Pass flag through to all C++ compiler invocations]:Xcxx:'
+        '--triple:triple:'
+        '--sdk:sdk:_files -/'
+        '--toolchain:toolchain:_files -/'
+        '--swift-sdk[Filter for selecting a specific Swift SDK to build with]:swift-sdk:'
+        '--sanitize[Turn on runtime checks for erroneous behavior, possible values: address, thread, undefined, scudo]:sanitize:(address thread undefined scudo)'
+        '--auto-index-store[Enable or disable indexing-while-building feature]'
+        '--enable-index-store[Enable or disable indexing-while-building feature]'
+        '--disable-index-store[Enable or disable indexing-while-building feature]'
+        '--enable-parseable-module-interfaces'
+        '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
+        '--use-integrated-swift-driver'
+        '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
+        '--experimental-explicit-module-build'
+        '--build-system:build-system:(native xcode)'
+        '-debug-info-format:debug-info-format:'
+        '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
+        '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
+        '--disable-local-rpath[Disable adding $ORIGIN/@loader_path to the rpath by default]'
+        '--product[The name of the executable product to install]:product:'
+        '--version[Show the version.]'
+        '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
+    )
+    _arguments -w -s -S $args[@] && ret=0
+
+    return ret
+}
+
+_swift_package_experimental-uninstall() {
+    integer ret=1
+    local -a args
+    args+=(
+        '--package-path[Specify the package path to operate on (default current directory). This changes the working directory before any other operation]:package-path:_files -/'
+        '--cache-path[Specify the shared cache directory path]:cache-path:_files -/'
+        '--config-path[Specify the shared configuration directory path]:config-path:_files -/'
+        '--security-path[Specify the shared security directory path]:security-path:_files -/'
+        '--scratch-path[Specify a custom scratch directory path (default .build)]:scratch-path:_files -/'
+        '--swift-sdks-path[Path to the directory containing installed Swift SDKs]:swift-sdks-path:_files -/'
+        '--pkg-config-path[Specify alternative path to search for pkg-config `.pc` files. Use the option multiple times to
+        specify more than one path.]:pkg-config-path:_files -/'
+        '--enable-dependency-cache[Use a shared cache when fetching dependencies]'
+        '--disable-dependency-cache[Use a shared cache when fetching dependencies]'
+        '--enable-build-manifest-caching'
+        '--disable-build-manifest-caching'
+        '--manifest-cache[Caching mode of Package.swift manifests (shared: shared cache, local: package'"'"'s build directory, none: disabled]:manifest-cache:'
+        '(--verbose -v)'{--verbose,-v}'[Increase verbosity to include informational output]'
+        '(--very-verbose --vv)'{--very-verbose,--vv}'[Increase verbosity to include debug output]'
+        '(--quiet -q)'{--quiet,-q}'[Decrease verbosity to only include error output.]'
+        '--disable-sandbox[Disable using the sandbox when executing subprocesses]'
+        '--netrc[Use netrc file even in cases where other credential stores are preferred]'
+        '--enable-netrc[Load credentials from a netrc file]'
+        '--disable-netrc[Load credentials from a netrc file]'
+        '--netrc-file[Specify the netrc file path]:netrc-file:_files'
+        '--enable-keychain[Search credentials in macOS keychain]'
+        '--disable-keychain[Search credentials in macOS keychain]'
+        '--resolver-fingerprint-checking:resolver-fingerprint-checking:'
+        '--resolver-signing-entity-checking:resolver-signing-entity-checking:'
+        '--enable-signature-validation[Validate signature of a signed package release downloaded from registry]'
+        '--disable-signature-validation[Validate signature of a signed package release downloaded from registry]'
+        '--enable-prefetching'
+        '--disable-prefetching'
+        '(--force-resolved-versions --disable-automatic-resolution --only-use-versions-from-resolved-file)'{--force-resolved-versions,--disable-automatic-resolution,--only-use-versions-from-resolved-file}'[Only use versions from the Package.resolved file and fail resolution if it is out-of-date]'
+        '--skip-update[Skip updating dependencies from their remote during a resolution]'
+        '--disable-scm-to-registry-transformation[disable source control to registry transformation]'
+        '--use-registry-identity-for-scm[look up source control dependencies in the registry and use their registry identity when possible to help deduplicate across the two origins]'
+        '--replace-scm-with-registry[look up source control dependencies in the registry and use the registry to retrieve them instead of source control when possible]'
+        '--default-registry-url[Default registry URL to use, instead of the registries.json configuration file]:default-registry-url:'
+        '(--configuration -c)'{--configuration,-c}'[Build with configuration]:configuration:(debug release)'
+        '-Xcc[Pass flag through to all C compiler invocations]:Xcc:'
+        '-Xswiftc[Pass flag through to all Swift compiler invocations]:Xswiftc:'
+        '-Xlinker[Pass flag through to all linker invocations]:Xlinker:'
+        '-Xcxx[Pass flag through to all C++ compiler invocations]:Xcxx:'
+        '--triple:triple:'
+        '--sdk:sdk:_files -/'
+        '--toolchain:toolchain:_files -/'
+        '--swift-sdk[Filter for selecting a specific Swift SDK to build with]:swift-sdk:'
+        '--sanitize[Turn on runtime checks for erroneous behavior, possible values: address, thread, undefined, scudo]:sanitize:(address thread undefined scudo)'
+        '--auto-index-store[Enable or disable indexing-while-building feature]'
+        '--enable-index-store[Enable or disable indexing-while-building feature]'
+        '--disable-index-store[Enable or disable indexing-while-building feature]'
+        '--enable-parseable-module-interfaces'
+        '(--jobs -j)'{--jobs,-j}'[The number of jobs to spawn in parallel during the build process]:jobs:'
+        '--use-integrated-swift-driver'
+        '--explicit-target-dependency-import-check:explicit-target-dependency-import-check:'
+        '--experimental-explicit-module-build'
+        '--build-system:build-system:(native xcode)'
+        '-debug-info-format:debug-info-format:'
+        '--enable-dead-strip[Disable/enable dead code stripping by the linker]'
+        '--disable-dead-strip[Disable/enable dead code stripping by the linker]'
+        '--disable-local-rpath[Disable adding $ORIGIN/@loader_path to the rpath by default]'
+        ':name:'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
     )
@@ -634,7 +891,7 @@ _swift_package_unedit() {
     integer ret=1
     local -a args
     args+=(
-        '--force[Unedit the package even if it has uncommited and unpushed changes]'
+        '--force[Unedit the package even if it has uncommitted and unpushed changes]'
         ':package-name:'
         '--version[Show the version.]'
         '(-help -h --help)'{-help,-h,--help}'[Show help information.]'
@@ -813,7 +1070,8 @@ _swift_package_plugin() {
         '--list[List the available command plugins]'
         '--allow-writing-to-package-directory[Allow the plugin to write to the package directory]'
         '--allow-writing-to-directory[Allow the plugin to write to an additional directory]:allow-writing-to-directory:'
-        '--allow-network-connections:allow-network-connections:(none local all docker unixDomainSocket)'
+        '--allow-network-connections:allow-network-connections:(none local(ports: []) all(ports: []) docker unixDomainSocket)'
+        '--package[Limit available plugins to a single package with the given identity]:package:'
         ':command:'
         ':arguments:'
         '--version[Show the version.]'
