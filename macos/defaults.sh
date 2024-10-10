@@ -7,6 +7,9 @@
 # https://github.com/ctreffs/xcode-defaults
 # https://macos-defaults.com/xcode/showbuildoperationduration.html
 
+# - Your terminal needs full disk access
+# - .plist files are usually located here ~/Library/Preferences but you can read/write app specific settings using "default read -app APPNAME"
+
 ### HouseKeeping
 
 # Close any open System Preferences panes, to prevent them from overriding
@@ -103,6 +106,11 @@ defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock showhidden -bool true
 # Hide recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
+
+### Windows
+
+# Remove margins from tiled windows
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
 
 ### Mission Control
 
