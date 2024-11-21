@@ -88,6 +88,8 @@ defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string AM.xcco
 defaults write com.apple.dt.Xcode BuildSystemScheduleInherentlyParallelCommandsExclusively -bool YES
 # Enable full screen mode for the simulator
 defaults write com.apple.iphonesimulator AllowFullscreenMode -bool YES
+# Disable default devices creation
+defaults write com.apple.CoreSimulator EnableDefaultSetCreation -bool NO
 
 ### Dock
 
