@@ -31,3 +31,7 @@ export PATH=/opt/homebrew/bin:$PATH
 
 # Add pipx to path
 export PATH=~/.local/bin:$PATH
+
+# Adds the Android SDK platform-tools directory to the system PATH environment variable.
+# This allows the user to run Android SDK tools from any terminal session without specifying the full path.
+export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
