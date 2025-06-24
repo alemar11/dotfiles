@@ -1,18 +1,19 @@
 #!/bin/bash
 
-FILES=(\
-  curlrc \
-  git_template \
-  gitconfig \
-  gitignore_global \
-  hushlogin \
-  lldb_helpers \
-  lldbinit \
-  lldbinit-Xcode \
-  vimrc \
-  zsh \
-  zshenv \
-  zshrc \
+FILES=(
+  curlrc
+  git_template
+  gitconfig
+  gitignore_global
+  hushlogin
+  lldb_helpers
+  lldbinit
+  lldbinit-Xcode
+  tmux.conf
+  vimrc
+  zsh
+  zshenv
+  zshrc
 )
 
 new_path() {
@@ -47,16 +48,14 @@ unlink() {
 
 # Loops through and link all files without links
 install_links() {
-  for file in "${FILES[@]}"
-  do
+  for file in "${FILES[@]}"; do
     link "$file"
   done
 }
 
 # Function to remove all linked files
 remove_links() {
-  for file in "${FILES[@]}"
-  do
+  for file in "${FILES[@]}"; do
     unlink "$file"
   done
 }
@@ -78,7 +77,7 @@ if [[ $1 == "install" ]]; then
 elif [[ $1 == "remove" ]]; then
   remove_links
 elif [[ $1 == "clean" ]]; then
-  # remove broken symbolic link.  
+  # remove broken symbolic link.
   find -L "$HOME" -maxdepth 1 -type l -exec rm -i {} \;
 else
   die
