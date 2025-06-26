@@ -9,7 +9,6 @@ FILES=(
   lldb_helpers
   lldbinit
   lldbinit-Xcode
-  tmux.conf
   vimrc
   zsh
   zshenv
