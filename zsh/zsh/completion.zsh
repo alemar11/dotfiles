@@ -3,7 +3,7 @@
 # These functions whose name begins with an underscore are part of the programmable completion engine. 
 # Bash follows zsh's convention here, where the function that generates completions for somecommand is called _somecommand, 
 # and if that function requires auxiliary functions, they are called _somecommand_stuff.
-fpath=($HOME/.completions $fpath)
+fpath=($HOME/.zsh/completions $fpath)
 
 # enable autocomplete functions
 autoload -Uz compinit && compinit -i
@@ -54,5 +54,5 @@ zstyle ':completion:*' accept-exact '*(N)'
 # Cache expensive completions
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.completions/cache/$HOST
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 

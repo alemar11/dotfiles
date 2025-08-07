@@ -35,7 +35,7 @@ Note: If you get a warning that this is from an unidentified developer, Right-cl
 ## Update Swift Package Manager Completion
 
 If you want to update the current auto completion run:
-`swift package completion-tool generate-zsh-script > ~/.completions/_swift`
+`swift package completion-tool generate-zsh-script > ~/.zsh/completions/_swift`
 
 ## Setup SSH
 
