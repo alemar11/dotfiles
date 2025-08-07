@@ -2,8 +2,8 @@
 export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
 
 # Functions
-fpath=(~/.zsh/functions $fpath)
-autoload -Uz ~/.zsh/functions/*(:t)
+fpath=(~/.unctions $fpath)
+autoload -Uz ~/.functions/*(:t)
 
 # Define the base directories for cd command
 cdpath=($HOME/Developer $HOME/Documents)

@@ -1,7 +1,9 @@
 #!/bin/bash
 
 FILES=(
+  completions
   curlrc
+  functions
   git_template
   gitconfig
   gitignore_global
@@ -32,6 +34,8 @@ link() {
   if [[ ! -e "$target" ]]; then
     echo "Linking $filename to $target"
     ln -s "$PWD/$filename" "$target"
+  else
+    echo "$filename already linked to $target"
   fi
 }
 
