@@ -5,7 +5,10 @@
 # and if that function requires auxiliary functions, they are called _somecommand_stuff.
 fpath=($HOME/.zsh/completions $fpath)
 
-# enable autocomplete functions
+# Homebrew's zsh completions
+fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+# Custom zsh completions
 autoload -Uz compinit && compinit -i
 
 zmodload zsh/complist
