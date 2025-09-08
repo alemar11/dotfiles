@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal dotfiles repository for macOS configuration and development environment setup. It provides scripts and configuration files for terminal, shell (zsh), git, vim, Xcode, and various development tools.
 
+**IMPORTANT: These dotfiles are designed exclusively for Apple Silicon Macs (M1/M2/M3 and newer). They do not support Intel-based Macs and should not be used on Intel CPUs.**
+
 ## Core Components
 
 ### Main Installation Script
