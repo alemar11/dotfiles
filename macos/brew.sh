@@ -49,10 +49,4 @@ brew install --cask "${CASKS[@]}"
 echo "🧼 Cleaning up..."
 brew cleanup -s
 
-GEMS=(
-  jazzy
-)
-echo "💎 Installing Ruby gems..."
-sudo gem install "${GEMS[@]}" -n /usr/local/bin
-
 echo "🎉 Setup complete!"
