@@ -1,8 +1,7 @@
 #!/bin/bash
 
-set -e
-set -o pipefail
-set -u
+# Exit on error, undefined variables, and pipe failures
+set -euo pipefail
 
 if [ ! -d macos ]; then
   echo "Must be run from root of dotfiles"
@@ -12,9 +11,9 @@ fi
 open "./macos/AM.terminal"
 
 echo "Installing software"
-sh "./macos/brew.sh"
+bash "./macos/brew.sh"
 echo "Done."
 
 echo "Configuring macOS defaults."
-sh "./macos/defaults.sh"
+bash "./macos/defaults.sh"
 echo "Done. Note that some of these changes require a logout/restart to take effect."

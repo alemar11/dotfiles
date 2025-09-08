@@ -2,13 +2,14 @@
 #
 # If you change these files in the Xcode UI, update the versions in this folder manually
 
-set -e
-set -o pipefail
-set -u
+# Exit on error, undefined variables, and pipe failures
+set -euo pipefail
 
 echo "Configuring Xcode."
 user_data_directory="$HOME/Library/Developer/Xcode/UserData"
-xcode_backup_directory="$DOTFILES/macos/xcode"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+xcode_backup_directory="$SCRIPT_DIR"
 
 bindings="${user_data_directory}/KeyBindings"
 mkdir -p "$bindings"
