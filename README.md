@@ -8,7 +8,7 @@
 
 # macOS
 
-In the *macos* folder there are some scripts to customize some `macOS` defaults, `Terminal`, `Xcode`, `VScode` and `Vim`.
+In the *macos* folder there are scripts to customize `macOS` defaults, `Terminal`, and `Xcode`.
 
 Double click “AM.terminal” file.  
 This is the specific Theme file for Terminal.app.   
