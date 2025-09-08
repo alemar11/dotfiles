@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit on error, undefined variables, and pipe failures
+set -euo pipefail
+
 FILES=(
   curlrc
   git_template
@@ -31,7 +34,7 @@ link() {
   target="$(new_path "$filename")"
   if [[ ! -e "$target" ]]; then
     echo "Linking $filename to $target"
-    ln -s "$PWD/$filename" "$target"
+    ln -s "$(cd "$(dirname "$0")" && pwd)/$filename" "$target"
   fi
 }
 
@@ -39,7 +42,7 @@ link() {
 unlink() {
   target="$(new_path "$1")"
 
-  if [ -e "$target" ]; then
+  if [[ -e "$target" ]]; then
     echo "Removing $target"
     rm "$target"
   fi
@@ -59,14 +62,14 @@ remove_links() {
   done
 }
 
-# Fuction to print the usage and exit when there's bad input
+# Function to print the usage and exit when there's bad input
 die() {
   echo "Usage ./dotfiles.sh {install|remove|clean}"
   exit 1
 }
 
 # Make sure there is 1 command line argument
-if [[ $# != 1 ]]; then
+if [[ $# -ne 1 ]]; then
   die
 fi
 
@@ -77,7 +80,7 @@ elif [[ $1 == "remove" ]]; then
   remove_links
 elif [[ $1 == "clean" ]]; then
   # remove broken symbolic link.
-  find -L "$HOME" -maxdepth 1 -type l -exec rm -i {} \;
+  find "$HOME" -L -maxdepth 1 -type l -exec rm -i {} \;
 else
   die
 fi
