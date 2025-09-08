@@ -20,6 +20,7 @@
   pul      = pull
   sub      = submodule update --init --recursive
   undo     = reset --soft HEAD^
+  wip      = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 [fetch]
   prune = true
 [pull]
@@ -29,5 +30,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[alias]
-  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
