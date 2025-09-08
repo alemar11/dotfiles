@@ -21,13 +21,7 @@ Note: If you get a warning that this is from an unidentified developer, Right-cl
 # Xcode configuration
 
 ```
-./macos/xcode/link.sh
-```
-
-# Vistual Studio Code configuration
-
-```
-./macos/vscode/link.sh
+./macos/xcode/copy.sh
 ```
 
 ---

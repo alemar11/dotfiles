@@ -23,6 +23,7 @@ PACKAGES=(
   hyperfine
   python
   rbenv
+  shellcheck
   swiftlint
   swift-format
   tree
