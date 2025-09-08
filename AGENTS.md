@@ -18,7 +18,7 @@ This is a personal dotfiles repository for macOS configuration and development e
 
 ### macOS Setup
 - `macos/install.sh` - Main macOS setup script that runs brew.sh and defaults.sh
-- `macos/brew.sh` - Homebrew package installations
+- `macos/brew.sh` - Homebrew package and cask installations (includes shellcheck for script validation)
 - `macos/defaults.sh` - macOS system preferences and defaults
 - `macos/AM.terminal` - Terminal.app theme file
 
