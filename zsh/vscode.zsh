@@ -8,7 +8,6 @@
 #If svs command is called, it is like sudo vs, opening the file or folder in Visual Studio Code. Useful for editing system protected files.
 
 if [[ $('uname') == 'Linux' ]]; then
-    local _vscode_linux_paths > /dev/null 2>&1
     _vscode_linux_paths=(
         "/usr/local/bin/code"
         "$HOME/bin/code"
@@ -25,7 +24,6 @@ if [[ $('uname') == 'Linux' ]]; then
     done
 
 elif  [[ "$OSTYPE" = darwin* ]]; then
-    local _vscode_darwin_paths > /dev/null 2>&1
     _vscode_darwin_paths=(
         "/usr/local/bin/code"
         "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
@@ -42,7 +40,6 @@ elif  [[ "$OSTYPE" = darwin* ]]; then
     done
 
 elif [[ "$OSTYPE" = 'cygwin' ]]; then
-    local _vscode_cygwin_paths > /dev/null 2>&1
     _vscode_cygwin_paths=(
         "$(cygpath $ProgramW6432/Visual\ Studio\ Code)/code.exe"
     )
