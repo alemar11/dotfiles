@@ -1,7 +1,16 @@
-set-title() {
-  print -n "\e]0;$*\a"
+set-tab-title() {
+  echo -en "\033]1;$*\007"
 }
 
-reset-title() {
-  print -n "\e]0;\a"
+reset-tab-title() {
+  echo -en "\033]1;\007"
+}
+
+# --- Window title ---
+set-window-title() {
+  echo -en "\033]2;$*\007"
+}
+
+reset-window-title() {
+  echo -en "\033]2;\007"
 }

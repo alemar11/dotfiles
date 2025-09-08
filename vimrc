@@ -1,53 +1,82 @@
-" Runtime Paths
-" see: https://morimori.tokyo/2016/01/two-steps-for-highlighting-and-indenting-swift-code-in-vim/
+" ---------- General ----------
+set nocompatible
+filetype plugin indent on
+syntax on
 
-set runtimepath+=~/.vim/bundle/swift.vim
-set runtimepath+=~/.vim/bundle/markdown.vim
+" ---------- Behavior ----------
+set history=1000
+set autoread
+set hidden                      " switch buffers without saving
+set belloff=all
+set updatetime=300
 
-" General
-
-set nocompatible                    "this must be first, because it changes other options as a side effect.
-filetype plugin on
-filetype indent on
-
-" Configuration
-
-set backspace=indent,eol,start      "allow backspacing over everything in insert mode
-set history=1000                    "store lots of :cmdline history
-set showcmd                         "show incomplete cmds down the bottom
-set showmode                        "show current mode down the bottom
-set belloff=all                     "disable beeping (bell sound and visual flash)
-set autoread                        "reload files changed outside vim
-set laststatus=2                    "always display the status bar
-set ignorecase                      "case-insensitive search
-set incsearch
+" ---------- UI ----------
+set number                      " absolute line numbers
+set norelativenumber             
+set ruler                       
+set showcmd
 set nowrap
-set ruler
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase                   " case-sensitive if pattern has uppercase
+set showmatch
+set matchtime=2
+set signcolumn=auto
+set scrolloff=3
+set splitbelow
+set splitright
+set wildmenu
+set wildmode=longest:full,full
+if has('termguicolors')
+  set termguicolors
+endif
 
-" Theme
+" One statusline (Neovim/Vim recent). Fallback to 2 if you prefer.
+if has('nvim') || v:version >= 802
+  set laststatus=3
+else
+  set laststatus=2
+endif
 
-syntax on                           "syntax highlighting
-set nu                              "show line numbers
-set ru                              "show ruler at cursor pos
-"set cursorline                      "highlight current line
-set hlsearch                        "highlight search results
-set showmatch                       "matching parentheses
-set gcr=n:blinkon0                  "turn off blinking cursor in normal mode
-
-" Indentation
-
-set autoindent
-set smartindent
-set smarttab                        "uses shiftwidth instead of tabstop at
-set shiftwidth=2                    "the amount to block indent when using <
-set softtabstop=2                   "causes backspace to delete 2 spaces =
+" ---------- Indentation ----------
+set expandtab
+set shiftwidth=2
+set softtabstop=2
 set tabstop=2
-set expandtab                       "uses spaces instead of tabs
+" Optional smarter indent for C-like languages:
+" set cindent
 
-" Extra
+" ---------- Files ----------
+set undofile                    " persistent undo
+set backupdir^=~/.vim/backup//
+set directory^=~/.vim/swap//
+set undodir^=~/.vim/undo//
 
-"enable or disable the key column
-nnoremap K :set nonumber!<CR>:set foldcolumn=0<CR> 
+" ---------- Clipboard / Mouse (optional) ----------
+" set clipboard=unnamedplus
+set mouse=a
 
-"show usefull info on the status bar
-set statusline=%F%m%r%h%w\ %y\ [row=%l/%L]\ [col=%02v]\ [%02p%%]\ 
+" ---------- Statusline ----------
+set statusline=%F%m%r%h%w\ %y\ [row=%l/%L]\ [col=%02v]\ [%02p%%]
+
+" ---------- Safer cursor shapes ----------
+if exists('+guicursor')
+  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+endif
+" If you insist on termcap sequences, guard them:
+if exists('&t_SI')
+  let &t_SI = "\e[6 q"   " insert: vertical bar
+  let &t_SR = "\e[4 q"   " replace: underline
+  let &t_EI = "\e[2 q"   " normal: block
+endif
+
+" ---------- Mappings ----------
+" Toggle line numbers + fold/sign columns (don’t clobber K)
+nnoremap <leader>n :set invnumber invrelativenumber<CR>
+
+" Toggle search highlight
+nnoremap <leader>h :nohlsearch<CR>
+
+" Optional: quick toggle for foldcolumn
+nnoremap <leader>f :if &foldcolumn == 0 \| set foldcolumn=1 \| else \| set foldcolumn=0 \| endif<CR>
