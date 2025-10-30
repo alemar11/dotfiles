@@ -39,6 +39,7 @@ alias gsb='git status -sb'
 alias gsub='git submodule update --init --recursive'
 alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
+alias gw='git wnew'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Swift Package Manager
@@ -80,7 +81,10 @@ alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &
 alias sysup='sudo softwareupdate -i -a'
 
 # Homebrew
-alias bu='brew update && brew upgrade'
+alias bu='echo "⬆️ Updating Homebrew and upgrading packages..." && brew update && brew upgrade && brew cleanup'
+
+# npm
+alias nu='echo "⬆️ Updating global packages (including npm)..." && npm update -g && npm install -g npm'
 
 # Caffeinate
 alias caffe='caffeinate'
