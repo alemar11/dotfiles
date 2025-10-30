@@ -13,14 +13,38 @@
 [hub]
   protocol = https
 [alias]
-  a        = add
-  last     = diff HEAD^ HEAD
+  a = add
+  last = diff HEAD^ HEAD
   last-msg = !git --no-pager log --format=format:%B -1
   last-sha = !git --no-pager log --format=format:%H -1
-  pul      = pull
-  sub      = submodule update --init --recursive
-  undo     = reset --soft HEAD^
-  wip      = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+  pul = pull
+  sub = submodule update --init --recursive
+  undo = reset --soft HEAD^
+  wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
+  tidy = "!git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
+  wnew = "!f() { \
+    if [ $# -ne 1 ]; then \
+      echo 'Usage: git wnew <branch-name>' >&2; \
+      exit 1; \
+    fi; \
+    branch=\"$1\"; \
+    root=$(git rev-parse --show-toplevel); \
+    worktrees_dir=\"$root/.worktrees\"; \
+    dest=\"$worktrees_dir/$branch\"; \
+    mkdir -p \"$worktrees_dir\"; \
+    if [ -d \"$dest\" ]; then \
+      echo \"❌ Worktree $dest already exists\" >&2; \
+      exit 1; \
+    fi; \
+    if git show-ref --verify --quiet \"refs/heads/$branch\"; then \
+      echo \"📂 Attaching existing branch $branch\"; \
+      git worktree add \"$dest\" \"$branch\"; \
+    else \
+      echo \"🌱 Creating new branch $branch\"; \
+      git worktree add -b \"$branch\" \"$dest\" HEAD; \
+    fi; \
+    echo \"✅ Worktree created at $dest\"; \
+  }; f"
 [fetch]
   prune = true
 [pull]
