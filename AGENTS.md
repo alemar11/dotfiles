@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Guidance for coding agents (Claude Code, ChatGPT, Copilot, etc.) working in this repository.
+Guidance for coding agents working in this repository.
 
 ## Quick rules
 - Apple Silicon only (M1/M2/M3+). Do not assume Intel support.

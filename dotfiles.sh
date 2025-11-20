@@ -21,7 +21,6 @@ DOTFILES=(
   "zsh:.zsh:folder"
   "zshenv:.zshenv:file"
   "zshrc:.zshrc:file"
-  "claude:.claude:folder_contents"
 )
 
 # Get the directory where this script is located
