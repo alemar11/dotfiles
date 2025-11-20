@@ -3,5 +3,7 @@
     "type": "command",
     "command": "bash $HOME/.claude/statusline.sh",
     "padding": 0
-  }
+  },
+  "alwaysThinkingEnabled": false,
+  "model": "opus"
 }
