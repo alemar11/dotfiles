@@ -1,74 +1,66 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for coding agents (Claude Code, ChatGPT, Copilot, etc.) working in this repository.
 
-## Repository Overview
+## Quick rules
+- Apple Silicon only (M1/M2/M3+). Do not assume Intel support.
+- Scripts expect the repo to live at `~/Developer/dotfiles`. Keep paths relative or update all references together.
+- Do not run host-modifying scripts (`macos/install.sh`, `macos/defaults.sh`, `macos/brew.sh`) unless explicitly requested—they change system settings and install software.
+- Manage symlinks via `./dotfiles.sh` rather than ad hoc commands.
+- Keep edits macOS/zsh-friendly and avoid introducing secrets or machine-specific values.
 
-This is a personal dotfiles repository for macOS configuration and development environment setup. It provides scripts and configuration files for terminal, shell (zsh), git, vim, Xcode, and various development tools.
+## Core components
 
-**IMPORTANT: These dotfiles are designed exclusively for Apple Silicon Macs (M1/M2/M3 and newer). They do not support Intel-based Macs and should not be used on Intel CPUs.**
+### Main installation
+- `dotfiles.sh` symlinks dotfiles to the home directory.
+  - `./dotfiles.sh install` creates symlinks.
+  - `./dotfiles.sh remove` removes symlinks.
+  - `./dotfiles.sh clean` removes broken symlinks.
 
-## Core Components
+### macOS setup
+- `macos/install.sh` runs `brew.sh` and `defaults.sh`.
+- `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
+- `macos/defaults.sh` applies macOS preferences.
+- `macos/AM.terminal` is the Terminal.app theme.
 
-### Main Installation Script
-- `dotfiles.sh` - Symlinks dotfiles to home directory
-  - Usage: `./dotfiles.sh install` to create symlinks
-  - `./dotfiles.sh remove` to remove symlinks
-  - `./dotfiles.sh clean` to remove broken symlinks
+### Xcode configuration
+- `macos/xcode/copy.sh` copies themes, keybindings, and breakpoints to Xcode `UserData`.
+- Contains custom color themes and keybindings.
 
-### macOS Setup
-- `macos/install.sh` - Main macOS setup script that runs brew.sh and defaults.sh
-- `macos/brew.sh` - Homebrew package and cask installations (includes shellcheck for script validation)
-- `macos/defaults.sh` - macOS system preferences and defaults
-- `macos/AM.terminal` - Terminal.app theme file
+### Shell configuration
+- `zshrc` sources all `zsh/*.zsh` files.
+- `zsh/` contains modular configuration:
+  - `aliases.zsh` - shell aliases
+  - `completion.zsh` - completion settings
+  - `prompt.zsh` - prompt configuration
+  - `xcode.zsh` - Xcode functions
+  - `vscode.zsh` - VS Code functions
+  - `functions/` - autoloaded zsh functions
 
-### Xcode Configuration
-- `macos/xcode/copy.sh` - Copies Xcode themes, keybindings, and breakpoints to Xcode UserData
-- Contains custom color themes and keybindings
-
-### Shell Configuration
-- `zshrc` - Main zsh configuration that sources all zsh/*.zsh files
-- `zsh/` directory contains modular zsh configuration:
-  - `aliases.zsh` - Shell aliases
-  - `completion.zsh` - Completion settings
-  - `prompt.zsh` - Prompt configuration
-  - `xcode.zsh` - Xcode-related functions
-  - `vscode.zsh` - VSCode-related functions
-  - `functions/` - Custom zsh functions
-
-### Other Configurations
+### Other configurations
 - `gitconfig` - Git configuration
-- `gitignore_global` - Global gitignore patterns
+- `gitignore_global` - global gitignore patterns
 - `vimrc` - Vim configuration
-- `lldbinit` and `lldbinit-Xcode` - LLDB debugger configuration
+- `lldbinit`, `lldbinit-Xcode` - LLDB debugger configuration
 
-## Common Commands
+## Common commands
 
-### Initial Setup
+### Initial setup
 ```bash
-# Install all dotfiles
-./dotfiles.sh install
-
-# macOS-specific setup (run from repository root)
-./macos/install.sh
-
-# Copy Xcode configuration
-./macos/xcode/copy.sh
+./dotfiles.sh install       # Install all dotfiles (symlinks)
+./macos/install.sh          # macOS setup (from repo root; run only when asked)
+./macos/xcode/copy.sh       # Copy Xcode configuration
 ```
 
-### Managing Dotfiles
+### Managing dotfiles
 ```bash
-# Remove all symlinks
-./dotfiles.sh remove
-
-# Clean broken symlinks
-./dotfiles.sh clean
+./dotfiles.sh remove        # Remove all symlinks
+./dotfiles.sh clean         # Clean broken symlinks
 ```
 
-## Architecture Notes
-
-- The repository uses symlinks to connect configuration files from the repo to their expected locations in the home directory
-- The `dotfiles.sh` script manages these symlinks programmatically based on the FILES array
-- zsh configuration is modular - the main `zshrc` sources all .zsh files from the `~/.zsh/` directory
-- Custom zsh functions are autoloaded from `~/.zsh/functions/`
-- The repository expects to be cloned to `~/Developer/dotfiles` based on the paths used in scripts
+## Architecture notes
+- Uses symlinks to map repo files to expected home directory locations.
+- `dotfiles.sh` manages symlinks via the `FILES` array.
+- zsh configuration is modular; `zshrc` sources all `.zsh` files from `~/.zsh/`.
+- Custom zsh functions are autoloaded from `~/.zsh/functions/`.
+- Scripts assume the repository is cloned to `~/Developer/dotfiles`.
