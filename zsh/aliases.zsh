@@ -42,6 +42,7 @@ alias gundo='git reset --soft HEAD~1'
 alias gw='git wnew'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
 alias lg='lazygit'
+alias ld='lazydocker'
 
 # Swift Package Manager
 alias spi='swift package init'

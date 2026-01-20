@@ -19,8 +19,11 @@ PACKAGES=(
   cloc
   cmake
   cocoapods
+  codex
   fastlane
   hyperfine
+  lazydocker
+  lazygit
   python
   rbenv
   shellcheck
