@@ -120,8 +120,8 @@ EOF
 # Only meaningful when called from other xcode functions
 function xcode_parse_versioned_file {
   local file=$1
-  local basename=${app:t}
-  local dir=${app:h}
+  local basename=${file:t}
+  local dir=${file:h}
   local parent=${dir:t}
   #echo "parent=$parent basename=$basename verstr=$verstr ver=$ver" >&2
   local verstr
@@ -181,7 +181,7 @@ function xcode_locate_versions {
   for app_dir ($app_dirs); do
     apps=( $app_dir/Xcode*.app(N) $app_dir/Xcode*/Xcode.app(N) )
     for app ($apps); do
-      xcode_ver=$(xcode_parse_versioned_file $app)
+      xcode_ver=$(xcode_parse_versioned_file "$app")
       if [[ $? != 0 ]]; then
         continue
       fi
