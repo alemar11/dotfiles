@@ -202,8 +202,44 @@ remove_all() {
 
 # Clean broken symlinks in home directory
 clean_broken_links() {
-  echo "Cleaning broken symlinks in $HOME..."
-  find "$HOME" -L -maxdepth 1 -type l -exec rm -i {} \;
+  echo "Cleaning broken symlinks managed by dotfiles..."
+  for entry in "${DOTFILES[@]}"; do
+    read -r source target type <<< "$(parse_entry "$entry")"
+    local source_path="$SCRIPT_DIR/$source"
+    local target_path="$HOME/$target"
+
+    case "$type" in
+      file|folder)
+        if [[ -L "$target_path" && ! -e "$target_path" ]]; then
+          echo "Removing broken symlink $target_path"
+          rm "$target_path"
+        fi
+        ;;
+      folder_contents)
+        if [[ -d "$source_path" && -d "$target_path" ]]; then
+          for file in "$source_path"/*; do
+            [[ -f "$file" ]] || continue
+            local filename
+            filename="$(basename "$file")"
+            local target_file="$target_path/$filename"
+            if [[ -L "$target_file" && ! -e "$target_file" ]]; then
+              echo "Removing broken symlink $target_file"
+              rm "$target_file"
+            fi
+          done
+
+          if [[ -z "$(ls -A "$target_path")" ]]; then
+            echo "Removing empty directory $target_path"
+            rmdir "$target_path"
+          fi
+        fi
+        ;;
+      *)
+        echo "Error: Unknown type '$type' for $source"
+        return 1
+        ;;
+    esac
+  done
   echo "Cleaning complete!"
 }
 
