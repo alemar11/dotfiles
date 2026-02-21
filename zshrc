@@ -1,9 +1,23 @@
 # Path to dotfiles repo
-export DOTFILES="$(dirname "$(readlink "$HOME/.zshrc")")"
+zshrc_link="$HOME/.zshrc"
+if [[ -L "$zshrc_link" ]]; then
+    zshrc_target="$(readlink "$zshrc_link" 2>/dev/null || true)"
+    if [[ -n "$zshrc_target" ]]; then
+        if [[ "$zshrc_target" != /* ]]; then
+            zshrc_target="$HOME/$zshrc_target"
+        fi
+        DOTFILES="${zshrc_target:h}"
+    fi
+fi
+: "${DOTFILES:=$HOME/Developer/dotfiles}"
+export DOTFILES
 
 # Functions
 fpath=(~/.zsh/functions $fpath)
-autoload -Uz ~/.zsh/functions/*(:t)
+autoload_targets=(~/.zsh/functions/*(N:t))
+if (( ${#autoload_targets} )); then
+    autoload -Uz "${autoload_targets[@]}"
+fi
 
 # Define the base directories for cd command
 cdpath=($HOME/Developer $HOME/Documents)
@@ -12,7 +26,9 @@ cdpath=($HOME/Developer $HOME/Documents)
 REPORTTIME=10
 
 # Load all the .zsh files
-for file (~/.zsh/*.zsh) source $file
+for file in ~/.zsh/*.zsh(N); do
+    source "$file"
+done
 
 # Adding path directory for custom scripts
 export PATH=$DOTFILES/bin:$PATH
@@ -21,10 +37,6 @@ export PATH=$DOTFILES/bin:$PATH
 if [[ -d ~/bin ]]; then
     export PATH=~/bin:$PATH
 fi
-
-# Add rbenv to path to access command-line utility
-export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
 
 # Add brew to path
 export PATH=/opt/homebrew/bin:$PATH 
