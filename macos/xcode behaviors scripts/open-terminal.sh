@@ -4,4 +4,4 @@
 # Project Dir:   $XcodeProjectPath
 # Workspace Dir: $XcodeWorkspacePath
 
-open -a Terminal "$(dirname $XcodeProjectPath)"
+open -a Terminal "$(dirname "$XcodeProjectPath")"
