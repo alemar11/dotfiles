@@ -36,7 +36,7 @@ zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
 zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,cmd'
 zstyle ':completion:*:*:*:*:processes' list-colors "=(#b) #([0-9]#)*=0=${color[green]}"
-zstyle ':completion:*:*:kill:*:processes' command 'ps --forest -e -o pid,user,tty,cmd'
+zstyle ':completion:*:*:kill:*:processes' command 'ps -A -o pid,user,tty,command'
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 
 # Display message when no matches are found
@@ -58,4 +58,3 @@ zstyle ':completion:*' accept-exact '*(N)'
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-
