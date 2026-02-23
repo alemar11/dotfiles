@@ -238,6 +238,24 @@ def flatten(obj: Any, path: str, out: Dict[str, Tuple[Any, str]]) -> None:
         out[path] = (obj, scalar_to_str(obj))
 
 
+def format_path(path: str) -> str:
+    if not path:
+        return "(root)"
+    tokens = [token for token in path.split(":") if token]
+    if not tokens:
+        return "(root)"
+    out: List[str] = []
+    for token in tokens:
+        if re.fullmatch(r"\d+", token):
+            if out:
+                out[-1] = f"{out[-1]}[{token}]"
+            else:
+                out.append(f"[{token}]")
+        else:
+            out.append(token)
+    return ".".join(out)
+
+
 def parse_script_value(rest: List[str]) -> Tuple[Any, str]:
     if not rest:
         return None, "unsupported"
@@ -406,6 +424,7 @@ def main() -> int:
 
     summary: List[Dict[str, Any]] = []
     top_priority: List[Dict[str, Any]] = []
+    nested_changes: List[Dict[str, Any]] = []
     mismatches: List[Dict[str, Any]] = []
     missing: List[Dict[str, Any]] = []
     commands: List[str] = []
@@ -499,9 +518,11 @@ def main() -> int:
                 else:
                     removed_root += 1
 
-                truth_value = current_val[0] if current_val is not None else None
-                if kind in {"CHANGED", "ADDED"} and current_val is not None and is_supported_proposal_type(truth_value):
-                    changed_root_keys.add((domain, key))
+                if kind in {"CHANGED", "ADDED"} and current_val is not None:
+                    truth_value = current_val[0]
+                    supported_for_proposal = is_supported_proposal_type(truth_value)
+                    if supported_for_proposal:
+                        changed_root_keys.add((domain, key))
                     in_script = (domain, key) in declared
                     top_priority.append(
                         {
@@ -511,10 +532,20 @@ def main() -> int:
                             "old": baseline_val[1] if baseline_val else "",
                             "new": current_val[1],
                             "in_script": in_script,
+                            "supported_for_proposal": supported_for_proposal,
                         }
                     )
             else:
                 nested += 1
+                nested_changes.append(
+                    {
+                        "domain": domain,
+                        "path": format_path(path),
+                        "kind": kind,
+                        "old": baseline_val[1] if baseline_val else "",
+                        "new": current_val[1] if current_val else "",
+                    }
+                )
 
         root_truth: Dict[str, Any] = {}
         if isinstance(current_obj, dict):
@@ -582,14 +613,49 @@ def main() -> int:
                 )
     print()
 
-    print("## Top Priority: Changed Root Keys")
+    print("## Top Priority: Changed/Added Root Keys")
     if not top_priority:
         print("- No changed/added root keys detected.")
+        if nested_changes:
+            print("- Nested changes were detected. See `Nested Changes (Informational)` below.")
     else:
-        for item in sorted(top_priority, key=lambda x: (x["domain"], x["key"])):
+        mapped_priority = sorted(
+            [item for item in top_priority if item["in_script"]],
+            key=lambda x: (x["domain"], x["key"]),
+        )
+        unmapped_priority = sorted(
+            [item for item in top_priority if not item["in_script"]],
+            key=lambda x: (x["domain"], x["key"]),
+        )
+
+        print("### Already Mapped in defaults.sh (Highest Priority)")
+        if not mapped_priority:
+            print("- None")
+        else:
+            for item in mapped_priority:
+                print(
+                    f"- `{item['domain']} {item['key']}` ({item['kind']}): old={item['old']} new={item['new']} "
+                    f"proposal_supported={'yes' if item['supported_for_proposal'] else 'no'}"
+                )
+
+        print("### Not Mapped in defaults.sh (Review for Addition)")
+        if not unmapped_priority:
+            print("- None")
+        else:
+            for item in unmapped_priority:
+                print(
+                    f"- `{item['domain']} {item['key']}` ({item['kind']}): old={item['old']} new={item['new']} "
+                    f"proposal_supported={'yes' if item['supported_for_proposal'] else 'no'}"
+                )
+    print()
+
+    print("## Nested Changes (Informational)")
+    if not nested_changes:
+        print("- No nested changes detected.")
+    else:
+        for item in sorted(nested_changes, key=lambda x: (x["domain"], x["path"])):
             print(
-                f"- `{item['domain']} {item['key']}` ({item['kind']}): old={item['old']} new={item['new']} "
-                f"in_defaults_sh={'yes' if item['in_script'] else 'no'}"
+                f"- `{item['domain']} {item['path']}` ({item['kind']}): old={item['old']} new={item['new']}"
             )
     print()
 

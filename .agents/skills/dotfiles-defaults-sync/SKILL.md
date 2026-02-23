@@ -16,7 +16,8 @@ Run the defaults drift and alignment workflow for this repository.
 - `.agents/skills/dotfiles-defaults-sync/scripts/defaults-audit-sync.sh`
 
 3. Review report sections in order:
-- `Top Priority: Changed Root Keys`
+- `Top Priority: Changed/Added Root Keys`
+- `Nested Changes (Informational)`
 - `defaults.sh Keys With Mismatched Values`
 - `Suggested Root Keys Missing From defaults.sh`
 
@@ -24,6 +25,8 @@ Run the defaults drift and alignment workflow for this repository.
 - Do not auto-edit without confirmation.
 - Ask approval for each proposed change one by one.
 - Ask approval for each proposed new key/value one by one.
+- Place each approved key under the correct section in `macos/defaults.sh`.
+- If a matching section does not exist, create a new clearly named section before adding the key.
 
 5. Re-run audit after approved edits.
 
@@ -36,6 +39,8 @@ Run the defaults drift and alignment workflow for this repository.
 - Do not attempt to include all nested keys from plist domains.
 - Never edit `macos/defaults.sh` until the user approves each individual change.
 - Never add proposed key/value entries until the user approves each individual proposal.
+- Keep `macos/defaults.sh` organized by section and insert new keys in the appropriate section.
+- If no suitable section exists for a new approved key, create one with a clear header and add the key there.
 
 ## Cache
 
