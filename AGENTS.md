@@ -7,6 +7,7 @@ Guidance for coding agents working in this repository.
 - Default clone path is `~/Developer/dotfiles`. Keep paths relative or update all references together.
 - Do not run host-modifying scripts (`macos/install.sh`, `macos/defaults.sh`, `macos/brew.sh`) unless explicitly requested—they change system settings and install software.
 - Do not edit `macos/defaults.sh` without explicit user approval for each individual change and each new key/value proposal.
+- For dotfiles maintenance/update tasks, use the `$dotfiles` skill as the default entrypoint and let it orchestrate sub-skills.
 - Manage symlinks via `./dotfiles.sh` rather than ad hoc commands.
 - Keep edits macOS/zsh-friendly and avoid introducing secrets or machine-specific values.
 
