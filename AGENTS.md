@@ -24,8 +24,8 @@ Guidance for coding agents working in this repository.
 - `macos/defaults.sh` applies macOS preferences.
 - Defaults drift/audit tooling lives in `.agents/skills/dotfiles-defaults-sync/scripts/`.
 - Defaults cache lives in `.cache/dotfiles-defaults-sync/`.
-- Swift completion updater lives in `.agents/skills/dotfiles-swift-update/scripts/update-spm-completion.sh`.
-- Swift completion cache lives in `.cache/dotfiles-swift-update/`.
+- Swift completion updater lives in `.agents/skills/dotfiles-swift-completion-update/scripts/update-spm-completion.sh`.
+- Swift completion cache lives in `.cache/dotfiles-swift-completion-update/`.
 
 ### Xcode configuration
 - `macos/xcode/copy.sh` copies keybindings and breakpoints to Xcode `UserData`.

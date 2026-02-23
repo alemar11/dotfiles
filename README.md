@@ -43,7 +43,7 @@ In the *macos* folder there are scripts to install Homebrew packages and apply `
 ## Update Swift Package Manager Completion
 
 If you want to update the current auto completion run:
-`.agents/skills/dotfiles-swift-update/scripts/update-spm-completion.sh`
+`.agents/skills/dotfiles-swift-completion-update/scripts/update-spm-completion.sh`
 
 ## Setup SSH
 

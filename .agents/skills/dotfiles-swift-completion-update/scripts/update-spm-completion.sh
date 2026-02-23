@@ -9,7 +9,7 @@ else
   REPO_ROOT="$SCRIPT_DIR"
 fi
 
-CACHE_DIR="$REPO_ROOT/.cache/dotfiles-swift-update"
+CACHE_DIR="$REPO_ROOT/.cache/dotfiles-swift-completion-update"
 CACHE_VERSION_FILE="$CACHE_DIR/last-swift-version.txt"
 CACHE_GENERATED_AT_FILE="$CACHE_DIR/last-generated-at.txt"
 
@@ -18,7 +18,7 @@ TARGET_FILE="$TARGET_DIR/_swift"
 
 usage() {
   cat <<'USAGE' >&2
-Usage: .agents/skills/dotfiles-swift-update/scripts/update-spm-completion.sh [--force]
+Usage: .agents/skills/dotfiles-swift-completion-update/scripts/update-spm-completion.sh [--force]
 
 Options:
   --force    Regenerate completion script even if cached Swift version matches

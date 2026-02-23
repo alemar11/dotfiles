@@ -1,4 +1,0 @@
-interface:
-  display_name: "Dotfiles Swift Update"
-  short_description: "Update Swift completion with version cache"
-  default_prompt: "Use $dotfiles-swift-update to update _swift completion only when Swift version cache indicates regeneration is needed."
