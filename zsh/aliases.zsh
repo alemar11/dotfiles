@@ -40,7 +40,7 @@ alias gsub='git submodule update --init --recursive'
 alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gw='git wnew'
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
+alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Lazygit and Lazydocker
 alias lg='lazygit'
@@ -51,9 +51,9 @@ alias cx='codex --yolo'
 
 # Swift Package Manager
 alias spi='swift package init'
-alias spf='swift package fetch'
+alias spr='swift package resolve'
 alias spu='swift package update'
-alias spx='swift package generate-xcodeproj'
+alias spx='xed .'
 alias sps='swift package show-dependencies'
 alias spd='swift package dump-package'
 
