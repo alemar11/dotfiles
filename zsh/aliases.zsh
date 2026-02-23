@@ -50,14 +50,6 @@ alias ld='lazydocker'
 # Codex
 alias cx='codex --yolo'
 
-# Swift Package Manager
-alias spi='swift package init'
-alias spr='swift package resolve'
-alias spu='swift package update'
-alias spx='xed .'
-alias sps='swift package show-dependencies'
-alias spd='swift package dump-package'
-
 # Simulators
 
 ## Directory
