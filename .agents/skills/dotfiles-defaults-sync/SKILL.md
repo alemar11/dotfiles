@@ -3,7 +3,7 @@ name: dotfiles-defaults-sync
 description: Audit and sync macOS defaults domain drift against a cached baseline and `macos/defaults.sh`. Use when defaults keys change on a machine, when validating `macos/defaults.sh` alignment, and when proposing meaningful root-level keys to add without auto-editing.
 ---
 
-# macOS Defaults Sync
+# Dotfiles Defaults Sync
 
 Run the defaults drift and alignment workflow for this repository.
 
@@ -46,6 +46,10 @@ Run the defaults drift and alignment workflow for this repository.
 
 - Cache directory: `.cache/dotfiles-defaults-sync/` at repository root.
 - Use `--no-update-cache` to run report-only checks.
+
+## References
+
+- Use `references/macos-defaults-sources.md` for external description sources when adding/updating documented key meanings.
 
 ## Learn
 
