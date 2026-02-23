@@ -4,7 +4,7 @@ Guidance for coding agents working in this repository.
 
 ## Quick rules
 - Apple Silicon only (M1/M2/M3+). Do not assume Intel support.
-- Scripts expect the repo to live at `~/Developer/dotfiles`. Keep paths relative or update all references together.
+- Default clone path is `~/Developer/dotfiles`. Keep paths relative or update all references together.
 - Do not run host-modifying scripts (`macos/install.sh`, `macos/defaults.sh`, `macos/brew.sh`) unless explicitly requested—they change system settings and install software.
 - Manage symlinks via `./dotfiles.sh` rather than ad hoc commands.
 - Keep edits macOS/zsh-friendly and avoid introducing secrets or machine-specific values.
@@ -21,11 +21,10 @@ Guidance for coding agents working in this repository.
 - `macos/install.sh` runs `brew.sh` and `defaults.sh`.
 - `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
 - `macos/defaults.sh` applies macOS preferences.
-- `macos/AM.terminal` is the Terminal.app theme.
 
 ### Xcode configuration
-- `macos/xcode/copy.sh` copies themes, keybindings, and breakpoints to Xcode `UserData`.
-- Contains custom color themes and keybindings.
+- `macos/xcode/copy.sh` copies keybindings and breakpoints to Xcode `UserData`.
+- Contains custom keybindings and breakpoints.
 
 ### Shell configuration
 - `zshrc` sources all `zsh/*.zsh` files.
@@ -60,7 +59,7 @@ Guidance for coding agents working in this repository.
 
 ## Architecture notes
 - Uses symlinks to map repo files to expected home directory locations.
-- `dotfiles.sh` manages symlinks via the `FILES` array.
+- `dotfiles.sh` manages symlinks via the `DOTFILES` array.
 - zsh configuration is modular; `zshrc` sources all `.zsh` files from `~/.zsh/`.
 - Custom zsh functions are autoloaded from `~/.zsh/functions/`.
-- Scripts assume the repository is cloned to `~/Developer/dotfiles`.
+- `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
