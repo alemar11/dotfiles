@@ -40,10 +40,10 @@ In the *macos* folder there are scripts to install Homebrew packages and apply `
   - In other words, `DOTFILES` resolves automatically as “the directory containing the file that `~/.zshrc` links to”, so the repository can live anywhere as long as `~/.zshrc` is linked by `./dotfiles.sh install`.
   - If you choose not to symlink `~/.zshrc`, set `DOTFILES` manually in your environment to the repo root so custom scripts on your `PATH` (e.g., `bin/*`) are available: `export DOTFILES=~/Developer/dotfiles && export PATH="$DOTFILES/bin:$PATH"`.
 
-## Update Swift Package Manager Completion
+## Skill-managed maintenance
 
-If you want to update the current auto completion run:
-`.agents/skills/dotfiles-swift-completion-update/scripts/update-spm-completion.sh`
+Defaults drift/audit and Swift completion refresh are handled through repository skills under `.agents/skills/`.
+Use the orchestrator skill (`$dotfiles`) to route these tasks instead of running maintenance scripts directly.
 
 ## Setup SSH
 

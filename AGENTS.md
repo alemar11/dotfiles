@@ -22,9 +22,9 @@ Guidance for coding agents working in this repository.
 - `macos/install.sh` runs `brew.sh` and `defaults.sh`.
 - `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
 - `macos/defaults.sh` applies macOS preferences.
-- Defaults drift/audit tooling lives in `.agents/skills/dotfiles-defaults-sync/scripts/`.
+- Defaults drift/audit is skill-managed via `$dotfiles-defaults-sync` (or `$dotfiles` orchestrator).
 - Defaults cache lives in `.cache/dotfiles-defaults-sync/`.
-- Swift completion updater lives in `.agents/skills/dotfiles-swift-completion-update/scripts/update-spm-completion.sh`.
+- Swift completion refresh is skill-managed via `$dotfiles-swift-completion-update` (or `$dotfiles` orchestrator).
 - Swift completion cache lives in `.cache/dotfiles-swift-completion-update/`.
 
 ### Xcode configuration
