@@ -54,6 +54,7 @@ brew install "${PACKAGES[@]}"
 CASKS=(
   appcleaner
   bruno
+  chatgpt
   codex-app
   docker
   ghostty@tip
