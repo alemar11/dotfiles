@@ -14,11 +14,7 @@ These dotfiles are intended for Apple Silicon Macs only (M1/M2/M3 and newer). Th
 
 # macOS
 
-In the *macos* folder there are scripts to customize `macOS` defaults, `Terminal`, and `Xcode`.
-
-Double click “AM.terminal” file.  
-This is the specific Theme file for Terminal.app.   
-Note: If you get a warning that this is from an unidentified developer, Right-click on the file and select “Open with” > Terminal option.
+In the *macos* folder there are scripts to install Homebrew packages and apply `macOS` defaults.
 
 ```
 ./macos/install.sh
@@ -27,7 +23,6 @@ Note: If you get a warning that this is from an unidentified developer, Right-cl
 # Interactive Steps and Permissions
 
 - The macOS defaults script may request administrator privileges (e.g., to change visibility of `/Volumes`). Be ready to enter your password when prompted.
-- Importing the Terminal theme opens Terminal.app and may show a Gatekeeper prompt. If you see “unidentified developer”, right‑click the `AM.terminal` file and choose “Open With → Terminal”.
 - If Xcode Command Line Tools are not installed, `brew.sh` may require them. You can install them with `xcode-select --install`.
 
 # Xcode configuration
