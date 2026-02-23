@@ -8,8 +8,33 @@ fpath=($HOME/.zsh/completions $fpath)
 # Homebrew's zsh completions
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
-# Custom zsh completions
-autoload -Uz compinit && compinit -i
+# Completion initialization:
+# - First run: build completion dump
+# - Subsequent runs: use cached dump for faster startup
+# - Periodically refresh dump to pick up new completion definitions
+autoload -Uz compinit
+zcompdump_file="${ZDOTDIR:-$HOME}/.zcompdump"
+compdump_refresh_days=1
+
+if [[ ! -f "$zcompdump_file" ]]; then
+  compinit -i -d "$zcompdump_file"
+else
+  if zmodload -F zsh/stat b:zstat 2>/dev/null; then
+    typeset -a zcompdump_mtime
+    if zstat -A zcompdump_mtime +mtime -- "$zcompdump_file" 2>/dev/null; then
+      (( zcompdump_age = (EPOCHSECONDS - zcompdump_mtime[1]) / 86400 ))
+      if (( zcompdump_age >= compdump_refresh_days )); then
+        compinit -i -d "$zcompdump_file"
+      else
+        compinit -C -d "$zcompdump_file"
+      fi
+    else
+      compinit -C -d "$zcompdump_file"
+    fi
+  else
+    compinit -C -d "$zcompdump_file"
+  fi
+fi
 
 zmodload zsh/complist
 
