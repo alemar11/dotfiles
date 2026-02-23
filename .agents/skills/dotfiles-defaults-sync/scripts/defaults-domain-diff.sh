@@ -3,7 +3,12 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CACHE_DIR="$SCRIPT_DIR/.cache"
+if REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)"; then
+  :
+else
+  REPO_ROOT="$SCRIPT_DIR"
+fi
+CACHE_DIR="$REPO_ROOT/.cache/dotfiles-defaults-sync"
 
 require_cmd() {
   local cmd="$1"
@@ -15,17 +20,40 @@ require_cmd() {
 
 usage() {
   cat <<'USAGE' >&2
-Usage: tools/macos/defaults-domain-diff.sh <domain>
-Example: tools/macos/defaults-domain-diff.sh com.apple.dt.Xcode
+Usage: .agents/skills/dotfiles-defaults-sync/scripts/defaults-domain-diff.sh [--no-update-cache] <domain>
+Example: .agents/skills/dotfiles-defaults-sync/scripts/defaults-domain-diff.sh com.apple.dt.Xcode
 USAGE
 }
 
-if [[ $# -ne 1 ]]; then
+update_cache=true
+domain=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --no-update-cache)
+      update_cache=false
+      shift
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      if [[ -z "$domain" ]]; then
+        domain="$1"
+        shift
+      else
+        usage
+        exit 1
+      fi
+      ;;
+  esac
+done
+
+if [[ -z "$domain" ]]; then
   usage
   exit 1
 fi
-
-domain="$1"
 
 require_cmd defaults
 require_cmd plutil
@@ -54,19 +82,28 @@ fi
 echo "## $domain"
 
 if [[ ! -f "$baseline_file" ]]; then
-  baseline_tmp="$(mktemp "$CACHE_DIR/defaults.${domain}.baseline.XXXXXX")"
-  cp "$current_plist" "$baseline_tmp"
-  mv "$baseline_tmp" "$baseline_file"
-  echo "# baseline created: $baseline_file"
+  if [[ "$update_cache" == "true" ]]; then
+    baseline_tmp="$(mktemp "$CACHE_DIR/defaults.${domain}.baseline.XXXXXX")"
+    cp "$current_plist" "$baseline_tmp"
+    mv "$baseline_tmp" "$baseline_file"
+    echo "# baseline created: $baseline_file"
+  else
+    echo "# baseline missing: $baseline_file (run without --no-update-cache to create)"
+  fi
   exit 0
 fi
 
 if ! plutil -lint "$baseline_file" >/dev/null 2>&1; then
-  baseline_tmp="$(mktemp "$CACHE_DIR/defaults.${domain}.baseline.XXXXXX")"
-  cp "$current_plist" "$baseline_tmp"
-  mv "$baseline_tmp" "$baseline_file"
-  echo "# baseline recreated (invalid cache): $baseline_file"
-  exit 0
+  if [[ "$update_cache" == "true" ]]; then
+    baseline_tmp="$(mktemp "$CACHE_DIR/defaults.${domain}.baseline.XXXXXX")"
+    cp "$current_plist" "$baseline_tmp"
+    mv "$baseline_tmp" "$baseline_file"
+    echo "# baseline recreated (invalid cache): $baseline_file"
+    exit 0
+  fi
+
+  echo "error: baseline cache is invalid and --no-update-cache is set: $baseline_file" >&2
+  exit 1
 fi
 
 python3 - "$baseline_file" "$current_plist" > "$diff_out" <<'PY'
@@ -164,6 +201,8 @@ PY
 
 cat "$diff_out"
 
-baseline_tmp="$(mktemp "$CACHE_DIR/defaults.${domain}.baseline.XXXXXX")"
-cp "$current_plist" "$baseline_tmp"
-mv "$baseline_tmp" "$baseline_file"
+if [[ "$update_cache" == "true" ]]; then
+  baseline_tmp="$(mktemp "$CACHE_DIR/defaults.${domain}.baseline.XXXXXX")"
+  cp "$current_plist" "$baseline_tmp"
+  mv "$baseline_tmp" "$baseline_file"
+fi
