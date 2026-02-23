@@ -29,10 +29,10 @@ PACKAGES=(
   cmake
   cocoapods
   codex
-  fastlane
   hyperfine
   lazydocker
   lazygit
+  node
   python
   shellcheck
   swiftlint
@@ -46,11 +46,17 @@ brew install "${PACKAGES[@]}"
 
 CASKS=(
   appcleaner
+  bruno
+  codex-app
+  docker
+  ghostty@tip
   iina
-  monodraw
+  netnewswire
+  pearcleaner
   proxyman
   rapidapi
   sketch
+  tableplus
   tower
   xcodes
 )
