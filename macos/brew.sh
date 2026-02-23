@@ -29,15 +29,22 @@ PACKAGES=(
   cmake
   cocoapods
   codex
+  ffmpeg
+  gh
+  git-lfs
   hyperfine
   lazydocker
   lazygit
+  mkcert
   node
+  postgresql@18
   python
   shellcheck
   swiftlint
   swift-format
   tree
+  uv
+  watchman
   yazi
   wget
 )
@@ -57,6 +64,7 @@ CASKS=(
   rapidapi
   sketch
   tableplus
+  tuist
   tower
   xcodes
 )
