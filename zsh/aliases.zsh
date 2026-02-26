@@ -6,7 +6,7 @@ alias reload!='rm -f "${ZDOTDIR:-$HOME}/.zcompdump" && RELOAD=1 source ~/.zshrc'
 alias ..='cd ..'
 
 # ls
-alias ls='ls -F'
+alias ls='eza --icons --grid --group-directories-first'
 alias ll='ls -la'
 alias cpwd='pwd | pbcopy' #copy working directory
 alias cpdir=cpwd

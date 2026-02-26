@@ -29,6 +29,7 @@ PACKAGES=(
   cmake
   cocoapods
   codex
+  eza
   ffmpeg
   gh
   git-lfs
