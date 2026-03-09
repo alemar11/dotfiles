@@ -6,7 +6,7 @@ color_red=$'\033[38;2;224;108;117m'
 color_green=$'\033[38;2;99;210;151m'
 color_yellow=$'\033[38;2;229;192;123m'
 color_blue=$'\033[38;2;86;182;194m'
-color_white=$'\033[38;2;171;178;191m'
+color_gray=$'\033[38;2;130;137;151m'
 reset=$'\033[0m'
 
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
@@ -101,25 +101,30 @@ fi
 if [[ "$untracked" == true ]]; then
   status_flags+="?"
 fi
-status_flags+="$ahead_behind"
+if [[ -n "$ahead_behind" ]]; then
+  if [[ -n "$status_flags" ]]; then
+    status_flags+=" "
+  fi
+  status_flags+="$ahead_behind"
+fi
 
-bracket_color="$color_white"
 status_color="$color_red"
+if [[ "$dirty" == false && -n "$ahead_behind" ]]; then
+  status_color="$color_yellow"
+fi
 
 if [[ -n "$status_flags" ]]; then
-  printf '%s[%s%s %s%s%s%s' \
-    "$bracket_color" \
+  printf '%s%s%s · %s%s%s' \
     "$status_color" \
     "$status_flags" \
+    "$color_gray" \
     "$age_color" \
     "$age" \
-    "$bracket_color" \
-    "]$reset"
+    "$reset"
 else
-  printf '%s[%s%s%s]%s' \
-    "$bracket_color" \
+  printf '%s· %s%s%s' \
+    "$color_gray" \
     "$age_color" \
     "$age" \
-    "$bracket_color" \
     "$reset"
 fi

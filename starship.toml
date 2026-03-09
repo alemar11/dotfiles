@@ -37,7 +37,7 @@ error_symbol = '[\$](white)'
 [git_branch]
 style = "bold fg:green"
 symbol = " "
-format = "[on](fg:green) [$symbol$branch ]($style)"
+format = "[$symbol$branch ]($style)"
 
 [custom.git_age]
 command = "\"$DOTFILES/bin/starship-git-prompt\""
