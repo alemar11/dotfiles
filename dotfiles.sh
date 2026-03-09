@@ -17,6 +17,7 @@ DOTFILES=(
   "lldb_helpers:.lldb_helpers:folder"
   "lldbinit:.lldbinit:file"
   "lldbinit-Xcode:.lldbinit-Xcode:file"
+  "starship.toml:.config/starship.toml:file"
   "vimrc:.vimrc:file"
   "zsh:.zsh:folder"
   "zshenv:.zshenv:file"
@@ -154,10 +155,21 @@ symlink_points_under() {
 link_file() {
   local source="$1"
   local target="$2"
+  local target_dir
 
   if [[ ! -e "$source" ]]; then
     log_error "$source doesn't exist"
     return 1
+  fi
+
+  target_dir="$(dirname "$target")"
+  if [[ ! -d "$target_dir" ]]; then
+    if mkdir -p "$target_dir"; then
+      log_ok "Created $target_dir"
+    else
+      log_error "Failed to create directory $target_dir"
+      return 1
+    fi
   fi
 
   if [[ ! -e "$target" && ! -L "$target" ]]; then

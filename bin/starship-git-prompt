@@ -1,0 +1,65 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  exit 0
+fi
+
+repo_root="$(git rev-parse --quiet --show-toplevel 2>/dev/null || true)"
+if [[ -z "$repo_root" || "$repo_root" == "$HOME" ]]; then
+  exit 0
+fi
+
+branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+if [[ -z "$branch" ]]; then
+  branch="No branch"
+fi
+
+dirty=false
+if [[ -n "$(git status -s --ignore-submodules=dirty 2>/dev/null)" ]]; then
+  dirty=true
+fi
+
+last_commit="$(git log --pretty=format:'%at' -1 2>/dev/null || true)"
+if [[ -n "$last_commit" ]]; then
+  now="$(date +%s)"
+  seconds_since_last_commit=$((now - last_commit))
+  minutes=$((seconds_since_last_commit / 60))
+  hours=$((seconds_since_last_commit / 3600))
+  days=$((seconds_since_last_commit / 86400))
+  sub_hours=$((hours % 24))
+  sub_minutes=$((minutes % 60))
+
+  if [[ "$dirty" == true ]]; then
+    if (( minutes > 120 )); then
+      age_color=$'\033[31m'
+    elif (( minutes > 60 )); then
+      age_color=$'\033[33m'
+    else
+      age_color=$'\033[32m'
+    fi
+  else
+    age_color=$'\033[36m'
+  fi
+
+  if (( hours > 24 )); then
+    age="${days}d${sub_hours}h${sub_minutes}m"
+  elif (( minutes > 60 )); then
+    age="${hours}h${sub_minutes}m"
+  else
+    age="${minutes}m"
+  fi
+else
+  age_color=$'\033[36m'
+  age="new"
+fi
+
+if [[ "$dirty" == true ]]; then
+  branch_color=$'\033[31m'
+else
+  branch_color=$'\033[32m'
+fi
+
+reset=$'\033[0m'
+printf '(%s%s%s|%s%s%s)' "$branch_color" "$branch" "$reset" "$age_color" "$age" "$reset"

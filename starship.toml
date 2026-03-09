@@ -1,0 +1,24 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+format = "$directory$character${custom.git_prompt}"
+
+[directory]
+format = "[$path]($style)"
+style = "magenta"
+truncation_length = 1
+truncate_to_repo = false
+truncation_symbol = ""
+
+[character]
+success_symbol = '[\$](white)'
+error_symbol = '[\$](white)'
+
+[custom.git_prompt]
+command = "\"$DOTFILES/bin/starship-git-prompt\""
+description = "Current git branch and time since last commit"
+format = "$output "
+require_repo = true
+shell = ["/bin/zsh", "--no-rcs"]
+unsafe_no_escape = true
+when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"

@@ -39,6 +39,8 @@ In the *macos* folder there are scripts to install Homebrew packages and apply `
 - During installation, `dotfiles.sh` creates a symlink from the repo’s `zshrc` to `~/.zshrc`. The shell configuration then derives the repository path via that symlink and exports it as `DOTFILES`.
   - In other words, `DOTFILES` resolves automatically as “the directory containing the file that `~/.zshrc` links to”, so the repository can live anywhere as long as `~/.zshrc` is linked by `./dotfiles.sh install`.
   - If you choose not to symlink `~/.zshrc`, set `DOTFILES` manually in your environment to the repo root so custom scripts on your `PATH` (e.g., `bin/*`) are available: `export DOTFILES=~/Developer/dotfiles && export PATH="$DOTFILES/bin:$PATH"`.
+- Prompt configuration is managed through `starship.toml`, which `dotfiles.sh` links to `~/.config/starship.toml`.
+- `zsh/prompt.zsh` only initializes Starship; prompt layout and custom segments live in `starship.toml`.
 
 ## Skill-managed maintenance
 

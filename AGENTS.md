@@ -37,10 +37,11 @@ Guidance for coding agents working in this repository.
 - `zsh/` contains modular configuration:
   - `aliases.zsh` - shell aliases
   - `completion.zsh` - completion settings
-  - `prompt.zsh` - prompt configuration
+  - `prompt.zsh` - Starship bootstrap for the shell prompt
   - `xcode.zsh` - Xcode functions
   - `vscode.zsh` - VS Code functions
   - `functions/` - autoloaded zsh functions
+- `starship.toml` defines the prompt layout and custom modules, and is linked to `~/.config/starship.toml`.
 
 ### Other configurations
 - `gitconfig` - Git configuration
