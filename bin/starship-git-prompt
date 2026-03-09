@@ -11,15 +11,44 @@ if [[ -z "$repo_root" || "$repo_root" == "$HOME" ]]; then
   exit 0
 fi
 
-branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
-if [[ -z "$branch" ]]; then
-  branch="No branch"
-fi
-
 dirty=false
 if [[ -n "$(git status -s --ignore-submodules=dirty 2>/dev/null)" ]]; then
   dirty=true
 fi
+
+staged=false
+modified=false
+untracked=false
+ahead_behind=""
+
+while IFS= read -r line; do
+  if [[ "$line" == '## '* ]]; then
+    if [[ "$line" == *'ahead '* && "$line" == *'behind '* ]]; then
+      ahead_behind="⇕"
+    elif [[ "$line" == *'ahead '* ]]; then
+      ahead_behind="⇡"
+    elif [[ "$line" == *'behind '* ]]; then
+      ahead_behind="⇣"
+    fi
+    continue
+  fi
+
+  x="${line:0:1}"
+  y="${line:1:1}"
+
+  if [[ "$x$y" == '??' ]]; then
+    untracked=true
+    continue
+  fi
+
+  if [[ "$x" != ' ' ]]; then
+    staged=true
+  fi
+
+  if [[ "$y" != ' ' ]]; then
+    modified=true
+  fi
+done < <(git status --porcelain --branch --ignore-submodules=dirty 2>/dev/null || true)
 
 last_commit="$(git log --pretty=format:'%at' -1 2>/dev/null || true)"
 if [[ -n "$last_commit" ]]; then
@@ -33,14 +62,14 @@ if [[ -n "$last_commit" ]]; then
 
   if [[ "$dirty" == true ]]; then
     if (( minutes > 120 )); then
-      age_color=$'\033[31m'
+      age_color=$'\033[38;2;191;97;106m'
     elif (( minutes > 60 )); then
-      age_color=$'\033[33m'
+      age_color=$'\033[38;2;235;203;139m'
     else
-      age_color=$'\033[32m'
+      age_color=$'\033[38;2;163;190;140m'
     fi
   else
-    age_color=$'\033[36m'
+    age_color=$'\033[38;2;136;192;208m'
   fi
 
   if (( hours > 24 )); then
@@ -50,16 +79,41 @@ if [[ -n "$last_commit" ]]; then
   else
     age="${minutes}m"
   fi
+reset=$'\033[0m'
 else
-  age_color=$'\033[36m'
+  age_color=$'\033[38;2;136;192;208m'
   age="new"
 fi
 
-if [[ "$dirty" == true ]]; then
-  branch_color=$'\033[31m'
-else
-  branch_color=$'\033[32m'
+status_flags=""
+if [[ "$modified" == true ]]; then
+  status_flags+="!"
 fi
+if [[ "$staged" == true ]]; then
+  status_flags+="+"
+fi
+if [[ "$untracked" == true ]]; then
+  status_flags+="?"
+fi
+status_flags+="$ahead_behind"
 
-reset=$'\033[0m'
-printf '(%s%s%s|%s%s%s)' "$branch_color" "$branch" "$reset" "$age_color" "$age" "$reset"
+bracket_color=$'\033[38;2;216;222;233m'
+status_color=$'\033[38;2;191;97;106m'
+
+if [[ -n "$status_flags" ]]; then
+  printf '%s[%s%s %s%s%s%s' \
+    "$bracket_color" \
+    "$status_color" \
+    "$status_flags" \
+    "$age_color" \
+    "$age" \
+    "$bracket_color" \
+    "]$reset"
+else
+  printf '%s[%s%s%s]%s' \
+    "$bracket_color" \
+    "$age_color" \
+    "$age" \
+    "$bracket_color" \
+    "$reset"
+fi
