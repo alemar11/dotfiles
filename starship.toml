@@ -42,9 +42,9 @@ success_symbol = '[\$](white)'
 error_symbol = '[\$](white)'
 
 [git_branch]
-style = "fg:green"
+style = "bold fg:green"
 symbol = " "
-format = "[on](white) [$symbol$branch ]($style)"
+format = "[on](fg:green) [$symbol$branch ]($style)"
 
 [custom.git_age]
 command = "\"$DOTFILES/bin/starship-git-prompt\""
@@ -123,7 +123,7 @@ format = '[$duration]($style)'
 dark_blue = "#61afef"
 blue = "#56b6c2"
 red = "#e06c75"
-green = "#98c379"
+green = "#63d297"
 purple = "#c678dd"
 cyan = "#56b6c2"
 orange = "#be5046"
