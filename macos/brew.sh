@@ -41,6 +41,7 @@ PACKAGES=(
   postgresql@18
   python
   shellcheck
+  starship
   swiftlint
   swift-format
   tree
@@ -58,6 +59,7 @@ CASKS=(
   chatgpt
   codex-app
   docker
+  font-fira-code-nerd-font
   ghostty@tip
   iina
   netnewswire
