@@ -70,3 +70,6 @@ Guidance for coding agents working in this repository.
 - zsh configuration is modular; `zshrc` sources all `.zsh` files from `~/.zsh/`.
 - Custom zsh functions are autoloaded from `~/.zsh/functions/`.
 - `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
+
+## Maintenance notes
+- For terminal theming in this repo, Starship's palette is the source of truth; align `eza`/`LS_COLORS` and custom prompt helpers to it rather than the reverse.
