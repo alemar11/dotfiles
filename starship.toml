@@ -30,13 +30,6 @@ truncation_length = 3
 truncation_symbol = "…/"
 truncate_to_repo = false
 
-[directory.substitutions]
-"Developer" = "Developer "
-"Documents" = "Documents 󰈙"
-"Downloads" = "Downloads "
-"Music" = "Music "
-"Pictures" = "Pictures "
-
 [character]
 success_symbol = '[\$](white)'
 error_symbol = '[\$](white)'
