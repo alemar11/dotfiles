@@ -66,26 +66,32 @@ symbol = ' '
 [nodejs]
 style = "blue"
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [golang]
 style = "blue"
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [haskell]
 style = "blue"
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [rust]
 style = "orange"
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [swift]
 style = "orange"
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [ruby]
 style = "blue"
 symbol = " "
+format = '[$symbol($version )]($style)'
 
 [package]
 symbol = "󰏗 "
