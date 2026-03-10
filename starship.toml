@@ -3,6 +3,7 @@
 format = """
 $directory\
 $git_branch\
+$git_status\
 ${custom.git_age}\
 $fill\
 $python\
@@ -40,9 +41,24 @@ style = "bold fg:green"
 symbol = " "
 format = "[$symbol$branch ]($style)"
 
+[git_status]
+format = "$all_status$ahead_behind "
+modified = "[!](fg:red)"
+staged = "[+](fg:red)"
+untracked = "[?](fg:red)"
+ahead = "[⇡](fg:yellow)"
+behind = "[⇣](fg:yellow)"
+diverged = "[⇕](fg:yellow)"
+up_to_date = ""
+conflicted = ""
+stashed = ""
+deleted = ""
+renamed = ""
+typechanged = ""
+
 [custom.git_age]
-command = "\"$DOTFILES/bin/starship-git-prompt\""
-description = "Git status and time since last git commit"
+command = "\"$DOTFILES/bin/starship/git-age\""
+description = "Time since last git commit"
 format = "$output "
 require_repo = true
 shell = ["/bin/zsh", "--no-rcs"]
