@@ -3,8 +3,8 @@
 format = """
 $directory\
 $git_branch\
-$git_status\
 ${custom.git_age}\
+$git_status\
 $fill\
 $python\
 $lua\
@@ -39,10 +39,10 @@ error_symbol = '[\$](white)'
 [git_branch]
 style = "bold fg:green"
 symbol = " "
-format = "[$symbol$branch ]($style)"
+format = "[$symbol$branch]($style)"
 
 [git_status]
-format = "$all_status$ahead_behind "
+format = "$all_status$ahead_behind"
 modified = "[!](fg:red)"
 staged = "[+](fg:red)"
 untracked = "[?](fg:red)"
@@ -59,7 +59,7 @@ typechanged = ""
 [custom.git_age]
 command = "\"$DOTFILES/bin/starship/git-age\""
 description = "Time since last git commit"
-format = "$output "
+format = " $output "
 require_repo = true
 shell = ["/bin/zsh", "--no-rcs"]
 unsafe_no_escape = true
