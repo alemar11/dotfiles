@@ -33,8 +33,12 @@ truncation_symbol = "…/"
 truncate_to_repo = false
 
 [character]
-success_symbol = '[\$](white)'
-error_symbol = '[\$](white)'
+success_symbol = "[❯](bold white)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold white)"
+vimcmd_visual_symbol = "[❮](bold yellow)"
+vimcmd_replace_symbol = "[❮](bold purple)"
+vimcmd_replace_one_symbol = "[❮](bold purple)"
 
 [git_branch]
 style = "bold fg:green"
