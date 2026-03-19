@@ -45,7 +45,6 @@ alias gw='git wnew'
 alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Lazygit and Lazydocker
-alias lg='lazygit'
 alias ld='lazydocker'
 
 # Codex
