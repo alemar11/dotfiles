@@ -25,12 +25,14 @@ echo "🍺 Updating homebrew..."
 brew update
 
 PACKAGES=(
+  bat
   cloc
   cmake
   cocoapods
   codex
   eza
   ffmpeg
+  fzf
   gh
   git-lfs
   hyperfine
@@ -48,6 +50,7 @@ PACKAGES=(
   uv
   watchman
   yazi
+  zoxide
   wget
 )
 echo "🍺 Installing brew packages..."

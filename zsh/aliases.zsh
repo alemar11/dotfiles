@@ -8,6 +8,7 @@ alias ..='cd ..'
 # ls
 alias ls='eza --icons --grid --group-directories-first'
 alias ll='ls -la'
+alias cat='bat'
 alias cpwd='pwd | pbcopy' #copy working directory
 alias cpdir=cpwd
 
