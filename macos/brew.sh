@@ -39,6 +39,7 @@ PACKAGES=(
   lazydocker
   lazygit
   mkcert
+  mole
   node
   postgresql@18
   python
