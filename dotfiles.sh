@@ -9,6 +9,7 @@ set -euo pipefail
 #   - folder: Link entire folder to ~/.target
 #   - folder_contents: Link files inside folder to ~/.target/
 DOTFILES=(
+  "bat:.config/bat:folder"
   "curlrc:.curlrc:file"
   "git_template:.git_template:folder"
   "gitconfig:.gitconfig:file"
