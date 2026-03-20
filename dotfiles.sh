@@ -19,6 +19,7 @@ DOTFILES=(
   "lldbinit-Xcode:.lldbinit-Xcode:file"
   "starship.toml:.config/starship.toml:file"
   "vimrc:.vimrc:file"
+  "yazi:.config/yazi:folder"
   "zsh:.zsh:folder"
   "zshenv:.zshenv:file"
   "zshrc:.zshrc:file"
