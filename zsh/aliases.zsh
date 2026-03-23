@@ -59,10 +59,6 @@ alias sim='cd ~/Library/Developer/CoreSimulator'
 ## List
 alias sim-list='xcrun simctl list --json'
 
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias lip="ifconfig en0 | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' && ifconfig en1 | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
-
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 
