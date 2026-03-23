@@ -154,16 +154,10 @@ symlink_points_under() {
   [[ "$link_target" == "$source_dir/"* ]]
 }
 
-# Link a single file
-link_file() {
-  local source="$1"
-  local target="$2"
+# Ensure the target parent directory exists before linking
+ensure_target_parent_dir() {
+  local target="$1"
   local target_dir
-
-  if [[ ! -e "$source" ]]; then
-    log_error "$source doesn't exist"
-    return 1
-  fi
 
   target_dir="$(dirname "$target")"
   if [[ ! -d "$target_dir" ]]; then
@@ -173,6 +167,21 @@ link_file() {
       log_error "Failed to create directory $target_dir"
       return 1
     fi
+  fi
+}
+
+# Link a single file
+link_file() {
+  local source="$1"
+  local target="$2"
+
+  if [[ ! -e "$source" ]]; then
+    log_error "$source doesn't exist"
+    return 1
+  fi
+
+  if ! ensure_target_parent_dir "$target"; then
+    return 1
   fi
 
   if [[ ! -e "$target" && ! -L "$target" ]]; then
@@ -195,6 +204,10 @@ link_folder() {
 
   if [[ ! -d "$source" ]]; then
     log_error "$source doesn't exist or is not a directory"
+    return 1
+  fi
+
+  if ! ensure_target_parent_dir "$target"; then
     return 1
   fi
 
