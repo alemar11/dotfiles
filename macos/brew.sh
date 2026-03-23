@@ -31,12 +31,14 @@ PACKAGES=(
   cocoapods
   codex
   eza
-  ffmpeg
   fastfetch
+  fd
+  ffmpeg
   fzf
   gh
   git-lfs
   hyperfine
+  jq
   lazydocker
   lazygit
   mkcert
