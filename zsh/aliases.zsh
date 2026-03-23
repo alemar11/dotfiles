@@ -49,6 +49,7 @@ alias ld='lazydocker'
 
 # Codex
 alias cx='codex --yolo'
+alias ff='fastfetch'
 
 # Simulators
 

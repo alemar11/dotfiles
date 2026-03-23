@@ -32,6 +32,7 @@ PACKAGES=(
   codex
   eza
   ffmpeg
+  fastfetch
   fzf
   gh
   git-lfs

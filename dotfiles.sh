@@ -11,6 +11,7 @@ set -euo pipefail
 DOTFILES=(
   "bat:.config/bat:folder"
   "curlrc:.curlrc:file"
+  "fastfetch:.config/fastfetch:folder"
   "git_template:.git_template:folder"
   "gitconfig:.gitconfig:file"
   "gitignore_global:.gitignore_global:file"
