@@ -2,7 +2,7 @@
 
 # --- Theme and Locale ---
 theme                      = light:Gitlab Light,dark:Gitlab Dark
-language                   = it_IT
+language                   = it
 
 # --- Window ---
 window-height              = 30
