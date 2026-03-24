@@ -14,10 +14,7 @@ Guidance for coding agents working in this repository.
 ## Core components
 
 ### Main installation
-- `dotfiles.sh` symlinks dotfiles to the home directory.
-  - `./dotfiles.sh install` creates symlinks.
-  - `./dotfiles.sh remove` removes symlinks.
-  - `./dotfiles.sh clean` removes broken symlinks.
+- `dotfiles.sh` symlinks repo files into the home directory and manages install/remove/clean flows.
 
 ### macOS setup
 - `macos/install.sh` runs `brew.sh` and `defaults.sh`.
@@ -67,8 +64,6 @@ Guidance for coding agents working in this repository.
 ## Architecture notes
 - Uses symlinks to map repo files to expected home directory locations.
 - `dotfiles.sh` manages symlinks via the `DOTFILES` array.
-- zsh configuration is modular; `zshrc` sources all `.zsh` files from `~/.zsh/`.
-- Custom zsh functions are autoloaded from `~/.zsh/functions/`.
 - `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
 
 ## Maintenance notes
