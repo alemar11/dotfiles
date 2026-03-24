@@ -1,0 +1,34 @@
+# This is the configuration file for Ghostty.
+
+# --- Theme and Locale ---
+theme                      = light:Gitlab Light,dark:Gitlab Dark
+language                   = it_IT
+
+# --- Window ---
+window-height              = 30
+window-width               = 100
+window-padding-x           = 10
+window-padding-y           = 8
+
+# --- Appearance ---
+background-opacity         = 0.90
+background-blur            = 15
+#background-blur           = macos-glass-clear
+cursor-opacity             = .8
+macos-titlebar-proxy-icon  = hidden
+#title                     = " "
+#unfocused-split-opacity   = 0.90
+#unfocused-split-fill      = #1e2030
+
+# --- Behavior ---
+focus-follows-mouse        = true
+copy-on-select             = clipboard
+confirm-close-surface      = false
+shell-integration-features = no-title
+
+# --- Quick Terminal ---
+keybind                    = global:ctrl+1=toggle_quick_terminal
+quick-terminal-position    = top
+
+# --- Keybindings ---
+keybind                    = super+r=clear_screen

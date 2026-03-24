@@ -15,6 +15,7 @@ DOTFILES=(
   "git_template:.git_template:folder"
   "gitconfig:.gitconfig:file"
   "gitignore_global:.gitignore_global:file"
+  "ghostty/config.ghostty:.config/ghostty/config.ghostty:file"
   "hushlogin:.hushlogin:file"
   "lldb_helpers:.lldb_helpers:folder"
   "lldbinit:.lldbinit:file"
