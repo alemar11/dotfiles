@@ -1,7 +1,7 @@
 # Dotfiles dark theme aligned to the Starship palette.
 background = #2c323c
-foreground = #abb2bf
-cursor-color = #abb2bf
+foreground = #dbe2ea
+cursor-color = #dbe2ea
 cursor-text = #2c323c
 selection-background = #c678dd
 selection-foreground = #2c323c
