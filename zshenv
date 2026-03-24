@@ -1,5 +1,5 @@
 # Default editor
 export EDITOR='vim'
 
-# Default language: English
-#export LANG=C
+# Default language: Italian
+export LANG=it_IT.UTF-8
