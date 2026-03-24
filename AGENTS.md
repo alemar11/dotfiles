@@ -72,4 +72,4 @@ Guidance for coding agents working in this repository.
 - `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
 
 ## Maintenance notes
-- For terminal theming in this repo, Starship's palette is the source of truth; align `eza`/`LS_COLORS` and custom prompt helpers to it rather than the reverse.
+- For terminal theming in this repo, Starship's palette is the source of truth; keep Ghostty's ANSI palette, `eza`/`LS_COLORS`/`EZA_COLORS`, and custom prompt helpers aligned to it rather than the reverse.

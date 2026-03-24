@@ -2,11 +2,6 @@
 
 set -euo pipefail
 
-faint=$'\033[2m'
-color_blue=$'\033[38;2;86;182;194m'
-color_gray=$'\033[38;2;130;137;151m'
-reset=$'\033[0m'
-
 if ! git rev-parse --git-dir >/dev/null 2>&1; then
   exit 0
 fi
@@ -25,7 +20,6 @@ if [[ -n "$last_commit" ]]; then
   days=$((seconds_since_last_commit / 86400))
   sub_hours=$((hours % 24))
   sub_minutes=$((minutes % 60))
-  age_color="$color_blue"
 
   if (( hours > 24 )); then
     age="${days}d${sub_hours}h${sub_minutes}m"
@@ -35,12 +29,7 @@ if [[ -n "$last_commit" ]]; then
     age="${minutes}m"
   fi
 else
-  age_color="$color_blue"
   age="new"
 fi
 
-printf '%s· %s%s%s' \
-  "$color_gray" \
-  "${faint}${age_color}" \
-  "$age" \
-  "$reset"
+printf '%s' "$age"

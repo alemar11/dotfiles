@@ -63,10 +63,9 @@ typechanged = ""
 [custom.git_age]
 command = "\"$DOTFILES/bin/starship/git-age\""
 description = "Time since last git commit"
-format = " $output "
+format = " [· ](fg:gray)[$output](dimmed fg:blue) "
 require_repo = true
 shell = ["/bin/zsh", "--no-rcs"]
-unsafe_no_escape = true
 when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
 
 [fill]

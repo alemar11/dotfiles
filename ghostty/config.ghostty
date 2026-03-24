@@ -1,7 +1,8 @@
 # This is the configuration file for Ghostty.
 
 # --- Theme and Locale ---
-theme                      = light:Gitlab Light,dark:Gitlab Dark
+# theme                      = light:Gitlab Light,dark:Gitlab Dark
+theme                      = light:dotfiles-light,dark:dotfiles-dark
 language                   = it
 
 # --- Window ---
