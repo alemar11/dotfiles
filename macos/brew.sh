@@ -81,9 +81,23 @@ CASKS=(
 )
 
 echo "🍺 Installing cask apps..."
-brew install --cask "${CASKS[@]}"
+FAILED_CASKS=()
+
+# Install casks individually so one broken download does not block the rest.
+for cask in "${CASKS[@]}"; do
+  if ! brew install --cask "$cask"; then
+    echo "⚠️ Failed to install cask: $cask"
+    FAILED_CASKS+=("$cask")
+  fi
+done
 
 echo "🧼 Cleaning up..."
 brew cleanup -s
+
+if (( ${#FAILED_CASKS[@]} > 0 )); then
+  echo "❌ Some casks failed to install:"
+  printf ' - %s\n' "${FAILED_CASKS[@]}"
+  exit 1
+fi
 
 echo "🎉 Setup complete!"
