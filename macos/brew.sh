@@ -20,6 +20,7 @@ fi
 
 # Ensure brew and brewed tools are available in this process.
 eval "$("$BREW_BIN" shellenv)"
+BREW_PREFIX="$("$BREW_BIN" --prefix)"
 
 echo "🍺 Updating homebrew..."
 brew update
@@ -29,7 +30,6 @@ PACKAGES=(
   cloc
   cmake
   cocoapods
-  codex
   eza
   fastfetch
   fd
@@ -64,6 +64,7 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
+  codex
   codex-app
   docker
   font-fira-code-nerd-font
@@ -84,12 +85,26 @@ echo "🍺 Installing cask apps..."
 FAILED_CASKS=()
 
 # Install casks individually so one broken download does not block the rest.
+# `--adopt` lets Homebrew take ownership of apps already present in
+# /Applications instead of failing with "there is already an App" conflicts.
 for cask in "${CASKS[@]}"; do
-  if ! brew install --cask "$cask"; then
+  if ! brew install --cask --adopt "$cask"; then
     echo "⚠️ Failed to install cask: $cask"
     FAILED_CASKS+=("$cask")
   fi
 done
+
+# Homebrew can occasionally retain a cask receipt for Codex without restoring
+# the expected CLI symlink under the brew prefix. Repair that case explicitly so
+# `codex` is available from shells that only include Homebrew on PATH.
+CODEX_BIN="$BREW_PREFIX/bin/codex"
+if brew list --cask codex >/dev/null 2>&1 && [[ ! -x "$CODEX_BIN" ]]; then
+  echo "⚠️ codex cask is installed but $CODEX_BIN is missing; reinstalling codex..."
+  if ! brew reinstall --cask codex; then
+    echo "⚠️ Failed to repair cask: codex"
+    FAILED_CASKS+=("codex")
+  fi
+fi
 
 echo "🧼 Cleaning up..."
 brew cleanup -s
