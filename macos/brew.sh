@@ -73,7 +73,6 @@ CASKS=(
   netnewswire
   pearcleaner
   proxyman
-  rapidapi
   sketch
   tableplus
   tuist
@@ -85,9 +84,9 @@ echo "🍺 Installing cask apps..."
 FAILED_CASKS=()
 
 # Install casks individually so one broken download does not block the rest.
-# `--adopt` lets Homebrew take ownership of apps already present in
-# /Applications instead of failing with "there is already an App" conflicts.
 for cask in "${CASKS[@]}"; do
+  # `--adopt` lets Homebrew take ownership of apps already present in
+  # /Applications instead of failing with "there is already an App" conflicts.
   if ! brew install --cask --adopt "$cask"; then
     echo "⚠️ Failed to install cask: $cask"
     FAILED_CASKS+=("$cask")
