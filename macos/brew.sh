@@ -66,6 +66,7 @@ CASKS=(
   chatgpt
   codex
   codex-app
+  datagrip
   docker
   font-fira-code-nerd-font
   ghostty@tip
