@@ -31,8 +31,10 @@
       "defaultRouteOnly": false
     },
     {
-      "type": "publicip",
-      "timeout": 1000
+      "type": "command",
+      "key": "Public IP",
+      "text": "curl -4 -fsS --connect-timeout 1 --max-time 1 https://api.ipify.org",
+      "format": "{result}"
     },
     "battery",
     "poweradapter",
