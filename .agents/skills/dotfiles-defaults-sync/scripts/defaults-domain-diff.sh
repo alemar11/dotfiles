@@ -20,18 +20,22 @@ require_cmd() {
 
 usage() {
   cat <<'USAGE' >&2
-Usage: .agents/skills/dotfiles-defaults-sync/scripts/defaults-domain-diff.sh [--no-update-cache] <domain>
+Usage: .agents/skills/dotfiles-defaults-sync/scripts/defaults-domain-diff.sh [--dry-run] [--update-cache] <domain>
 Example: .agents/skills/dotfiles-defaults-sync/scripts/defaults-domain-diff.sh com.apple.dt.Xcode
 USAGE
 }
 
-update_cache=true
+update_cache=false
 domain=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --no-update-cache)
+    --dry-run|--no-update-cache)
       update_cache=false
+      shift
+      ;;
+    --update-cache)
+      update_cache=true
       shift
       ;;
     -h|--help)
@@ -63,7 +67,9 @@ require_cmd mkdir
 require_cmd mv
 require_cmd cp
 
-mkdir -p "$CACHE_DIR"
+if [[ "$update_cache" == "true" ]]; then
+  mkdir -p "$CACHE_DIR"
+fi
 
 baseline_file="$CACHE_DIR/defaults.${domain}.baseline.plist"
 
@@ -73,6 +79,11 @@ trap 'rm -rf "$tmpdir"' EXIT
 current_plist="$tmpdir/current.plist"
 diff_out="$tmpdir/diff.out"
 
+mode="dry-run"
+if [[ "$update_cache" == "true" ]]; then
+  mode="update-cache"
+fi
+
 if ! defaults export "$domain" - > "$current_plist" 2>"$tmpdir/export.err"; then
   echo "error: failed to export defaults domain '$domain'" >&2
   cat "$tmpdir/export.err" >&2
@@ -80,6 +91,7 @@ if ! defaults export "$domain" - > "$current_plist" 2>"$tmpdir/export.err"; then
 fi
 
 echo "## $domain"
+echo "# mode: $mode"
 
 if [[ ! -f "$baseline_file" ]]; then
   if [[ "$update_cache" == "true" ]]; then
@@ -88,7 +100,7 @@ if [[ ! -f "$baseline_file" ]]; then
     mv "$baseline_tmp" "$baseline_file"
     echo "# baseline created: $baseline_file"
   else
-    echo "# baseline missing: $baseline_file (run without --no-update-cache to create)"
+    echo "# baseline missing: $baseline_file (run with --update-cache to create)"
   fi
   exit 0
 fi
@@ -102,7 +114,7 @@ if ! plutil -lint "$baseline_file" >/dev/null 2>&1; then
     exit 0
   fi
 
-  echo "error: baseline cache is invalid and --no-update-cache is set: $baseline_file" >&2
+  echo "error: baseline cache is invalid in dry-run mode: $baseline_file (run with --update-cache to recreate)" >&2
   exit 1
 fi
 

@@ -15,17 +15,21 @@ CACHE_DIR="$REPO_ROOT/.cache/dotfiles-defaults-sync"
 
 usage() {
   cat <<'USAGE' >&2
-Usage: .agents/skills/dotfiles-defaults-sync/scripts/defaults-audit-sync.sh [--no-update-cache] [--domain <domain>]
+Usage: .agents/skills/dotfiles-defaults-sync/scripts/defaults-audit-sync.sh [--dry-run] [--update-cache] [--domain <domain>]
 USAGE
 }
 
-update_cache=true
+update_cache=false
 declare -a domain_filters=()
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --no-update-cache)
+    --dry-run|--no-update-cache)
       update_cache=false
+      shift
+      ;;
+    --update-cache)
+      update_cache=true
       shift
       ;;
     --domain)
@@ -60,7 +64,9 @@ if [[ ! -f "$DEFAULTS_SCRIPT" ]]; then
   exit 1
 fi
 
-mkdir -p "$CACHE_DIR"
+if [[ "$update_cache" == "true" ]]; then
+  mkdir -p "$CACHE_DIR"
+fi
 
 python_args=("$DOMAINS_FILE" "$DEFAULTS_SCRIPT" "$CACHE_DIR" "$update_cache")
 if (( ${#domain_filters[@]} )); then
@@ -472,11 +478,15 @@ def main() -> int:
             if update_cache:
                 save_baseline(baseline_path, current_raw)
                 notes.append(f"{domain}: baseline created")
+            else:
+                notes.append(f"{domain}: run with --update-cache to create baseline")
         elif not baseline_valid:
             notes.append(f"{domain}: baseline invalid")
             if update_cache:
                 save_baseline(baseline_path, current_raw)
                 notes.append(f"{domain}: baseline recreated")
+            else:
+                notes.append(f"{domain}: run with --update-cache to recreate baseline")
 
         current_flat: Dict[str, Tuple[Any, str]] = {}
         flatten(current_obj, "", current_flat)
@@ -596,7 +606,7 @@ def main() -> int:
 
     print("# macOS Defaults Audit")
     print(f"Generated: {dt.datetime.now().isoformat(timespec='seconds')}")
-    print(f"Mode: {'update-cache' if update_cache else 'no-update-cache'}")
+    print(f"Mode: {'update-cache' if update_cache else 'dry-run'}")
     print()
 
     print("## Drift Summary by Domain")

@@ -1,4 +1,4 @@
 interface:
   display_name: "Dotfiles Defaults Sync"
   short_description: "Audit defaults drift and script alignment"
-  default_prompt: "Use $dotfiles-defaults-sync to audit defaults cache drift and propose macos/defaults.sh updates."
+  default_prompt: "Use $dotfiles-defaults-sync in dry-run mode first to list defaults drift differences before proposing any macos/defaults.sh updates or refreshing cache."
