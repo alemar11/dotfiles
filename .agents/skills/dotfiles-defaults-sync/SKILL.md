@@ -1,11 +1,17 @@
 ---
 name: dotfiles-defaults-sync
-description: Audit and sync macOS defaults domain drift against a cached baseline and `macos/defaults.sh`, using dry-run mode by default so differences are listed before any cache updates or proposed edits.
+description: Audit and sync macOS defaults domain drift against a cached baseline and `macos/defaults.sh`, using dry-run mode by default so stable concrete preferences are proposed while volatile state is listed separately as informational.
 ---
 
 # Dotfiles Defaults Sync
 
 Run the defaults drift and alignment workflow for this repository.
+
+The goal of this skill is to sync `macos/defaults.sh` with stable, concrete
+machine preferences. Volatile defaults such as timestamps, analytics counters,
+usage trackers, window frames, recent selections, boot UUIDs, and similar
+session/UI state are useful to see in dry-run mode, but they are informational
+only and are not proposal candidates by default.
 
 ## Workflow
 
@@ -19,6 +25,7 @@ Run the defaults drift and alignment workflow for this repository.
 
 4. Review report sections in order:
 - `Top Priority: Changed/Added Root Keys`
+- `Volatile Root Keys (Informational)`
 - `Nested Changes (Informational)`
 - `defaults.sh Keys With Mismatched Values`
 - `Suggested Root Keys Missing From defaults.sh`
@@ -43,6 +50,8 @@ Run the defaults drift and alignment workflow for this repository.
 - In dry-run mode, list differences before updating cache or proposing file edits.
 - Use cache drift to prioritize changes.
 - Prioritize changed or added root keys first.
+- List volatile root keys separately as informational only.
+- Never treat volatile keys as proposal candidates by default.
 - Propose missing keys only for root-level scalar values.
 - Do not attempt to include all nested keys from plist domains.
 - Do not update cache unless `--update-cache` is explicitly requested.
@@ -65,4 +74,5 @@ Run the defaults drift and alignment workflow for this repository.
 
 - The skill may update its own files to fix bugs or improve flow descriptions.
 - Keep self-updates scoped to the skill package (`SKILL.md`, `agents/openai.yaml`, `scripts/*`).
+- Keep the volatile key-pattern list updated when new volatile defaults are discovered during audits.
 - Do not auto-change workflow behavior that edits `macos/defaults.sh`; keep one-by-one user approval requirements intact.

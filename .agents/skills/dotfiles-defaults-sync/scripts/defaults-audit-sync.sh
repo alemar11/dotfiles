@@ -154,6 +154,54 @@ MEANINGFUL_KEY_PATTERNS: Dict[str, Tuple[str, ...]] = {
     ),
 }
 
+VOLATILE_KEY_PATTERNS: Dict[str, Tuple[str, ...]] = {
+    "NSGlobalDomain": (
+        r"^ACDMonthlyAnalyticsLastPosted$",
+        r"^NSLinguisticDataAssetsRequestTime$",
+    ),
+    "com.apple.CoreSimulator": (
+        r"^SimUsageTracker(?:\.|$)",
+    ),
+    "com.apple.CrashReporter": (
+        r"^memoryExceptionProcesses\.bootUUID$",
+        r"^patternMatchServiceCrashes\.bootUUID$",
+        r"^urgentSubmissionDay$",
+    ),
+    "com.apple.TextEdit": (
+        r"^NSWindow Frame ",
+        r"^NSOSPLastRootDirectory$",
+    ),
+    "com.apple.WindowManager": (
+        r"^Last(?:DailyHeartbeatDateString|HeartbeatDateString\.daily)$",
+    ),
+    "com.apple.dock": (
+        r"^lastShowIndicatorTime$",
+        r"^mod-count$",
+    ),
+    "com.apple.dt.Xcode": (
+        r"^DVTAnalytics\.",
+        r"^IDEAnalyticsMetricsNotifications\.",
+        r"^IDEChatLastServerResourcesRetrieval$",
+        r"^IDEIntelligenceHasInstalledAtLeastOnce$",
+        r"^IDELastViewedSettingsPane$",
+        r"^IDEMostRecentPostFLE(?:Date|ToolsVersion)$",
+        r"^IDEProductsUISelectedInspector$",
+        r"^IDEProductsViewControllerSelectedProductSectionIdentifier$",
+        r"^IDERunSheetController_UIState$",
+        r"^IDEXcodeDeviceSupportLastNotified-",
+        r"^IDE_CA_",
+        r"^LastPersistenceCleanupDateKey$",
+        r"^NSNavPanelExpandedSizeForSaveMode$",
+        r"^NSOSPLastRootDirectory$",
+        r"^NSTableView Columns ",
+        r"^NSWindow Frame ",
+        r"^ProductMappingKey$",
+    ),
+    "com.apple.finder": (
+        r"^GoToField$",
+    ),
+}
+
 
 def scalar_to_str(value: Any) -> str:
     if isinstance(value, bool):
@@ -349,6 +397,11 @@ def is_meaningful_key(domain: str, key: str) -> bool:
     return any(re.search(pattern, key) for pattern in patterns)
 
 
+def is_volatile_key(domain: str, key: str) -> bool:
+    patterns = VOLATILE_KEY_PATTERNS.get(domain, ())
+    return any(re.search(pattern, key) for pattern in patterns)
+
+
 def parse_defaults_script(path: Path) -> Dict[Tuple[str, str], Dict[str, Any]]:
     declared: Dict[Tuple[str, str], Dict[str, Any]] = {}
     lines = path.read_text().splitlines()
@@ -430,8 +483,10 @@ def main() -> int:
 
     summary: List[Dict[str, Any]] = []
     top_priority: List[Dict[str, Any]] = []
+    volatile_root: List[Dict[str, Any]] = []
     nested_changes: List[Dict[str, Any]] = []
     mismatches: List[Dict[str, Any]] = []
+    volatile_mismatches: List[Dict[str, Any]] = []
     missing: List[Dict[str, Any]] = []
     commands: List[str] = []
     notes: List[str] = []
@@ -531,20 +586,23 @@ def main() -> int:
                 if kind in {"CHANGED", "ADDED"} and current_val is not None:
                     truth_value = current_val[0]
                     supported_for_proposal = is_supported_proposal_type(truth_value)
-                    if supported_for_proposal:
+                    volatile = is_volatile_key(domain, key)
+                    if supported_for_proposal and not volatile:
                         changed_root_keys.add((domain, key))
                     in_script = (domain, key) in declared
-                    top_priority.append(
-                        {
-                            "domain": domain,
-                            "key": key,
-                            "kind": kind,
-                            "old": baseline_val[1] if baseline_val else "",
-                            "new": current_val[1],
-                            "in_script": in_script,
-                            "supported_for_proposal": supported_for_proposal,
-                        }
-                    )
+                    item = {
+                        "domain": domain,
+                        "key": key,
+                        "kind": kind,
+                        "old": baseline_val[1] if baseline_val else "",
+                        "new": current_val[1],
+                        "in_script": in_script,
+                        "supported_for_proposal": supported_for_proposal,
+                    }
+                    if volatile:
+                        volatile_root.append(item)
+                    else:
+                        top_priority.append(item)
             else:
                 nested += 1
                 nested_changes.append(
@@ -568,18 +626,20 @@ def main() -> int:
             truth_canon = scalar_to_str(truth_value)
             if k in declared:
                 if not values_equivalent(declared[k]["value"], truth_value):
-                    mismatches.append(
-                        {
-                            "domain": domain,
-                            "key": key,
-                            "line": declared[k]["line"],
-                            "script": declared[k]["canonical"],
-                            "truth": truth_canon,
-                            "truth_value": truth_value,
-                        }
-                    )
+                    item = {
+                        "domain": domain,
+                        "key": key,
+                        "line": declared[k]["line"],
+                        "script": declared[k]["canonical"],
+                        "truth": truth_canon,
+                        "truth_value": truth_value,
+                    }
+                    if is_volatile_key(domain, key):
+                        volatile_mismatches.append(item)
+                    else:
+                        mismatches.append(item)
             else:
-                if k in changed_root_keys or is_meaningful_key(domain, key):
+                if not is_volatile_key(domain, key) and (k in changed_root_keys or is_meaningful_key(domain, key)):
                     missing.append(
                         {
                             "domain": domain,
@@ -625,7 +685,7 @@ def main() -> int:
 
     print("## Top Priority: Changed/Added Root Keys")
     if not top_priority:
-        print("- No changed/added root keys detected.")
+        print("- No non-volatile changed/added root keys detected.")
         if nested_changes:
             print("- Nested changes were detected. See `Nested Changes (Informational)` below.")
     else:
@@ -653,6 +713,50 @@ def main() -> int:
             print("- None")
         else:
             for item in unmapped_priority:
+                print(
+                    f"- `{item['domain']} {item['key']}` ({item['kind']}): old={item['old']} new={item['new']} "
+                    f"proposal_supported={'yes' if item['supported_for_proposal'] else 'no'}"
+                )
+    print()
+
+    print("## Volatile Root Keys (Informational)")
+    volatile_mapped = sorted(
+        [item for item in volatile_root if item["in_script"]],
+        key=lambda x: (x["domain"], x["key"]),
+    )
+    volatile_mapped_keys = {(item["domain"], item["key"]) for item in volatile_mapped}
+    volatile_unmapped = sorted(
+        [item for item in volatile_root if not item["in_script"]],
+        key=lambda x: (x["domain"], x["key"]),
+    )
+    volatile_mismatch_items = sorted(
+        [item for item in volatile_mismatches if (item["domain"], item["key"]) not in volatile_mapped_keys],
+        key=lambda x: (x["domain"], x["key"]),
+    )
+    if not volatile_mapped and not volatile_unmapped and not volatile_mismatch_items:
+        print("- No volatile root keys detected.")
+    else:
+        print("- Volatile root keys are shown for visibility only and are excluded from proposals and suggested commands by default.")
+        print()
+        print("### Already Mapped in defaults.sh")
+        if not volatile_mapped and not volatile_mismatch_items:
+            print("- None")
+        else:
+            for item in volatile_mapped:
+                print(
+                    f"- `{item['domain']} {item['key']}` ({item['kind']}): old={item['old']} new={item['new']} "
+                    f"proposal_supported={'yes' if item['supported_for_proposal'] else 'no'}"
+                )
+            for item in volatile_mismatch_items:
+                print(
+                    f"- `{item['domain']} {item['key']}` (MISMATCH): defaults.sh={item['script']} current={item['truth']}"
+                )
+        print()
+        print("### Not Mapped in defaults.sh")
+        if not volatile_unmapped:
+            print("- None")
+        else:
+            for item in volatile_unmapped:
                 print(
                     f"- `{item['domain']} {item['key']}` ({item['kind']}): old={item['old']} new={item['new']} "
                     f"proposal_supported={'yes' if item['supported_for_proposal'] else 'no'}"
