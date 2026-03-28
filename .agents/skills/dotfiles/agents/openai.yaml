@@ -1,4 +1,0 @@
-interface:
-  display_name: "Dotfiles Orchestrator"
-  short_description: "Route dotfiles tasks across skills"
-  default_prompt: "Use $dotfiles to orchestrate dotfiles maintenance by selecting and sequencing the right specialized skills."

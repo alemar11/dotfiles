@@ -7,7 +7,7 @@ Guidance for coding agents working in this repository.
 - Default clone path is `~/Developer/dotfiles`. Keep paths relative or update all references together.
 - Do not run host-modifying scripts (`macos/install.sh`, `macos/defaults.sh`, `macos/brew.sh`) unless explicitly requested—they change system settings and install software.
 - Do not edit `macos/defaults.sh` without explicit user approval for each individual change and each new key/value proposal.
-- For dotfiles maintenance/update tasks, use the `$dotfiles` skill as the default entrypoint and let it orchestrate sub-skills.
+- For dotfiles maintenance/update tasks, use the relevant specialized skill directly.
 - Manage symlinks via `./dotfiles.sh` rather than ad hoc commands.
 - Keep edits macOS/zsh-friendly and avoid introducing secrets or machine-specific values.
 
@@ -20,9 +20,9 @@ Guidance for coding agents working in this repository.
 - `macos/install.sh` runs `brew.sh` and `defaults.sh`.
 - `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
 - `macos/defaults.sh` applies macOS preferences.
-- Defaults drift/audit is skill-managed via `$dotfiles-defaults-sync` (or `$dotfiles` orchestrator).
+- Defaults drift/audit is skill-managed via `$dotfiles-defaults-sync`.
 - Defaults cache lives in `.cache/dotfiles-defaults-sync/`.
-- Swift completion refresh is skill-managed via `$dotfiles-swift-completion-update` (or `$dotfiles` orchestrator).
+- Swift completion refresh is skill-managed via `$dotfiles-swift-completion-update`.
 - Swift completion cache lives in `.cache/dotfiles-swift-completion-update/`.
 
 ### Xcode configuration
