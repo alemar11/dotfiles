@@ -121,6 +121,8 @@ defaults write com.apple.dt.Xcode DVTTextEditorTrimTrailingWhitespace -bool true
 defaults write com.apple.dt.Xcode DVTTextEditorTrimWhitespaceOnlyLines -bool true
 # Show line numbers
 defaults write com.apple.dt.Xcode DVTTextShowLineNumbers -bool true
+# Show all scope guides
+defaults write com.apple.dt.Xcode DVTTextScopeGuidesDisplayStyle -string "All"
 # Set custom colorscheme
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentTheme -string "Default (Light).xccolortheme"
 defaults write com.apple.dt.Xcode XCFontAndColorCurrentDarkTheme -string "Default (Dark).xccolortheme"
@@ -137,7 +139,7 @@ defaults write com.apple.dock magnification -bool true
 # Put the dock on bottom
 defaults write com.apple.dock orientation -string "bottom"
 # Enable autohide
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool false
 # Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
 # Make Dock icons of hidden applications translucent
@@ -159,9 +161,13 @@ defaults write com.apple.dock "expose-group-apps" -bool true
 # https://gist.github.com/GreyAsteroid/c73028e447d716b02063b0870c12c6be
 
 # Enable stage manager
-defaults write com.apple.WindowManager GloballyEnabled -bool false
+defaults write com.apple.WindowManager GloballyEnabled -bool true
 # "Hide recent Apps"
 defaults write com.apple.WindowManager AutoHide -bool false
+# Click desktop to reveal it
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool true
+# Keep desktop icons visible when revealing the desktop
+defaults write com.apple.WindowManager StandardHideDesktopIcons -bool false
 
 ### TextEdit
 
