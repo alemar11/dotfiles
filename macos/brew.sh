@@ -37,6 +37,7 @@ PACKAGES=(
   fzf
   gh
   git-lfs
+  htop
   hyperfine
   jq
   lazydocker
