@@ -45,6 +45,7 @@ PACKAGES=(
   mkcert
   mole
   node
+  pandoc
   postgresql@18
   python
   shellcheck
