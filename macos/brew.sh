@@ -56,6 +56,7 @@ PACKAGES=(
   uv
   watchman
   yazi
+  yt-dlp
   zoxide
   wget
 )
@@ -71,6 +72,7 @@ CASKS=(
   datagrip
   docker
   font-fira-code-nerd-font
+  google-chrome
   ghostty@tip
   iina
   netnewswire
