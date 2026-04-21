@@ -33,3 +33,4 @@ quick-terminal-position    = top
 
 # --- Keybindings ---
 keybind                    = super+r=clear_screen
+keybind                    = super+k=toggle_command_palette
