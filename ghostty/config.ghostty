@@ -30,6 +30,7 @@ shell-integration-features = no-title
 # --- Quick Terminal ---
 keybind                    = global:ctrl+1=toggle_quick_terminal
 quick-terminal-position    = top
+quick-terminal-size        = 60%
 
 # --- Keybindings ---
 keybind                    = super+r=clear_screen
