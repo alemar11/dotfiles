@@ -19,6 +19,7 @@ Guidance for coding agents working in this repository.
 ### macOS setup
 - `macos/install.sh` runs `brew.sh` and `defaults.sh`.
 - `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
+- For Homebrew list additions, do not add a generic tap list; use default Homebrew package/cask names when they resolve from default taps, and use fully qualified third-party tokens only after verifying Homebrew can resolve them without a separate tap step.
 - `macos/defaults.sh` applies macOS preferences.
 - Defaults drift/audit is skill-managed via `$dotfiles-defaults-sync`.
 - Defaults cache lives in `.cache/dotfiles-defaults-sync/`.

@@ -68,6 +68,7 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
+  cmux
   codex
   codex-app
   datagrip
