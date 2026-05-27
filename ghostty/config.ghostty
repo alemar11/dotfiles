@@ -33,5 +33,4 @@ quick-terminal-position    = top
 quick-terminal-size        = 60%
 
 # --- Keybindings ---
-keybind                    = super+r=clear_screen
 keybind                    = super+k=toggle_command_palette
