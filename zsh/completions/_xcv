@@ -7,8 +7,8 @@ function _xcv_compl_list_versions() {
 
 _arguments \
   '(-l -L -p)-h[prints a help message]' \
-  '(-L -p -h)-l[lists installed Xcode versions]' \
-  '(-l -p -h)-L[lists installed Xcode versions (long form)]' \
+  '(-L -p -h)-l[lists installed Xcode versions (long form)]' \
+  '(-l -p -h)-L[lists installed Xcode versions (short form)]' \
   '(-h -l -L)-p[prints active Xcode version]' \
   && ret=0
 

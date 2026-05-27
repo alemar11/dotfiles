@@ -8,8 +8,6 @@ if [ ! -d macos ]; then
   exit 1
 fi
 
-open "./macos/AM.terminal"
-
 echo "Installing software"
 bash "./macos/brew.sh"
 echo "Done."

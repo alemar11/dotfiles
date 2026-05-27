@@ -12,6 +12,14 @@ fi
 : "${DOTFILES:=$HOME/Developer/dotfiles}"
 export DOTFILES
 
+# Bootstrap PATH before sourcing feature modules that probe commands at load time.
+export PATH="$DOTFILES/bin:/opt/homebrew/bin:$PATH"
+
+# Check for custom bin directory and add to path
+if [[ -d $HOME/bin ]]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
 # Functions
 fpath=(~/.zsh/functions $fpath)
 autoload_targets=(~/.zsh/functions/*(N:t))
@@ -29,24 +37,3 @@ REPORTTIME=10
 for file in ~/.zsh/*.zsh(N); do
     source "$file"
 done
-
-# Adding path directory for custom scripts
-export PATH=$DOTFILES/bin:$PATH
-
-# Check for custom bin directory and add to path
-if [[ -d ~/bin ]]; then
-    export PATH=~/bin:$PATH
-fi
-
-# Add brew to path
-export PATH=/opt/homebrew/bin:$PATH 
-
-# Add pipx to path
-export PATH=~/.local/bin:$PATH
-
-# Adds the Android SDK platform-tools directory to the system PATH environment variable.
-# This allows the user to run Android SDK tools from any terminal session without specifying the full path.
-export PATH=$PATH:$HOME/Library/Android/sdk/platform-tools
-
-# Load machine-local shell config (tokens/secrets, not committed)
-[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

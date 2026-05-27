@@ -8,10 +8,6 @@
   excludesfile = ~/.gitignore_global
 [push]
   default = upstream
-[github]
-  user = alemar11
-[hub]
-  protocol = https
 [alias]
   a = add
   last = diff HEAD^ HEAD
@@ -21,7 +17,12 @@
   sub = submodule update --init --recursive
   undo = reset --soft HEAD^
   wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
-  tidy = "!git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D"
+  tidy = "!f() { \
+    git fetch --prune || return 1; \
+    gone=$(git branch -vv | awk '/: gone]/{print $1}'); \
+    [ -z \"$gone\" ] && { echo 'No gone branches.'; return 0; }; \
+    echo \"$gone\" | xargs -n 1 git branch -d; \
+  }; f"
   wnew = "!f() { \
     if [ $# -ne 1 ]; then \
       echo 'Usage: git wnew <branch-name>' >&2; \
@@ -53,4 +54,4 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-	required = true
+	required = false

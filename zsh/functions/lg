@@ -1,0 +1,10 @@
+# LazyGit can write a target directory on exit so the shell follows it:
+# https://github.com/jesseduffield/lazygit?tab=readme-ov-file#changing-directory-on-exit
+export LAZYGIT_NEW_DIR_FILE="$HOME/.lazygit/newdir"
+
+lazygit "$@"
+
+if [[ -f "$LAZYGIT_NEW_DIR_FILE" ]]; then
+  cd -- "$(cat "$LAZYGIT_NEW_DIR_FILE")"
+  rm -f -- "$LAZYGIT_NEW_DIR_FILE" > /dev/null
+fi

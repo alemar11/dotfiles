@@ -1,0 +1,152 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+format = """
+$directory\
+$git_branch\
+${custom.git_age}\
+$git_status\
+$fill\
+$python\
+$lua\
+$nodejs\
+$golang\
+$haskell\
+$rust\
+$swift\
+$ruby\
+$aws\
+$docker_context\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+command_timeout = 2000
+palette = "main"
+
+[directory]
+style = "bold fg:dark_blue"
+format = "[$path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+truncate_to_repo = true
+
+[character]
+success_symbol = "[❯](bold white)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold white)"
+vimcmd_visual_symbol = "[❮](bold yellow)"
+vimcmd_replace_symbol = "[❮](bold purple)"
+vimcmd_replace_one_symbol = "[❮](bold purple)"
+
+[git_branch]
+style = "bold fg:green"
+symbol = " "
+format = "[$symbol$branch]($style)"
+
+[git_status]
+format = "$all_status$ahead_behind"
+modified = "[!](fg:red)"
+staged = "[+](fg:red)"
+untracked = "[?](fg:red)"
+ahead = "[⇡](fg:yellow)"
+behind = "[⇣](fg:yellow)"
+diverged = "[⇕](fg:yellow)"
+up_to_date = ""
+conflicted = ""
+stashed = ""
+deleted = ""
+renamed = ""
+typechanged = ""
+
+[custom.git_age]
+command = "\"$DOTFILES/bin/starship/git-age\""
+description = "Time since last git commit"
+format = " [· ](fg:gray)[$output](dimmed fg:blue) "
+require_repo = true
+shell = ["/bin/zsh", "--no-rcs"]
+when = "git rev-parse --is-inside-work-tree >/dev/null 2>&1"
+
+[fill]
+symbol = " "
+
+[python]
+style = "teal"
+symbol = " "
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = true
+pyenv_prefix = ""
+
+[lua]
+format = '[$symbol($version )]($style)'
+symbol = ' '
+
+[nodejs]
+style = "blue"
+symbol = " "
+format = '[$symbol($version )]($style)'
+
+[golang]
+style = "blue"
+symbol = " "
+format = '[$symbol($version )]($style)'
+
+[haskell]
+style = "blue"
+symbol = " "
+format = '[$symbol($version )]($style)'
+
+[rust]
+style = "orange"
+symbol = " "
+format = '[$symbol($version )]($style)'
+
+[swift]
+style = "orange"
+symbol = " "
+format = '[$symbol($version )]($style)'
+
+[ruby]
+style = "blue"
+symbol = " "
+format = '[$symbol($version )]($style)'
+
+[package]
+symbol = "󰏗 "
+
+[aws]
+symbol = " "
+style = "yellow"
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[docker_context]
+symbol = " "
+style = "fg:#06969A"
+format = '[$symbol]($style) $path'
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_extensions = ["Dockerfile"]
+
+[jobs]
+symbol = " "
+style = "red"
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[cmd_duration]
+min_time = 500
+style = "fg:gray"
+format = '[$duration]($style)'
+
+[palettes.main]
+dark_blue = "#61afef"
+blue = "#56b6c2"
+red = "#e06c75"
+green = "#63d297"
+purple = "#c678dd"
+cyan = "#56b6c2"
+orange = "#be5046"
+yellow = "#e5c07b"
+gray = "#828997"
+white = "#abb2bf"
+black = "#2c323c"

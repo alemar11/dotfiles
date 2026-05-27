@@ -1,0 +1,12 @@
+NSGlobalDomain
+com.apple.CoreSimulator
+com.apple.CrashReporter
+com.apple.Safari
+com.apple.TextEdit
+com.apple.WindowManager
+com.apple.desktopservices
+com.apple.dock
+com.apple.driver.AppleBluetoothMultitouch.mouse
+com.apple.dt.Xcode
+com.apple.finder
+com.apple.menuextra.battery

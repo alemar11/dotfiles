@@ -1,12 +1,14 @@
 # reload zsh config
-alias reload!='RELOAD=1 source ~/.zshrc'
+alias reload='RELOAD=1 source ~/.zshrc'
+alias reload!='rm -f "${ZDOTDIR:-$HOME}/.zcompdump" && RELOAD=1 source ~/.zshrc'
 
 # cd
 alias ..='cd ..'
 
 # ls
-alias ls='ls -F'
+alias ls='eza --icons --grid --group-directories-first'
 alias ll='ls -la'
+alias cat='bat'
 alias cpwd='pwd | pbcopy' #copy working directory
 alias cpdir=cpwd
 
@@ -40,22 +42,14 @@ alias gsub='git submodule update --init --recursive'
 alias gt='git checkout -t'
 alias gundo='git reset --soft HEAD~1'
 alias gw='git wnew'
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
+alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Lazygit and Lazydocker
-alias lg='lazygit'
 alias ld='lazydocker'
 
 # Codex
 alias cx='codex --yolo'
-
-# Swift Package Manager
-alias spi='swift package init'
-alias spf='swift package fetch'
-alias spu='swift package update'
-alias spx='swift package generate-xcodeproj'
-alias sps='swift package show-dependencies'
-alias spd='swift package dump-package'
+alias ff='fastfetch'
 
 # Simulators
 
@@ -64,10 +58,6 @@ alias sim='cd ~/Library/Developer/CoreSimulator'
 
 ## List
 alias sim-list='xcrun simctl list --json'
-
-# IP addresses
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias lip="ifconfig en0 | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1' && ifconfig en1 | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"

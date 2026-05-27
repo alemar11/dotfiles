@@ -1,0 +1,24 @@
+# Dotfiles light theme derived from the Starship palette with higher contrast.
+background = #fafaff
+foreground = #2c323c
+cursor-color = #2c323c
+cursor-text = #fafaff
+selection-background = #c678dd
+selection-foreground = #fafaff
+
+palette = 0=#2c323c
+palette = 1=#c45562
+palette = 2=#2f9d61
+palette = 3=#b8851c
+palette = 4=#3478c6
+palette = 5=#995eb8
+palette = 6=#2f8f99
+palette = 7=#56606d
+palette = 8=#828997
+palette = 9=#da6d79
+palette = 10=#4cb57a
+palette = 11=#cf9a2c
+palette = 12=#4e90da
+palette = 13=#af73cd
+palette = 14=#44a8b0
+palette = 15=#2c323c

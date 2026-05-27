@@ -8,8 +8,13 @@ fpath=($HOME/.zsh/completions $fpath)
 # Homebrew's zsh completions
 fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 
-# Custom zsh completions
-autoload -Uz compinit && compinit -i
+# Completion initialization:
+# - First run: build completion dump
+# - Subsequent runs: reuse the dump while still allowing compinit to
+#   validate completion changes
+autoload -Uz compinit
+zcompdump_file="${ZDOTDIR:-$HOME}/.zcompdump"
+compinit -i -d "$zcompdump_file"
 
 zmodload zsh/complist
 

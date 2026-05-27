@@ -4,38 +4,42 @@ Guidance for coding agents working in this repository.
 
 ## Quick rules
 - Apple Silicon only (M1/M2/M3+). Do not assume Intel support.
-- Scripts expect the repo to live at `~/Developer/dotfiles`. Keep paths relative or update all references together.
+- Default clone path is `~/Developer/dotfiles`. Keep paths relative or update all references together.
 - Do not run host-modifying scripts (`macos/install.sh`, `macos/defaults.sh`, `macos/brew.sh`) unless explicitly requested—they change system settings and install software.
+- Do not edit `macos/defaults.sh` without explicit user approval for each individual change and each new key/value proposal.
+- For dotfiles maintenance/update tasks, use the relevant specialized skill directly.
 - Manage symlinks via `./dotfiles.sh` rather than ad hoc commands.
 - Keep edits macOS/zsh-friendly and avoid introducing secrets or machine-specific values.
 
 ## Core components
 
 ### Main installation
-- `dotfiles.sh` symlinks dotfiles to the home directory.
-  - `./dotfiles.sh install` creates symlinks.
-  - `./dotfiles.sh remove` removes symlinks.
-  - `./dotfiles.sh clean` removes broken symlinks.
+- `dotfiles.sh` symlinks repo files into the home directory and manages install/remove/clean flows.
 
 ### macOS setup
 - `macos/install.sh` runs `brew.sh` and `defaults.sh`.
 - `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
+- For Homebrew list additions, do not add a generic tap list; use default Homebrew package/cask names when they resolve from default taps, and use fully qualified third-party tokens only after verifying Homebrew can resolve them without a separate tap step.
 - `macos/defaults.sh` applies macOS preferences.
-- `macos/AM.terminal` is the Terminal.app theme.
+- Defaults drift/audit is skill-managed via `$dotfiles-defaults-sync`.
+- Defaults cache lives in `.cache/dotfiles-defaults-sync/`.
+- Swift completion refresh is skill-managed via `$dotfiles-swift-completion-update`.
+- Swift completion cache lives in `.cache/dotfiles-swift-completion-update/`.
 
 ### Xcode configuration
-- `macos/xcode/copy.sh` copies themes, keybindings, and breakpoints to Xcode `UserData`.
-- Contains custom color themes and keybindings.
+- `macos/xcode/copy.sh` copies keybindings and breakpoints to Xcode `UserData`.
+- Contains custom keybindings and breakpoints.
 
 ### Shell configuration
 - `zshrc` sources all `zsh/*.zsh` files.
 - `zsh/` contains modular configuration:
   - `aliases.zsh` - shell aliases
   - `completion.zsh` - completion settings
-  - `prompt.zsh` - prompt configuration
+  - `prompt.zsh` - Starship bootstrap for the shell prompt
   - `xcode.zsh` - Xcode functions
   - `vscode.zsh` - VS Code functions
   - `functions/` - autoloaded zsh functions
+- `starship.toml` defines the prompt layout and custom modules, and is linked to `~/.config/starship.toml`.
 
 ### Other configurations
 - `gitconfig` - Git configuration
@@ -60,7 +64,8 @@ Guidance for coding agents working in this repository.
 
 ## Architecture notes
 - Uses symlinks to map repo files to expected home directory locations.
-- `dotfiles.sh` manages symlinks via the `FILES` array.
-- zsh configuration is modular; `zshrc` sources all `.zsh` files from `~/.zsh/`.
-- Custom zsh functions are autoloaded from `~/.zsh/functions/`.
-- Scripts assume the repository is cloned to `~/Developer/dotfiles`.
+- `dotfiles.sh` manages symlinks via the `DOTFILES` array.
+- `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
+
+## Maintenance notes
+- For terminal theming in this repo, Starship's palette is the source of truth; keep Ghostty's ANSI palette, `eza`/`LS_COLORS`/`EZA_COLORS`, and custom prompt helpers aligned to it rather than the reverse.

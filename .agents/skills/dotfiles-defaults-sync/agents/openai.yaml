@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dotfiles Defaults Sync"
+  short_description: "Audit defaults drift and script alignment"
+  default_prompt: "Use $dotfiles-defaults-sync in dry-run mode first to propose only stable concrete defaults for macos/defaults.sh, while listing volatile root drift separately as informational before any updates or cache refresh."

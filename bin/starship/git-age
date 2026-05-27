@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  exit 0
+fi
+
+repo_root="$(git rev-parse --quiet --show-toplevel 2>/dev/null || true)"
+if [[ -z "$repo_root" || "$repo_root" == "$HOME" ]]; then
+  exit 0
+fi
+
+last_commit="$(git log --pretty=format:'%at' -1 2>/dev/null || true)"
+if [[ -n "$last_commit" ]]; then
+  now="$(date +%s)"
+  seconds_since_last_commit=$((now - last_commit))
+  minutes=$((seconds_since_last_commit / 60))
+  hours=$((seconds_since_last_commit / 3600))
+  days=$((seconds_since_last_commit / 86400))
+  sub_hours=$((hours % 24))
+  sub_minutes=$((minutes % 60))
+
+  if (( hours > 24 )); then
+    age="${days}d${sub_hours}h${sub_minutes}m"
+  elif (( minutes > 60 )); then
+    age="${hours}h${sub_minutes}m"
+  else
+    age="${minutes}m"
+  fi
+else
+  age="new"
+fi
+
+printf '%s' "$age"
