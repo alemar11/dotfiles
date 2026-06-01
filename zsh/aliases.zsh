@@ -78,7 +78,12 @@ alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &
 alias sysup='sudo softwareupdate -i -a'
 
 # Homebrew
-alias bu='echo "⬆️ Updating Homebrew and upgrading packages..." && brew update && brew upgrade && brew cleanup'
+bu() {
+  echo "⬆️ Updating Homebrew and upgrading packages..."
+  HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew update &&
+    HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew upgrade &&
+    HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew cleanup
+}
 
 # npm
 alias nu='echo "⬆️ Updating global packages (including npm)..." && npm update -g && npm install -g npm'
