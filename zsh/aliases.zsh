@@ -1,6 +1,6 @@
 # reload zsh config
 alias reload='RELOAD=1 source ~/.zshrc'
-alias reload!='rm -f "${ZDOTDIR:-$HOME}/.zcompdump" && RELOAD=1 source ~/.zshrc'
+alias reload!='rm -f "${ZDOTDIR:-$HOME}/.zcompdump" && exec zsh -l'
 
 # cd
 alias ..='cd ..'
