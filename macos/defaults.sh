@@ -59,6 +59,11 @@ defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 # Enable key repeats
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
+### OpenAI
+
+# Allow ChatGPT Computer Use to interact with normally blocked apps and sensitive system UI
+defaults write -g ComputerUseAllowForbiddenTargets -bool true
+
 ### Finder
 
 # Show hidden files by default
