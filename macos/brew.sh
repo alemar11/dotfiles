@@ -20,7 +20,6 @@ fi
 
 # Ensure brew and brewed tools are available in this process.
 eval "$("$BREW_BIN" shellenv)"
-BREW_PREFIX="$("$BREW_BIN" --prefix)"
 
 echo "🍺 Updating homebrew..."
 brew update
@@ -69,8 +68,6 @@ CASKS=(
   bruno
   chatgpt
   cmux
-  codex
-  codex-app
   datagrip
   docker
   font-fira-code-nerd-font
@@ -99,18 +96,6 @@ for cask in "${CASKS[@]}"; do
     FAILED_CASKS+=("$cask")
   fi
 done
-
-# Homebrew can occasionally retain a cask receipt for Codex without restoring
-# the expected CLI symlink under the brew prefix. Repair that case explicitly so
-# `codex` is available from shells that only include Homebrew on PATH.
-CODEX_BIN="$BREW_PREFIX/bin/codex"
-if brew list --cask codex >/dev/null 2>&1 && [[ ! -x "$CODEX_BIN" ]]; then
-  echo "⚠️ codex cask is installed but $CODEX_BIN is missing; reinstalling codex..."
-  if ! brew reinstall --cask codex; then
-    echo "⚠️ Failed to repair cask: codex"
-    FAILED_CASKS+=("codex")
-  fi
-fi
 
 echo "🧼 Cleaning up..."
 brew cleanup -s
