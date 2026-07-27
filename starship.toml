@@ -3,6 +3,7 @@
 format = """
 $directory\
 $git_branch\
+${custom.git_worktree}\
 ${custom.git_age}\
 $git_status\
 $fill\
@@ -44,6 +45,18 @@ vimcmd_replace_one_symbol = "[❮](bold purple)"
 style = "bold fg:green"
 symbol = " "
 format = "[$symbol$branch]($style)"
+
+[custom.git_worktree]
+command = "printf '(worktree)'"
+description = "Linked Git worktree indicator"
+format = " [$output](dimmed fg:gray)"
+require_repo = true
+shell = ["/bin/zsh", "--no-rcs"]
+when = """
+git_dir=$(git rev-parse --path-format=absolute --git-dir 2>/dev/null) &&
+common_dir=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) &&
+[[ "$git_dir" != "$common_dir" ]]
+"""
 
 [git_status]
 format = "$all_status$ahead_behind"
