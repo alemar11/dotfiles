@@ -46,6 +46,7 @@ PACKAGES=(
   mole
   node
   pandoc
+  pi-coding-agent
   postgresql@18
   python
   shellcheck
@@ -68,6 +69,7 @@ CASKS=(
   bruno
   chatgpt
   cmux
+  codexbar
   datagrip
   docker
   font-fira-code-nerd-font
