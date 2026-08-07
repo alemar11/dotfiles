@@ -24,6 +24,12 @@ eval "$("$BREW_BIN" shellenv)"
 echo "🍺 Updating homebrew..."
 brew update
 
+echo "🔗 Adding alemar11/tap..."
+brew tap alemar11/tap
+
+echo "🔐 Trusting alemar11/tap..."
+brew trust alemar11/tap
+
 PACKAGES=(
   bat
   cloc
