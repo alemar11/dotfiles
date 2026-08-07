@@ -22,6 +22,7 @@ DOTFILES=(
   "lldb_helpers:.lldb_helpers:folder"
   "lldbinit:.lldbinit:file"
   "lldbinit-Xcode:.lldbinit-Xcode:file"
+  "mise/config.toml:.config/mise/config.toml:file"
   "starship.toml:.config/starship.toml:file"
   "vimrc:.vimrc:file"
   "yazi:.config/yazi:folder"

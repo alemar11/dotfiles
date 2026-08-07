@@ -66,10 +66,8 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias o='open .'
 alias speedtest='networkquality'
 
-# Python (`type python3` to find the path)
-alias python='/opt/homebrew/bin/python3'
+# Python is managed globally by mise.
 alias py='python'
-alias pip='/opt/homebrew/bin/pip3'
 
 ## SSH
 alias ssha='find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null'
@@ -83,6 +81,13 @@ bu() {
   HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew update &&
     HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew upgrade --yes &&
     HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew cleanup
+}
+
+# mise
+mu() {
+  echo "⬆️ Updating mise-managed tools..."
+  mise install &&
+    mise upgrade --yes
 }
 
 # npm

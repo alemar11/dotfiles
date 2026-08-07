@@ -10,6 +10,7 @@ fi
 
 echo "Installing software"
 bash "./macos/brew.sh"
+bash "./macos/mise.sh"
 echo "Done."
 
 echo "Configuring macOS defaults."

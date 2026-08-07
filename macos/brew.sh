@@ -42,19 +42,16 @@ PACKAGES=(
   jq
   lazydocker
   lazygit
+  mise
   mkcert
   mole
-  node
   pandoc
   pi-coding-agent
   postgresql@18
-  python
   shellcheck
   starship
-  swiftlint
   swift-format
   tree
-  uv
   watchman
   yazi
   yt-dlp
