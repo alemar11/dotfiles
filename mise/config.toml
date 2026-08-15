@@ -7,3 +7,6 @@ uv = "latest"
 ruby = "latest"
 swiftlint = "latest"
 xcodegen = "latest"
+
+[settings]
+minimum_release_age = "0s"
