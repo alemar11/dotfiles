@@ -78,6 +78,7 @@ CASKS=(
   font-fira-code-nerd-font
   google-chrome
   ghostty@tip
+  hopper-disassembler
   iina
   netnewswire
   pearcleaner
