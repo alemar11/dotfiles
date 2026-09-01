@@ -32,6 +32,7 @@ brew trust alemar11/tap
 
 PACKAGES=(
   bat
+  btop
   cloc
   cmake
   cocoapods
