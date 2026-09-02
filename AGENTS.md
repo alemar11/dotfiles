@@ -9,6 +9,7 @@ Guidance for coding agents working in this repository.
 - Do not edit `macos/defaults.sh` without explicit user approval for each individual change and each new key/value proposal.
 - For dotfiles maintenance/update tasks, use the relevant specialized skill directly.
 - Manage symlinks via `./dotfiles.sh` rather than ad hoc commands.
+- When a binary is no longer installed or managed by this repository, remove its associated configuration files and `DOTFILES` entries in the same change; tracked configs must correspond to software still handled here.
 - Keep edits macOS/zsh-friendly and avoid introducing secrets or machine-specific values.
 
 ## Core components

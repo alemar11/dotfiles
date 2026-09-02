@@ -1,0 +1,12 @@
+[theme]
+auto_switch = true
+dark_name = "terminal"
+light_name = "terminal"
+
+[ui]
+sidebar_width = 24
+pane_outer_borders = false
+pane_gaps = false
+pane_scrollbars = false
+hide_tab_bar_when_single_tab = true
+status_indicators = "symbols"
