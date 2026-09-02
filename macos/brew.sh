@@ -72,7 +72,6 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
-  cmux
   codexbar
   datagrip
   docker
