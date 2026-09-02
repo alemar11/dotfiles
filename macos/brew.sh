@@ -43,7 +43,6 @@ PACKAGES=(
   fzf
   gh
   git-lfs
-  htop
   modem-dev/tap/hunk
   hyperfine
   jq
