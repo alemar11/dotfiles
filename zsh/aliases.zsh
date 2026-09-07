@@ -77,9 +77,9 @@ alias sysup='sudo softwareupdate -i -a'
 # Homebrew
 bu() {
   echo "⬆️ Updating Homebrew and upgrading packages..."
-  HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew update &&
-    HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew upgrade --yes &&
-    HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew cleanup
+  brew update &&
+    brew upgrade --yes &&
+    brew cleanup
 }
 
 # mise
