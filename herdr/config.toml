@@ -10,3 +10,4 @@ pane_gaps = false
 pane_scrollbars = false
 hide_tab_bar_when_single_tab = true
 status_indicators = "symbols"
+agent_panel_sort = "spaces"
