@@ -10,6 +10,7 @@ set -euo pipefail
 #   - folder_contents: Link files inside folder to ~/.target/
 DOTFILES=(
   "bat:.config/bat:folder"
+  "btop/btop.conf:.config/btop/btop.conf:file"
   "btop/themes/dotfiles-dark.theme:.config/btop/themes/dotfiles-dark.theme:file"
   "curlrc:.curlrc:file"
   "fastfetch:.config/fastfetch:folder"

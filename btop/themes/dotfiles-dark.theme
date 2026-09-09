@@ -33,9 +33,9 @@ theme[cached_start]="#61afef"
 theme[cached_mid]="#56b6c2"
 theme[cached_end]="#63d297"
 
-theme[available_start]="#e5c07b"
-theme[available_mid]="#be5046"
-theme[available_end]="#e06c75"
+theme[available_start]="#61afef"
+theme[available_mid]="#56b6c2"
+theme[available_end]="#63d297"
 
 theme[used_start]="#63d297"
 theme[used_mid]="#e5c07b"
