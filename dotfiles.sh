@@ -12,6 +12,7 @@ DOTFILES=(
   "bat:.config/bat:folder"
   "btop/btop.conf:.config/btop/btop.conf:file"
   "btop/themes/dotfiles-dark.theme:.config/btop/themes/dotfiles-dark.theme:file"
+  "btop/themes/dotfiles-light.theme:.config/btop/themes/dotfiles-light.theme:file"
   "curlrc:.curlrc:file"
   "fastfetch:.config/fastfetch:folder"
   "git_template:.git_template:folder"
