@@ -46,8 +46,10 @@ alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 # Lazygit and Lazydocker
 alias ld='lazydocker'
 
-# Codex
+# Codex / Cursor Agent
 alias cx='codex --yolo'
+alias cxq='codex exec --ephemeral -s read-only'
+alias cu='agent --yolo'
 alias ff='fastfetch'
 
 # Simulators
