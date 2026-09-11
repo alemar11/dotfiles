@@ -48,7 +48,6 @@ alias ld='lazydocker'
 
 # Codex / Cursor Agent
 alias cx='codex --yolo'
-alias cxq='codex exec --ephemeral -s read-only'
 alias cu='agent --yolo'
 alias ff='fastfetch'
 
