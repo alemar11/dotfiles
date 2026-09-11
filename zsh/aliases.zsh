@@ -48,7 +48,7 @@ alias ld='lazydocker'
 
 # Codex / Cursor Agent
 alias cx='codex --yolo'
-alias cu='agent --yolo'
+alias cua='agent --yolo'
 alias ff='fastfetch'
 
 # Simulators
