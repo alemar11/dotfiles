@@ -10,8 +10,11 @@ pane_outer_borders = false
 pane_gaps = false
 pane_scrollbars = false
 hide_tab_bar_when_single_tab = true
-status_indicators = "symbols"
+status_indicators = "dots"
 agent_panel_sort = "spaces"
 
 [ui.toast]
-delivery = "system"
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
