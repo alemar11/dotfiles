@@ -21,8 +21,11 @@ delivery = "terminal"
 [ui.sound]
 enabled = false
 
+[keys]
+goto = "prefix+d"
+
 [[keys.command]]
-key = ["cmd+shift+g", "prefix+d"]
+key = "prefix+g"
 type = "popup"
 command = 'cd "${HERDR_ACTIVE_PANE_CWD:-.}" && exec lazygit'
 description = "Git status"

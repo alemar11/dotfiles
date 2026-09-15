@@ -2,3 +2,6 @@
 .DS_Store
 zsh/cache
 **/.cache/
+
+# Yazi packages are restored from yazi/package.toml with `ya pkg install`.
+/yazi/plugins/

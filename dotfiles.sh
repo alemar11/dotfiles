@@ -37,6 +37,22 @@ DOTFILES=(
 
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Override only when installing into a staging directory (for example, in tests).
+DOTFILES_TARGET_DIR="${DOTFILES_TARGET_DIR:-$HOME}"
+SELECTED_DOTFILES=("${DOTFILES[@]}")
+
+select_source() {
+  local requested="$1"
+  local entry
+  for entry in "${DOTFILES[@]}"; do
+    if [[ "${entry%%:*}" == "$requested" ]]; then
+      SELECTED_DOTFILES=("$entry")
+      return 0
+    fi
+  done
+  log_error "Unknown dotfile source '$requested'; no changes made."
+  return 1
+}
 
 # Runtime state
 COUNT_LINKED=0
@@ -281,7 +297,7 @@ install_entry() {
   read -r source target type <<< "$(parse_entry "$entry")"
 
   local source_path="$SCRIPT_DIR/$source"
-  local target_path="$HOME/$target"
+  local target_path="$DOTFILES_TARGET_DIR/$target"
 
   case "$type" in
     file)
@@ -367,7 +383,7 @@ remove_entry() {
   read -r source target type <<< "$(parse_entry "$entry")"
 
   local source_path="$SCRIPT_DIR/$source"
-  local target_path="$HOME/$target"
+  local target_path="$DOTFILES_TARGET_DIR/$target"
 
   case "$type" in
     file|folder)
@@ -387,7 +403,7 @@ remove_entry() {
 install_all() {
   log_info "Installing dotfiles..."
   local entry
-  for entry in "${DOTFILES[@]}"; do
+  for entry in "${SELECTED_DOTFILES[@]}"; do
     if ! install_entry "$entry"; then
       return 1
     fi
@@ -399,7 +415,7 @@ install_all() {
 remove_all() {
   log_info "Removing dotfiles..."
   local entry
-  for entry in "${DOTFILES[@]}"; do
+  for entry in "${SELECTED_DOTFILES[@]}"; do
     if ! remove_entry "$entry"; then
       return 1
     fi
@@ -411,10 +427,10 @@ remove_all() {
 clean_broken_links() {
   log_info "Cleaning broken symlinks managed by dotfiles..."
   local entry
-  for entry in "${DOTFILES[@]}"; do
+  for entry in "${SELECTED_DOTFILES[@]}"; do
     read -r source target type <<< "$(parse_entry "$entry")"
     local source_path="$SCRIPT_DIR/$source"
-    local target_path="$HOME/$target"
+    local target_path="$DOTFILES_TARGET_DIR/$target"
 
     case "$type" in
       file|folder)
@@ -567,12 +583,15 @@ show_menu() {
 usage() {
   echo "Usage:"
   echo "  $0                  # Interactive menu (TTY only)"
-  echo "  $0 {install|remove|clean}"
+  echo "  $0 {install|remove|clean} [source]"
+  echo "  $0 install vimrc     # Only link the Vim configuration"
   echo ""
   echo "Commands:"
   echo "  install - Create symlinks for all dotfiles"
   echo "  remove  - Remove managed dotfile symlinks"
   echo "  clean   - Remove managed broken symlinks from home directory"
+  echo "  source  - Optional exact source from DOTFILES (default: all)"
+  echo "  DOTFILES_TARGET_DIR overrides the target home directory for staging."
 }
 
 # Main script logic
@@ -589,13 +608,16 @@ main() {
     return 1
   fi
 
-  if [[ $# -ne 1 ]]; then
+  if [[ $# -gt 2 ]]; then
     usage
     return 1
   fi
 
   case "$1" in
     install|remove|clean)
+      if [[ $# -eq 2 ]]; then
+        select_source "$2" || return 1
+      fi
       run_action "$1"
       ;;
     *)

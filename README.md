@@ -56,6 +56,31 @@ To install the standalone Codex and Cursor CLIs:
 - Prompt configuration is managed through `starship.toml`, which `dotfiles.sh` links to `~/.config/starship.toml`.
 - `zsh/prompt.zsh` only initializes Starship; prompt layout and custom segments live in `starship.toml`.
 
+## Vim
+
+The [Vim setup](vim/README.md) uses classic Vim with two plugins: `vim-lsp` for
+TypeScript, Python, and Swift language support, and `vim-which-key` for a shortcut
+menu at the bottom. Buffers, splits, search, and the file browser are built into Vim.
+
+Run `./vim/install.sh` once, then open `vim .` and press Space to see the menu.
+The configuration lives in [`vimrc`](vimrc), linked with `./dotfiles.sh install vimrc`.
+See the [setup guide](vim/README.md) for installation, updates, and core shortcuts.
+
+## Yazi
+
+The Yazi configuration shows Git status indicators beside files and directories
+using the official [Git plugin](https://github.com/yazi-rs/plugins/tree/main/git.yazi).
+After installing Yazi, link its configuration and restore the locked plugin version:
+
+```sh
+./dotfiles.sh install yazi
+ya pkg install
+```
+
+Restart Yazi after setup. Plugin versions are tracked in `yazi/package.toml`;
+downloaded plugins are ignored by Git. Run `ya pkg upgrade` to update them and
+review the resulting manifest changes.
+
 ## Skill-managed maintenance
 
 Defaults drift/audit and Swift completion refresh are handled through repository skills under `.agents/skills/`.
