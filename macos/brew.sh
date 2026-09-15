@@ -51,9 +51,11 @@ PACKAGES=(
   mise
   mkcert
   mole
+  neovim
   pandoc
   pi-coding-agent
   postgresql@18
+  ripgrep
   shellcheck
   starship
   swift-format
