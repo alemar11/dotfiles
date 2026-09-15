@@ -60,6 +60,7 @@ PACKAGES=(
   starship
   swift-format
   tree
+  tree-sitter-cli
   watchman
   yazi
   yt-dlp
