@@ -1,0 +1,5 @@
+# Use explicit Starship palette colors for readable footer text in both appearances.
+# starship.toml [palettes.main]: black, dark_blue, white.
+[mode]
+normal_main = { fg = "#2c323c", bg = "#61afef", bold = true }
+normal_alt = { fg = "#2c323c", bg = "#abb2bf" }
