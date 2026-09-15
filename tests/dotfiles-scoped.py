@@ -10,7 +10,7 @@ with tempfile.TemporaryDirectory(prefix="dotfiles-links-") as temp:
     target = Path(temp)
     env = dict(os.environ, DOTFILES_TARGET_DIR=temp)
 
-    def run(action, source="nvim", ok=True):
+    def run(action, source="yazi", ok=True):
         result = subprocess.run(
             ["bash", str(repo / "dotfiles.sh"), action, source],
             env=env,
@@ -23,8 +23,8 @@ with tempfile.TemporaryDirectory(prefix="dotfiles-links-") as temp:
     run("install", "does-not-exist", ok=False)
     assert not list(target.iterdir())
     run("install")
-    link = target / ".config/nvim"
-    assert link.is_symlink() and link.resolve() == repo / "nvim"
+    link = target / ".config/yazi"
+    assert link.is_symlink() and link.resolve() == repo / "yazi"
     assert list((target / ".config").iterdir()) == [link]
     run("install")
     run("remove")
@@ -43,5 +43,11 @@ with tempfile.TemporaryDirectory(prefix="dotfiles-links-") as temp:
     run("remove")
     run("clean")
     assert link.is_symlink()
+
+    run("install", "vimrc")
+    vimrc = target / ".vimrc"
+    assert vimrc.is_symlink() and vimrc.resolve() == repo / "vimrc"
+    run("remove", "vimrc")
+    assert not vimrc.is_symlink()
 
 print("Scoped link tests passed: selection, idempotence, existing config and foreign links")
