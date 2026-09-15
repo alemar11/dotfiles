@@ -72,10 +72,12 @@ function! Check() abort
     call assert_false(has_key(DotfilesWhichKeyMenu(), 'l'))
     call assert_equal('', maparg(' lr', 'n'))
     call assert_equal(0, &conceallevel)
+    call assert_true(&wrap && &linebreak && &breakindent)
     call assert_equal('```swift', getline(2))
     call assert_equal('', maparg('/', 'n'))
     bprevious
     call assert_true(has_key(DotfilesWhichKeyMenu(), 'l'))
+    call assert_false(&wrap || &linebreak || &breakindent)
   catch
     call add(v:errors, v:exception . ' at ' . v:throwpoint)
   endtry

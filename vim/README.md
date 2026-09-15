@@ -10,7 +10,7 @@ A small configuration for learning Vim, with two plugins:
 [vim-plug](https://github.com/junegunn/vim-plug) installs and updates these plugins.
 Vim itself provides buffers, splits, tab pages, search, syntax highlighting, and
 the netrw file browser. The configuration is [`../vimrc`](../vimrc), symlinked to
-`~/.vimrc`; this `vim/` folder contains the installer and documentation.
+`~/.vimrc`; this `vim/` folder contains the colorscheme, installer, and documentation.
 
 ## Install
 
@@ -153,6 +153,22 @@ All source characters remain visible, including Markdown backticks and JSON
 quotes (`conceallevel=0`). No Markdown renderer, debugger UI, file-tree plugin,
 or automatic completion popup is installed. This Vim setup uses no Alt mappings
 and does not require changing Ghostty's Option-key behavior.
+
+## Appearance
+
+The built-in `dotfiles` colorscheme follows the Starship palette, with muted line
+numbers, a subtle highlight on the current screen row, and a fixed diagnostic
+gutter so code does not shift when errors appear. Diagnostics use colored
+underlines and small `E`/`W`/`i`/`?` gutter markers. The status bar shows mode,
+filename, file type, line/column, and progress through the file.
+
+Markdown wraps visually at word boundaries; code stays unwrapped. This does not
+insert newlines or change file contents. In wrapped prose, `gj`/`gk` move by
+screen row; normal `j`/`k` still move by file line. Use `:setlocal nowrap` to
+temporarily turn wrapping off for the current view.
+
+Colors live in [`colors/dotfiles.vim`](colors/dotfiles.vim), with dark and light
+variants selected by Vim's `background` setting. No extra plugin is needed.
 
 ## Update
 

@@ -1,6 +1,8 @@
 " Classic Vim. Installation and shortcuts: vim/README.md in this repository.
 set nocompatible
 let mapleader = ' '
+" Load our colorscheme through the vimrc symlink, without another installation.
+execute 'set runtimepath^=' . fnameescape(fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/vim')
 
 " Install explicitly with vim/install.sh; opening Vim never downloads software.
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -16,23 +18,42 @@ syntax on
 set history=1000 autoread hidden belloff=all updatetime=300
 set number norelativenumber ruler showcmd nowrap
 set hlsearch incsearch ignorecase smartcase showmatch matchtime=2
-set signcolumn=auto scrolloff=3 splitbelow splitright
+set signcolumn=yes numberwidth=3 scrolloff=3 splitbelow splitright
+set cursorline cursorlineopt=number,screenline
 set wildmenu wildmode=longest:full,full
 set expandtab shiftwidth=2 softtabstop=2 tabstop=2
 set mouse=a
-set laststatus=2
-set statusline=%F%m%r%h%w\ %y\ [row=%l/%L]\ [col=%02v]\ [%02p%%]
+set laststatus=2 noshowmode
+function! DotfilesVimMode() abort
+  return get({'n': 'NORMAL', 'i': 'INSERT', 'R': 'REPLACE',
+        \ 'v': 'VISUAL', 'V': 'V-LINE', "\<C-V>": 'V-BLOCK',
+        \ 's': 'SELECT', 'S': 'S-LINE', "\<C-S>": 'S-BLOCK',
+        \ 'c': 'COMMAND', 't': 'TERMINAL'}, mode(), 'NORMAL')
+endfunction
+let &statusline = ' %{DotfilesVimMode()} │ %t%m%r%h%w%=%{&filetype}  %l:%c  %p%% '
 set completeopt=menuone,noinsert,noselect
 set timeout timeoutlen=500 ttimeout ttimeoutlen=100
 if has('termguicolors')
   set termguicolors
 endif
+colorscheme dotfiles
 
 " Keep source characters visible, including Markdown and JSON syntax.
 set conceallevel=0
+function! s:buffer_display() abort
+  setlocal conceallevel=0
+  if &filetype ==# 'markdown'
+    setlocal wrap linebreak breakindent
+  else
+    setlocal nowrap nolinebreak nobreakindent
+  endif
+endfunction
 augroup dotfiles_display
   autocmd!
-  autocmd FileType,BufWinEnter * setlocal conceallevel=0
+  autocmd FileType,BufWinEnter * call s:buffer_display()
+  autocmd WinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+  autocmd ModeChanged * redrawstatus
 augroup END
 
 " Keep generated files outside project directories.
@@ -83,6 +104,10 @@ nnoremap <silent> <leader>wc <C-W>c
 " ---------- Language servers ----------
 " TS/Python executables are managed by mise; Swift uses mise or active Xcode.
 let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_signs_error = {'text': 'E'}
+let g:lsp_diagnostics_signs_warning = {'text': 'W'}
+let g:lsp_diagnostics_signs_information = {'text': 'i'}
+let g:lsp_diagnostics_signs_hint = {'text': '?'}
 
 function! s:project_root(markers, server_info) abort
   let directory = expand('%:p:h')
