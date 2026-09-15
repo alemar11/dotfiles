@@ -56,6 +56,17 @@ To install the standalone Codex and Cursor CLIs:
 - Prompt configuration is managed through `starship.toml`, which `dotfiles.sh` links to `~/.config/starship.toml`.
 - `zsh/prompt.zsh` only initializes Starship; prompt layout and custom segments live in `starship.toml`.
 
+## Neovim code browser
+
+The [Neovim setup](nvim/README.md) uses LazyVim, Neo-tree, and Snacks picker for
+TypeScript, Swift, Python, and supporting document formats. Install or remove
+only its configuration with `./dotfiles.sh install nvim` / `./dotfiles.sh remove nvim`.
+Back up existing Neovim directories before the first setup. Start with `nvim .`.
+The configuration bootstraps lazy.nvim and LazyVim on first launch. Follow the
+[installation steps](nvim/README.md#install) for a new machine and the
+[update guide](nvim/README.md#update) for Neovim, plugins, language tools, and
+syntax parsers. Save the reviewed plugin versions in `nvim/lazy-lock.json`.
+
 ## Skill-managed maintenance
 
 Defaults drift/audit and Swift completion refresh are handled through repository skills under `.agents/skills/`.
