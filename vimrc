@@ -1,6 +1,13 @@
 " Classic Vim. Installation and shortcuts: vim/README.md in this repository.
 set nocompatible
 let mapleader = ' '
+
+" Ghostty follows macOS appearance. Pick the same palette before the first
+" redraw; its background-color reply arrives only after Vim has drawn a frame.
+if has('macunix') && $TERM_PROGRAM ==# 'ghostty'
+  let &background = trim(system('/usr/bin/defaults read -g AppleInterfaceStyle 2>/dev/null')) ==# 'Dark' ? 'dark' : 'light'
+endif
+
 " Load our colorscheme through the vimrc symlink, without another installation.
 execute 'set runtimepath^=' . fnameescape(fnamemodify(resolve(expand('<sfile>:p')), ':h') . '/vim')
 

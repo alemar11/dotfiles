@@ -169,6 +169,8 @@ temporarily turn wrapping off for the current view.
 
 Colors live in [`colors/dotfiles.vim`](colors/dotfiles.vim), with dark and light
 variants selected by Vim's `background` setting. No extra plugin is needed.
+In Ghostty, Vim reads the macOS appearance before its first redraw to avoid a
+light-theme flash at startup. Terminal background detection remains enabled.
 
 ## Update
 
