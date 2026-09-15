@@ -151,8 +151,8 @@ when supported by the current server.
 
 All source characters remain visible, including Markdown backticks and JSON
 quotes (`conceallevel=0`). No Markdown renderer, debugger UI, file-tree plugin,
-or automatic completion popup is installed. The existing Ghostty Option setting
-remains useful for terminal shortcuts; this Vim setup uses no Alt mappings.
+or automatic completion popup is installed. This Vim setup uses no Alt mappings
+and does not require changing Ghostty's Option-key behavior.
 
 ## Update
 

@@ -26,8 +26,6 @@ focus-follows-mouse        = true
 copy-on-select             = clipboard
 confirm-close-surface      = false
 shell-integration-features = no-title
-# Left Option acts as Alt; Right Option keeps normal character input.
-macos-option-as-alt        = left
 
 # --- Quick Terminal ---
 keybind                    = global:ctrl+1=toggle_quick_terminal
