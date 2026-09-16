@@ -18,3 +18,13 @@ prepend_rules = [
   { mime = "application/pdf", use = "open" },
   { mime = "image/*", use = "open" },
 ]
+
+[[plugin.prepend_fetchers]]
+url = "*"
+run = "git"
+group = "git"
+
+[[plugin.prepend_fetchers]]
+url = "*/"
+run = "git"
+group = "git"
