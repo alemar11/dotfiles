@@ -51,13 +51,16 @@ PACKAGES=(
   mise
   mkcert
   mole
+  neovim
   pandoc
   pi-coding-agent
   postgresql@18
+  ripgrep
   shellcheck
   starship
   swift-format
   tree
+  tree-sitter-cli
   watchman
   yazi
   yt-dlp
@@ -73,7 +76,6 @@ CASKS=(
   chatgpt
   codexbar
   datagrip
-  docker
   font-fira-code-nerd-font
   google-chrome
   ghostty@tip

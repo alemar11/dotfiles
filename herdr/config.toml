@@ -1,13 +1,39 @@
+onboarding = false
 [theme]
 auto_switch = true
 dark_name = "terminal"
 light_name = "terminal"
 
+[theme.custom]
+active_row_bg = "#45475A"
+
 [ui]
-sidebar_width = 24
+sidebar_width = 36
 pane_outer_borders = false
 pane_gaps = false
 pane_scrollbars = false
-hide_tab_bar_when_single_tab = true
-status_indicators = "symbols"
-agent_panel_sort = "spaces"
+status_indicators = "dots"
+agent_panel_sort = "priority"
+
+[ui.toast]
+delivery = "terminal"
+
+[ui.sound]
+enabled = false
+
+[keys]
+goto = "prefix+d"
+
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = 'cd "${HERDR_ACTIVE_PANE_CWD:-.}" && exec lazygit'
+description = "Git status"
+width = "90%"
+height = "85%"
+
+[ui.sidebar.agents]
+rows = [["state_icon", { token = "workspace", fg = "#A78BFA", bold = true }, "agent"], ["tab"]]
+
+[ui.sidebar.spaces]
+rows = [["state_icon", { token = "workspace", fg = "#A78BFA", bold = true }], ["branch", "git_status"]]
