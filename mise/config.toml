@@ -1,4 +1,5 @@
 [tools]
+bun = "latest"
 node = "latest"
 # typescript-language-server requires the JavaScript tsserver shipped in TS 6.
 "npm:typescript" = "6"
