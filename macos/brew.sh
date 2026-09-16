@@ -80,6 +80,7 @@ CASKS=(
   hopper-disassembler
   iina
   netnewswire
+  orbstack
   pearcleaner
   proxyman
   sketch
