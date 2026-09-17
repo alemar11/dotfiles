@@ -1,10 +1,14 @@
-# Open text files in VS Code and use macOS handlers for previews/documents.
+[mgr]
+# Hide the parent-folder pane; keep the current folder and preview.
+ratio = [0, 4, 3]
+
+# Open text files in Vim and use macOS handlers for previews/documents.
 [opener]
 xcode = [
   { run = "xed %s", orphan = true, for = "macos", desc = "Xcode" },
 ]
 edit = [
-  { run = "code -g %s", orphan = true, for = "macos", desc = "VS Code" },
+  { run = "vim %s", block = true, for = "macos", desc = "Vim" },
 ]
 open = [
   { run = "open %s", orphan = true, for = "macos", desc = "Open" },
