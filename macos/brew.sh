@@ -72,7 +72,6 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
-  codexbar
   datagrip
   font-fira-code-nerd-font
   google-chrome
@@ -80,6 +79,7 @@ CASKS=(
   hopper-disassembler
   iina
   netnewswire
+  openusage
   orbstack
   pearcleaner
   proxyman
