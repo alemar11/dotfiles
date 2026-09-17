@@ -1,0 +1,11 @@
+# Enter directories in-place; keep Enter on files using the configured opener.
+[[mgr.prepend_keymap]]
+on = "<Enter>"
+run = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+# File-manager style counterpart to Enter; h and Left still leave as well.
+[[mgr.prepend_keymap]]
+on = "<Backspace>"
+run = "leave"
+desc = "Back to the parent directory"
