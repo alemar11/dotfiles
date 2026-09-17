@@ -43,6 +43,7 @@ PACKAGES=(
   fzf
   gh
   git-lfs
+  glow
   modem-dev/tap/hunk
   hyperfine
   jq
@@ -81,10 +82,8 @@ CASKS=(
   netnewswire
   openusage
   orbstack
-  pearcleaner
   proxyman
   sketch
-  tableplus
   tuist
   tower
   xcodes
