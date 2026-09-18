@@ -71,6 +71,7 @@ set undofile
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
+let g:netrw_home = expand('~/.vim')
 
 " Cursor shapes in terminal Vim: block in Normal, bar in Insert.
 if exists('&t_SI')
