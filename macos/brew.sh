@@ -51,6 +51,7 @@ PACKAGES=(
   mise
   mkcert
   mole
+  neovim
   pandoc
   pi-coding-agent
   postgresql@18

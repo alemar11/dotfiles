@@ -4,8 +4,10 @@
 [http]
   sslVerify = true
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = ~/.gitignore_global
+[merge]
+  tool = nvimdiff
 [push]
   default = upstream
 [alias]
