@@ -23,29 +23,6 @@
     [ -z \"$gone\" ] && { echo 'No gone branches.'; return 0; }; \
     echo \"$gone\" | xargs -n 1 git branch -d; \
   }; f"
-  wnew = "!f() { \
-    if [ $# -ne 1 ]; then \
-      echo 'Usage: git wnew <branch-name>' >&2; \
-      exit 1; \
-    fi; \
-    branch=\"$1\"; \
-    root=$(git rev-parse --show-toplevel); \
-    worktrees_dir=\"$root/.worktrees\"; \
-    dest=\"$worktrees_dir/$branch\"; \
-    mkdir -p \"$worktrees_dir\"; \
-    if [ -d \"$dest\" ]; then \
-      echo \"❌ Worktree $dest already exists\" >&2; \
-      exit 1; \
-    fi; \
-    if git show-ref --verify --quiet \"refs/heads/$branch\"; then \
-      echo \"📂 Attaching existing branch $branch\"; \
-      git worktree add \"$dest\" \"$branch\"; \
-    else \
-      echo \"🌱 Creating new branch $branch\"; \
-      git worktree add -b \"$branch\" \"$dest\" HEAD; \
-    fi; \
-    echo \"✅ Worktree created at $dest\"; \
-  }; f"
 [fetch]
   prune = true
 [pull]

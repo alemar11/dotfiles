@@ -38,10 +38,7 @@ alias gm="git mergetool"
 alias gp='git push'
 alias gs='git status'
 alias gsb='git status -sb'
-alias gsub='git submodule update --init --recursive'
 alias gt='git checkout -t'
-alias gundo='git reset --soft HEAD~1'
-alias gw='git wnew'
 alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Lazygit and Lazydocker
