@@ -1,10 +1,6 @@
 [tools]
 bun = "latest"
 node = "latest"
-# typescript-language-server requires the JavaScript tsserver shipped in TS 6.
-"npm:typescript" = "6"
-"npm:typescript-language-server" = "latest"
-"npm:pyright" = "latest"
 python = "latest"
 pnpm = "latest"
 rust = "latest"
