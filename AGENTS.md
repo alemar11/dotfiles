@@ -46,6 +46,7 @@ Guidance for coding agents working in this repository.
 - `gitconfig` - Git configuration
 - `gitignore_global` - global gitignore patterns
 - `vimrc` - plugin-free Vim configuration, linked with `./dotfiles.sh install vimrc`
+- `vim/colors/dotfiles.vim` - Starship/Ghostty colorscheme loaded from the vimrc symlink
 - `lldbinit`, `lldbinit-Xcode` - LLDB debugger configuration
 
 ## Common commands
@@ -69,4 +70,4 @@ Guidance for coding agents working in this repository.
 - `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
 
 ## Maintenance notes
-- For terminal theming in this repo, Starship's palette is the source of truth; keep Ghostty's ANSI palette, `eza`/`LS_COLORS`/`EZA_COLORS`, and custom prompt helpers aligned to it rather than the reverse.
+- For terminal theming in this repo, Starship's palette is the source of truth; keep Ghostty's ANSI palette, Vim's `dotfiles` colorscheme, `eza`/`LS_COLORS`/`EZA_COLORS`, and custom prompt helpers aligned to it rather than the reverse.

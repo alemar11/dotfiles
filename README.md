@@ -58,8 +58,9 @@ To install the standalone Codex and Cursor CLIs:
 
 ## Vim
 
-Classic macOS Vim with a small [`vimrc`](vimrc) and no plugins. Buffers, splits,
-search, and the file browser are built into Vim.
+Classic macOS Vim with a small [`vimrc`](vimrc) and no plugins. In Ghostty it
+matches macOS light/dark and the Starship palette via [`vim/colors/dotfiles.vim`](vim/colors/dotfiles.vim).
+Buffers, splits, search, and the file browser are built into Vim.
 
 Link it with `./dotfiles.sh install vimrc`, then open `vim .`.
 

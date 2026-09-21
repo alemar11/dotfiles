@@ -14,7 +14,8 @@ function! Check() abort
     call assert_false(exists('g:plug_home'))
     call assert_true(empty(globpath(&runtimepath, 'autoload/which_key.vim')))
     call assert_true(empty(globpath(&runtimepath, 'autoload/lsp.vim')))
-    call assert_true(!exists('g:colors_name') || g:colors_name !=# 'dotfiles')
+    call assert_equal('dotfiles', get(g:, 'colors_name', ''))
+    call assert_equal(1, &termguicolors)
     call assert_equal('', &omnifunc)
     call assert_equal('', maparg(' ', 'n'))
     call assert_equal(0, &conceallevel)
@@ -48,4 +49,4 @@ with tempfile.TemporaryDirectory(prefix="dotfiles-vim-") as directory:
     errors = json.loads(result.read_text()) if result.exists() else [process.stderr]
     if process.returncode != 0 or errors:
         raise AssertionError(f"{errors}\n{process.stderr}")
-    print("PASS vim: no plugins, no custom colorscheme, file opens")
+    print("PASS vim: no plugins, Ghostty colorscheme, file opens")
