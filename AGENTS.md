@@ -45,7 +45,7 @@ Guidance for coding agents working in this repository.
 ### Other configurations
 - `gitconfig` - Git configuration
 - `gitignore_global` - global gitignore patterns
-- `vimrc` - Vim configuration
+- `vimrc` - plugin-free Vim configuration, linked with `./dotfiles.sh install vimrc`
 - `lldbinit`, `lldbinit-Xcode` - LLDB debugger configuration
 
 ## Common commands

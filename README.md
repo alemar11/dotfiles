@@ -58,13 +58,10 @@ To install the standalone Codex and Cursor CLIs:
 
 ## Vim
 
-The [Vim setup](vim/README.md) uses classic Vim with two plugins: `vim-lsp` for
-TypeScript, Python, and Swift language support, and `vim-which-key` for a shortcut
-menu at the bottom. Buffers, splits, search, and the file browser are built into Vim.
+Classic macOS Vim with a small [`vimrc`](vimrc) and no plugins. Buffers, splits,
+search, and the file browser are built into Vim.
 
-Run `./vim/install.sh` once, then open `vim .` and press Space to see the menu.
-The configuration lives in [`vimrc`](vimrc), linked with `./dotfiles.sh install vimrc`.
-See the [setup guide](vim/README.md) for installation, updates, and core shortcuts.
+Link it with `./dotfiles.sh install vimrc`, then open `vim .`.
 
 ## Yazi
 
