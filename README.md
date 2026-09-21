@@ -64,6 +64,14 @@ Buffers, splits, search, and the file browser are built into Vim.
 
 Link it with `./dotfiles.sh install vimrc`, then open `vim .`.
 
+## Neovim
+
+Bare Neovim config in [`nvim/`](nvim/) reuses the same Ghostty/macOS appearance and
+[`vim/colors/dotfiles.vim`](vim/colors/dotfiles.vim) colorscheme, plus line numbers.
+No plugins.
+
+Link it with `./dotfiles.sh install nvim`, then open `nvim .`.
+
 ## Yazi
 
 The Yazi configuration shows Git status indicators beside files and directories
