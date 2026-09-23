@@ -22,10 +22,11 @@ delivery = "terminal"
 enabled = false
 
 [keys]
-goto = "prefix+d"
+goto = "prefix+g"
+copy_mode = "prefix+y"
 
 [[keys.command]]
-key = "prefix+g"
+key = "prefix+d"
 type = "popup"
 command = 'cd "${HERDR_ACTIVE_PANE_CWD:-.}" && exec lazygit'
 description = "Git status"
