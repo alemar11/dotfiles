@@ -31,6 +31,7 @@ echo "🔐 Trusting alemar11/tap..."
 brew trust alemar11/tap
 
 PACKAGES=(
+  aria2
   bat
   btop
   cloc
@@ -43,7 +44,7 @@ PACKAGES=(
   fzf
   gh
   git-lfs
-  modem-dev/tap/hunk
+  herdr
   hyperfine
   jq
   lazydocker
@@ -60,6 +61,7 @@ PACKAGES=(
   starship
   swift-format
   tree
+  vapor
   watchman
   yazi
   yt-dlp
