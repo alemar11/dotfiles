@@ -37,3 +37,4 @@ REPORTTIME=10
 for file in ~/.zsh/*.zsh(N); do
     source "$file"
 done
+export PATH="$HOME/.local/bin:$PATH"

@@ -1,4 +1,4 @@
-"""Smoke-check the bare Neovim configuration."""
+"""Smoke-check the Neovim configuration."""
 
 import json
 import os

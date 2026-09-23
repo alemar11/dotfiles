@@ -7,7 +7,6 @@ set -euo pipefail
 # Types:
 #   - file: Link a single file to ~/.target
 #   - folder: Link entire folder to ~/.target
-#   - folder_contents: Link files inside folder to ~/.target/
 DOTFILES=(
   "bat:.config/bat:folder"
   "btop/btop.conf:.config/btop/btop.conf:file"
@@ -61,6 +60,7 @@ COUNT_REMOVED=0
 COUNT_SKIPPED=0
 COUNT_WARNINGS=0
 COUNT_ERRORS=0
+FORCE_YES=0
 declare -a FAILURES=()
 
 COLOR_INFO=""
@@ -168,17 +168,6 @@ symlink_points_to() {
   [[ "$link_target" == "$expected_source" ]]
 }
 
-# Check whether a symlink points under an expected source directory
-symlink_points_under() {
-  local link_path="$1"
-  local source_dir="$2"
-  local link_target
-
-  [[ -L "$link_path" ]] || return 1
-  link_target="$(readlink "$link_path" 2>/dev/null || true)"
-  [[ "$link_target" == "$source_dir/"* ]]
-}
-
 # Ensure the target parent directory exists before linking
 ensure_target_parent_dir() {
   local target="$1"
@@ -195,6 +184,20 @@ ensure_target_parent_dir() {
   fi
 }
 
+# Remove a dangling symlink so install can recreate the managed link
+clear_dangling_symlink() {
+  local target="$1"
+
+  if [[ -L "$target" && ! -e "$target" ]]; then
+    if rm "$target"; then
+      log_ok "Removed dangling symlink $target"
+    else
+      log_error "Failed to remove dangling symlink $target"
+      return 1
+    fi
+  fi
+}
+
 # Link a single file
 link_file() {
   local source="$1"
@@ -206,6 +209,10 @@ link_file() {
   fi
 
   if ! ensure_target_parent_dir "$target"; then
+    return 1
+  fi
+
+  if ! clear_dangling_symlink "$target"; then
     return 1
   fi
 
@@ -236,6 +243,10 @@ link_folder() {
     return 1
   fi
 
+  if ! clear_dangling_symlink "$target"; then
+    return 1
+  fi
+
   if [[ ! -e "$target" && ! -L "$target" ]]; then
     if ln -s "$source" "$target"; then
       COUNT_LINKED=$((COUNT_LINKED + 1))
@@ -247,49 +258,6 @@ link_folder() {
   else
     log_skip "$target already exists"
   fi
-}
-
-# Link contents of a folder
-link_folder_contents() {
-  local source_dir="$1"
-  local target_dir="$2"
-
-  if [[ ! -d "$source_dir" ]]; then
-    log_error "$source_dir doesn't exist or is not a directory"
-    return 1
-  fi
-
-  # Create target directory if it doesn't exist
-  if [[ ! -d "$target_dir" ]]; then
-    if mkdir -p "$target_dir"; then
-      log_ok "Created $target_dir"
-    else
-      log_error "Failed to create directory $target_dir"
-      return 1
-    fi
-  fi
-
-  # Link each file in the source directory
-  local file
-  for file in "$source_dir"/*; do
-    if [[ -f "$file" ]]; then
-      local filename
-      filename="$(basename "$file")"
-      local target_file="$target_dir/$filename"
-
-      if [[ ! -e "$target_file" && ! -L "$target_file" ]]; then
-        if ln -s "$file" "$target_file"; then
-          COUNT_LINKED=$((COUNT_LINKED + 1))
-          log_ok "Linked $file -> $target_file"
-        else
-          log_error "Failed to link $file -> $target_file"
-          return 1
-        fi
-      else
-        log_skip "$target_file already exists"
-      fi
-    fi
-  done
 }
 
 # Process a single dotfile entry for installation
@@ -306,9 +274,6 @@ install_entry() {
       ;;
     folder)
       link_folder "$source_path" "$target_path"
-      ;;
-    folder_contents)
-      link_folder_contents "$source_path" "$target_path"
       ;;
     *)
       log_error "Unknown type '$type' for $source"
@@ -339,45 +304,6 @@ remove_file() {
   fi
 }
 
-# Remove managed folder contents symlinks
-remove_folder_contents() {
-  local target_dir="$1"
-  local source_dir="$2"
-
-  if [[ ! -d "$target_dir" ]]; then
-    return
-  fi
-
-  # Remove symlinks managed by this repo in the target directory
-  local file
-  for file in "$target_dir"/*; do
-    if [[ -L "$file" ]]; then
-      if symlink_points_under "$file" "$source_dir"; then
-        if rm "$file"; then
-          COUNT_REMOVED=$((COUNT_REMOVED + 1))
-          log_ok "Removed symlink $file"
-        else
-          log_error "Failed to remove symlink $file"
-          return 1
-        fi
-      else
-        log_warn "$file is a symlink not managed by this repo, skipping"
-      fi
-    fi
-  done
-
-  # Remove directory if empty
-  if [[ -z "$(ls -A "$target_dir")" ]]; then
-    if rmdir "$target_dir"; then
-      COUNT_REMOVED=$((COUNT_REMOVED + 1))
-      log_ok "Removed empty directory $target_dir"
-    else
-      log_error "Failed to remove empty directory $target_dir"
-      return 1
-    fi
-  fi
-}
-
 # Process a single dotfile entry for removal
 remove_entry() {
   local entry="$1"
@@ -389,9 +315,6 @@ remove_entry() {
   case "$type" in
     file|folder)
       remove_file "$target_path" "$source_path"
-      ;;
-    folder_contents)
-      remove_folder_contents "$target_path" "$source_path"
       ;;
     *)
       log_error "Unknown type '$type' for $source"
@@ -445,33 +368,6 @@ clean_broken_links() {
           fi
         fi
         ;;
-      folder_contents)
-        if [[ -d "$target_path" ]]; then
-          local file
-          for file in "$target_path"/*; do
-            [[ -L "$file" && ! -e "$file" ]] || continue
-            if symlink_points_under "$file" "$source_path"; then
-              if rm "$file"; then
-                COUNT_REMOVED=$((COUNT_REMOVED + 1))
-                log_ok "Removed broken symlink $file"
-              else
-                log_error "Failed to remove broken symlink $file"
-                return 1
-              fi
-            fi
-          done
-
-          if [[ -z "$(ls -A "$target_path")" ]]; then
-            if rmdir "$target_path"; then
-              COUNT_REMOVED=$((COUNT_REMOVED + 1))
-              log_ok "Removed empty directory $target_path"
-            else
-              log_error "Failed to remove empty directory $target_path"
-              return 1
-            fi
-          fi
-        fi
-        ;;
       *)
         log_error "Unknown type '$type' for $source"
         return 1
@@ -481,9 +377,48 @@ clean_broken_links() {
   log_ok "Cleaning complete."
 }
 
+confirm_action() {
+  local action="$1"
+  local answer
+
+  read -r -p "Run '$action'? [y/N] " answer || return 1
+  case "$answer" in
+    y|Y|yes|YES|Yes)
+      return 0
+      ;;
+    *)
+      log_info "Cancelled."
+      return 1
+      ;;
+  esac
+}
+
+# remove/clean require --yes or an interactive confirmation
+require_destructive_confirmation() {
+  local action="$1"
+
+  if [[ $FORCE_YES -eq 1 ]]; then
+    return 0
+  fi
+
+  if is_interactive_tty; then
+    confirm_action "$action"
+    return $?
+  fi
+
+  log_error "Refusing to run '$action' without confirmation. Re-run with --yes."
+  return 1
+}
+
 run_action() {
   local action="$1"
   local rc=0
+
+  if [[ "$action" == "remove" || "$action" == "clean" ]]; then
+    if ! require_destructive_confirmation "$action"; then
+      return 1
+    fi
+  fi
 
   reset_run_state
 
@@ -523,22 +458,6 @@ run_action() {
   return "$rc"
 }
 
-confirm_action() {
-  local action="$1"
-  local answer
-
-  read -r -p "Run '$action'? [y/N] " answer || return 1
-  case "$answer" in
-    y|Y|yes|YES|Yes)
-      return 0
-      ;;
-    *)
-      log_info "Cancelled."
-      return 1
-      ;;
-  esac
-}
-
 show_menu() {
   local choice
   local action
@@ -566,12 +485,6 @@ show_menu() {
         ;;
     esac
 
-    if [[ "$action" == "remove" || "$action" == "clean" ]]; then
-      if ! confirm_action "$action"; then
-        continue
-      fi
-    fi
-
     if run_action "$action"; then
       action_rc=0
     else
@@ -583,15 +496,17 @@ show_menu() {
 # Print usage
 usage() {
   echo "Usage:"
-  echo "  $0                  # Interactive menu (TTY only)"
-  echo "  $0 {install|remove|clean} [source]"
-  echo "  $0 install vimrc     # Only link the Vim configuration"
+  echo "  $0                              # Interactive menu (TTY only)"
+  echo "  $0 install [source]"
+  echo "  $0 {remove|clean} [--yes] [source]"
+  echo "  $0 install vimrc                # Only link the Vim configuration"
   echo ""
   echo "Commands:"
   echo "  install - Create symlinks for all dotfiles"
   echo "  remove  - Remove managed dotfile symlinks"
   echo "  clean   - Remove managed broken symlinks from home directory"
   echo "  source  - Optional exact source from DOTFILES (default: all)"
+  echo "  --yes   - Skip confirmation for remove/clean (required when not a TTY)"
   echo "  DOTFILES_TARGET_DIR overrides the target home directory for staging."
 }
 
@@ -609,17 +524,39 @@ main() {
     return 1
   fi
 
-  if [[ $# -gt 2 ]]; then
-    usage
-    return 1
-  fi
+  local action="$1"
+  shift
 
-  case "$1" in
+  FORCE_YES=0
+  local source=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --yes|-y)
+        FORCE_YES=1
+        ;;
+      -*)
+        log_error "Unknown option '$1'"
+        usage
+        return 1
+        ;;
+      *)
+        if [[ -n "$source" ]]; then
+          usage
+          return 1
+        fi
+        source="$1"
+        ;;
+    esac
+    shift
+  done
+
+  case "$action" in
     install|remove|clean)
-      if [[ $# -eq 2 ]]; then
-        select_source "$2" || return 1
+      if [[ -n "$source" ]]; then
+        select_source "$source" || return 1
       fi
-      run_action "$1"
+      run_action "$action"
       ;;
     *)
       usage

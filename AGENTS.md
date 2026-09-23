@@ -34,20 +34,27 @@ Guidance for coding agents working in this repository.
 ### Shell configuration
 - `zshrc` sources all `zsh/*.zsh` files.
 - `zsh/` contains modular configuration:
-  - `aliases.zsh` - shell aliases
+  - `aliases.zsh` - shell aliases (`vim` → `nvim`; fancy listing is `l`/`ll`/`lt`, not `ls`)
+  - `colors.zsh` - Starship-aligned `LS_COLORS` / `EZA_COLORS`
   - `completion.zsh` - completion settings
+  - `history.zsh` - history options
+  - `mise.zsh` - mise activation when installed
+  - `options.zsh` - zsh options
   - `prompt.zsh` - Starship bootstrap for the shell prompt
-  - `xcode.zsh` - Xcode functions
   - `vscode.zsh` - VS Code functions
+  - `window.zsh` - terminal window title helpers
+  - `xcode.zsh` - Xcode functions
+  - `zoxide.zsh` - zoxide init when installed
   - `functions/` - autoloaded zsh functions
+  - `completions/` - extra completion scripts
 - `starship.toml` defines the prompt layout and custom modules, and is linked to `~/.config/starship.toml`.
 
 ### Other configurations
 - `gitconfig` - Git configuration
 - `gitignore_global` - global gitignore patterns
-- `vimrc` - plugin-free Vim configuration, linked with `./dotfiles.sh install vimrc`
+- `vimrc` - plugin-free Vim configuration, linked with `./dotfiles.sh install vimrc` (use `command vim` because `vim` is aliased to `nvim`)
 - `vim/colors/dotfiles.vim` - Starship/Ghostty colorscheme loaded from the vimrc and nvim configs
-- `nvim/` - bare Neovim style config (same colorscheme + line numbers), linked with `./dotfiles.sh install nvim`
+- `nvim/` - Neovim config (same colorscheme + line numbers + WhichKey via lazy.nvim), linked with `./dotfiles.sh install nvim`
 - `lldbinit`, `lldbinit-Xcode` - LLDB debugger configuration
 
 ## Common commands
@@ -61,8 +68,8 @@ Guidance for coding agents working in this repository.
 
 ### Managing dotfiles
 ```bash
-./dotfiles.sh remove        # Remove all symlinks
-./dotfiles.sh clean         # Clean broken symlinks
+./dotfiles.sh remove --yes  # Remove all symlinks (confirmation or --yes required)
+./dotfiles.sh clean --yes   # Clean broken symlinks
 ```
 
 ## Architecture notes

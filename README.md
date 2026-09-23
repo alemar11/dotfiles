@@ -62,15 +62,18 @@ Classic macOS Vim with a small [`vimrc`](vimrc) and no plugins. In Ghostty it
 matches macOS light/dark and the Starship palette via [`vim/colors/dotfiles.vim`](vim/colors/dotfiles.vim).
 Buffers, splits, search, and the file browser are built into Vim.
 
-Link it with `./dotfiles.sh install vimrc`, then open `vim .`.
+Link it with `./dotfiles.sh install vimrc`. The shell aliases `vim` to `nvim`; run
+classic Vim with `command vim .` or `\vim .`.
 
 ## Neovim
 
-Bare Neovim config in [`nvim/`](nvim/) reuses the same Ghostty/macOS appearance and
+Neovim config in [`nvim/`](nvim/) reuses the same Ghostty/macOS appearance and
 [`vim/colors/dotfiles.vim`](vim/colors/dotfiles.vim) colorscheme, plus line numbers.
-No plugins.
+It bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) only to install
+[WhichKey](https://github.com/folke/which-key.nvim); the lockfile is tracked as
+`nvim/lazy-lock.json`.
 
-Link it with `./dotfiles.sh install nvim`, then open `nvim .`.
+Link it with `./dotfiles.sh install nvim`, then open `nvim .` (or `vim .`).
 
 ## Yazi
 
@@ -89,8 +92,10 @@ review the resulting manifest changes.
 
 ## Skill-managed maintenance
 
-Defaults drift/audit and Swift completion refresh are handled through repository skills under `.agents/skills/`.
-Use the orchestrator skill (`$dotfiles`) to route these tasks instead of running maintenance scripts directly.
+Defaults drift/audit and Swift completion refresh are handled through repository skills under `.agents/skills/`:
+
+- `$dotfiles-defaults-sync` — audit/sync macOS defaults drift against `macos/defaults.sh`
+- `$dotfiles-swift-completion-update` — refresh `zsh/completions/_swift` when Swift changes
 
 ## Setup SSH
 
