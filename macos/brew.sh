@@ -86,7 +86,6 @@ CASKS=(
   orbstack
   proxyman
   sketch
-  tuist
   tower
   xcodes
 )

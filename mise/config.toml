@@ -8,6 +8,8 @@ uv = "latest"
 ruby = "latest"
 swiftlint = "latest"
 xcodegen = "latest"
+# aqua backend; asdf tuist plugin resolves broken tags for "latest"
+"aqua:tuist/tuist" = "4.209.0"
 
 [settings]
 minimum_release_age = "0s"
