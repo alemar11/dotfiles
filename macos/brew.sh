@@ -80,6 +80,7 @@ CASKS=(
   ghostty@tip
   hopper-disassembler
   iina
+  ngrok
   netnewswire
   openusage
   orbstack
@@ -87,6 +88,7 @@ CASKS=(
   sketch
   tower
   xcodes
+  xcodes-app
 )
 
 echo "🍺 Installing cask apps..."
