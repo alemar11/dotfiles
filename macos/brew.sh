@@ -55,7 +55,6 @@ PACKAGES=(
   neovim
   pandoc
   pi-coding-agent
-  postgresql@18
   ripgrep
   shellcheck
   starship
