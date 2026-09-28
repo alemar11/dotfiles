@@ -2,7 +2,7 @@
 " Current setup:
 " - no plugins, no extra mappings
 " - Ghostty/macOS appearance + Starship colorscheme before the first redraw
-" - syntax, filetype indent, line numbers, highlighted search
+" - syntax, filetype indent, line numbers, ignorecase + smartcase search
 " - 2-space tabs, mouse
 " - undo/swap/backup/netrw files under ~/.vim
 " - :find across the tree; :grep uses ripgrep when installed

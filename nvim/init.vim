@@ -1,7 +1,7 @@
 " Neovim. Linked with: ./dotfiles.sh install nvim
 " Bare style match for classic Vim, with lazy.nvim for WhichKey:
 " - Ghostty/macOS appearance + Starship colorscheme before the first redraw
-" - line numbers; WhichKey is the only plugin
+" - line numbers; ignorecase + smartcase search; WhichKey is the only plugin
 
 " Neovim detects the terminal background and reloads this colorscheme when
 " Ghostty reports a macOS light/dark theme change.
@@ -49,6 +49,7 @@ endif
 colorscheme dotfiles
 
 set number norelativenumber
+set hlsearch incsearch ignorecase smartcase
 
 " Bootstrap lazy.nvim and install only WhichKey. Plugin state lives under
 " stdpath("data"); the generated lockfile is tracked alongside this config.
