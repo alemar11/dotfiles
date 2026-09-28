@@ -32,6 +32,7 @@ brew trust alemar11/tap
 
 PACKAGES=(
   aria2
+  asc
   bat
   btop
   cloc
