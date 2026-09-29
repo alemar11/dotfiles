@@ -110,6 +110,10 @@ Run `:lua vim.pack.update()` to review updates, then `:write` to apply them or
 
 Link it with `./dotfiles.sh install nvim`, then open `nvim .` (or `vim .`).
 
+Markdown files use `render-markdown.nvim` to display styled headings, tables,
+checkboxes, and code blocks in the editor. Use `:RenderMarkdown toggle` to toggle
+rendering.
+
 ## Yazi
 
 The Yazi configuration shows Git status indicators beside files and directories
