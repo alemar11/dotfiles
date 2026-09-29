@@ -65,22 +65,42 @@ plugin configurations. Mason, LSP, and Treesitter each have their own file under
 `nvim/lua/plugins/`. The enabled mini.nvim modules each have a configuration under
 [`nvim/lua/plugins/mini/`](nvim/lua/plugins/mini/), with extra pickers alongside mini.pick.
 
+The bundled `xcode` colorscheme uses Xcode Default syntax and editor colors,
+with light and dark variants selected by `:set background=light` or
+`:set background=dark`. It includes Treesitter, LSP, and mini.nvim highlights.
+Colorizer previews color literals directly in files; use `:ColorizerToggle`
+to toggle it for the current buffer. Its setup is in `lua/plugins/colorizer.lua`.
+
 Space is the leader key. Use `-` to browse the current working directory or
 `<leader>-` to reveal the current file. In the explorer, Enter opens an entry,
-`L` opens it and closes the explorer when it is a file, Esc/`H` navigate upward,
+`L` opens it and closes the explorer when it is a file, `h`/`H` navigate upward,
 `q` closes the explorer, and `=` applies file edits after confirmation.
 Use `<leader>pf` to find files, `<leader>ps` to search the word under the cursor,
 `<leader>pg` for live text search, and `<leader>vh` for help.
 Use `<leader>xx` for diagnostics and `<leader>pk` to search keymaps.
+mini.clue shows available keys after pausing on Space, `g`, `z`, Ctrl-w, `[` or `]`.
+mini.statusline shows mode, diagnostics, and filename on the left, with LSP,
+Git branch and diff counts, file information, and cursor position on the right.
+mini.git supplies the branch information;
+mini.pairs automatically closes brackets and quotes while typing.
+Use `<leader>f` to format the file, or the selection in Visual mode, with Conform.
+Formatting is manual. Install its external tools with `:MasonInstall stylua prettier ruff`:
+StyLua handles Lua, Prettier handles JS/TS and web/document formats, and Ruff handles Python.
+Swift formatting uses `xcrun swift-format` from Xcode. Other filetypes fall back to
+an attached LSP formatter when available. Use `:ConformInfo` to inspect formatter availability.
+Use `<leader>u` to toggle Neovim's bundled undo tree. Moving with `j`/`k` in
+the tree restores the selected editing state; `u` and Ctrl-r retain normal undo/redo.
 
 Use `:Mason` to install language servers, then enable their nvim-lspconfig names
 with `vim.lsp.enable(...)` in `lua/plugins/lsp.lua`. Lua, TypeScript/JavaScript, Python,
 and Swift are enabled. Install the first three servers with
 `:MasonInstall lua-language-server typescript-language-server pyright`.
 Swift uses SourceKit-LSP from the selected Xcode toolchain through `xcrun`.
-Use `:TSInstall <language>` to install parsers and `:TSUpdate` after updating
-nvim-treesitter. Parser compilation requires tree-sitter-cli 0.26.1+ and a C compiler.
-Additional languages need highlighting enabled with `vim.treesitter.start()`.
+Treesitter installs the parser list in `lua/plugins/treesitter.lua` automatically
+and enables highlighting when a parser is available, including in buffers opened
+before installation finishes. Parser updates run after nvim-treesitter updates
+through `vim.pack`. Use `:TSInstall <language>` for extra parsers or `:TSUpdate`
+for a manual update. Parser compilation requires tree-sitter-cli 0.26.1+ and a C compiler.
 
 Add plugin specifications in `lua/plugins/init.lua` to `vim.pack.add({ ... })` and restart Neovim to install
 them. Track the generated `nvim/nvim-pack-lock.json` with the configuration.
