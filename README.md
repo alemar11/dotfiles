@@ -62,6 +62,19 @@ Neovim 0.12+ config starts in [`nvim/init.lua`](nvim/init.lua) and uses the buil
 `vim.pack` package manager. Plugins are declared and configured in
 [`nvim/lua/plugins.lua`](nvim/lua/plugins.lua): nvim-lspconfig for language-server
 presets, Mason for installing development tools, and nvim-treesitter for parsers.
+mini.nvim supplies file browsing, pickers, and icons, configured in
+[`nvim/lua/navigation.lua`](nvim/lua/navigation.lua).
+Notifications, command-line completion, surrounding text, LSP completion,
+friendly-snippets, and Git diff hunks are configured in
+[`nvim/lua/editing.lua`](nvim/lua/editing.lua).
+
+Space is the leader key. Use `-` to browse the current working directory or
+`<leader>-` to reveal the current file. In the explorer, Enter opens an entry,
+`L` opens it and closes the explorer when it is a file, Esc/`H` navigate upward,
+`q` closes the explorer, and `=` applies file edits after confirmation.
+Use `<leader>pf` to find files, `<leader>ps` to search the word under the cursor,
+`<leader>pg` for live text search, and `<leader>vh` for help.
+Use `<leader>xx` for diagnostics and `<leader>pk` to search keymaps.
 
 Use `:Mason` to install language servers, then enable their nvim-lspconfig names
 with `vim.lsp.enable(...)` in `lua/plugins.lua`. Lua, TypeScript/JavaScript, and Python

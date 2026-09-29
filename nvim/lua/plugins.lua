@@ -1,8 +1,13 @@
 vim.pack.add({
+  { src = "https://github.com/nvim-mini/mini.nvim", version = "stable" },
+  "https://github.com/rafamadriz/friendly-snippets",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason.nvim",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 })
+
+require("navigation")
+require("editing")
 
 -- Set up Mason before enabling any language servers so its binaries are on PATH.
 require("mason").setup()
