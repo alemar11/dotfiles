@@ -30,6 +30,10 @@ brew tap alemar11/tap
 echo "🔐 Trusting alemar11/tap..."
 brew trust alemar11/tap
 
+# Deja is distributed through its official tap, not Homebrew core.
+brew tap giammarco-ferranti/deja
+brew trust --formula giammarco-ferranti/deja/deja
+
 PACKAGES=(
   aria2
   asc
@@ -37,6 +41,7 @@ PACKAGES=(
   btop
   cloc
   cmake
+  deja
   cocoapods
   eza
   fastfetch
