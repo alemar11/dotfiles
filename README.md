@@ -82,6 +82,7 @@ mini.clue shows available keys after pausing on Space, `g`, `z`, Ctrl-w, `[` or 
 mini.statusline shows mode, diagnostics, and filename on the left, with LSP,
 Git branch and diff counts, file information, and cursor position on the right.
 mini.git supplies the branch information;
+mini.tabline displays open buffers at the top and highlights the current buffer.
 mini.pairs automatically closes brackets and quotes while typing.
 Use `<leader>f` to format the file, or the selection in Visual mode, with Conform.
 Formatting is manual. Install its external tools with `:MasonInstall stylua prettier ruff`:
