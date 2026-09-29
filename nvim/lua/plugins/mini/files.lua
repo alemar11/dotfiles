@@ -3,7 +3,7 @@ files.setup({
   mappings = {
     go_in = "<CR>",
     go_in_plus = "L",
-    go_out = "<Esc>",
+    go_out = "h",
     go_out_plus = "H",
   },
 })
