@@ -52,7 +52,7 @@ Guidance for coding agents working in this repository.
 ### Other configurations
 - `gitconfig` - Git configuration
 - `gitignore_global` - global gitignore patterns
-- `nvim/` - Neovim 0.12+ Lua config using built-in `vim.pack` with nvim-lspconfig, Mason, nvim-treesitter, mini.nvim, and friendly-snippets; navigation and editing modules configure mini.nvim, linked with `./dotfiles.sh install nvim`
+- `nvim/` - Neovim 0.12+ Lua config using built-in `vim.pack` with nvim-lspconfig, Mason, nvim-treesitter, mini.nvim, and friendly-snippets; individual plugin configs live under `nvim/lua/plugins/`, with mini.nvim modules under `mini/`, linked with `./dotfiles.sh install nvim`
 - `lldbinit`, `lldbinit-Xcode` - LLDB debugger configuration
 
 ## Common commands

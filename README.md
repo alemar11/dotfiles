@@ -59,14 +59,11 @@ To install the standalone Codex and Cursor CLIs:
 ## Neovim
 
 Neovim 0.12+ config starts in [`nvim/init.lua`](nvim/init.lua) and uses the built-in
-`vim.pack` package manager. Plugins are declared and configured in
-[`nvim/lua/plugins.lua`](nvim/lua/plugins.lua): nvim-lspconfig for language-server
-presets, Mason for installing development tools, and nvim-treesitter for parsers.
-mini.nvim supplies file browsing, pickers, and icons, configured in
-[`nvim/lua/navigation.lua`](nvim/lua/navigation.lua).
-Notifications, command-line completion, surrounding text, LSP completion,
-friendly-snippets, and Git diff hunks are configured in
-[`nvim/lua/editing.lua`](nvim/lua/editing.lua).
+`vim.pack` package manager. Packages are declared in
+[`nvim/lua/plugins/init.lua`](nvim/lua/plugins/init.lua), which loads the individual
+plugin configurations. Mason, LSP, and Treesitter each have their own file under
+`nvim/lua/plugins/`. The enabled mini.nvim modules each have a configuration under
+[`nvim/lua/plugins/mini/`](nvim/lua/plugins/mini/), with extra pickers alongside mini.pick.
 
 Space is the leader key. Use `-` to browse the current working directory or
 `<leader>-` to reveal the current file. In the explorer, Enter opens an entry,
@@ -77,14 +74,14 @@ Use `<leader>pf` to find files, `<leader>ps` to search the word under the cursor
 Use `<leader>xx` for diagnostics and `<leader>pk` to search keymaps.
 
 Use `:Mason` to install language servers, then enable their nvim-lspconfig names
-with `vim.lsp.enable(...)` in `lua/plugins.lua`. Lua, TypeScript/JavaScript, and Python
+with `vim.lsp.enable(...)` in `lua/plugins/lsp.lua`. Lua, TypeScript/JavaScript, and Python
 are enabled. Install their servers with
 `:MasonInstall lua-language-server typescript-language-server pyright`.
 Use `:TSInstall <language>` to install parsers and `:TSUpdate` after updating
 nvim-treesitter. Parser compilation requires tree-sitter-cli 0.26.1+ and a C compiler.
 Additional languages need highlighting enabled with `vim.treesitter.start()`.
 
-Add plugin specifications in `lua/plugins.lua` to `vim.pack.add({ ... })` and restart Neovim to install
+Add plugin specifications in `lua/plugins/init.lua` to `vim.pack.add({ ... })` and restart Neovim to install
 them. Track the generated `nvim/nvim-pack-lock.json` with the configuration.
 Run `:lua vim.pack.update()` to review updates, then `:write` to apply them or
 `:quit` to discard them. See `:help vim.pack` for details.
