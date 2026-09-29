@@ -64,7 +64,9 @@ Neovim 0.12+ config starts in [`nvim/init.lua`](nvim/init.lua) and uses the buil
 presets, Mason for installing development tools, and nvim-treesitter for parsers.
 
 Use `:Mason` to install language servers, then enable their nvim-lspconfig names
-with `vim.lsp.enable(...)` in `lua/plugins.lua`. No servers are enabled yet.
+with `vim.lsp.enable(...)` in `lua/plugins.lua`. Lua, TypeScript/JavaScript, and Python
+are enabled. Install their servers with
+`:MasonInstall lua-language-server typescript-language-server pyright`.
 Use `:TSInstall <language>` to install parsers and `:TSUpdate` after updating
 nvim-treesitter. Parser compilation requires tree-sitter-cli 0.26.1+ and a C compiler.
 Additional languages need highlighting enabled with `vim.treesitter.start()`.
