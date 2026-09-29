@@ -61,6 +61,7 @@ PACKAGES=(
   starship
   swift-format
   tree
+  tree-sitter-cli
   vapor
   watchman
   yazi
