@@ -23,3 +23,9 @@ vim.opt.relativenumber = true
 
 -- Reserve space for diagnostic and Git signs, preventing sideways shifts.
 vim.opt.signcolumn = "yes"
+
+-- Use the system clipboard for ordinary yank, delete, and paste operations.
+vim.opt.clipboard = "unnamedplus"
+
+-- Show one status line shared by all windows.
+vim.opt.laststatus = 3
