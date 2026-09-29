@@ -74,9 +74,10 @@ Use `<leader>pf` to find files, `<leader>ps` to search the word under the cursor
 Use `<leader>xx` for diagnostics and `<leader>pk` to search keymaps.
 
 Use `:Mason` to install language servers, then enable their nvim-lspconfig names
-with `vim.lsp.enable(...)` in `lua/plugins/lsp.lua`. Lua, TypeScript/JavaScript, and Python
-are enabled. Install their servers with
+with `vim.lsp.enable(...)` in `lua/plugins/lsp.lua`. Lua, TypeScript/JavaScript, Python,
+and Swift are enabled. Install the first three servers with
 `:MasonInstall lua-language-server typescript-language-server pyright`.
+Swift uses SourceKit-LSP from the selected Xcode toolchain through `xcrun`.
 Use `:TSInstall <language>` to install parsers and `:TSUpdate` after updating
 nvim-treesitter. Parser compilation requires tree-sitter-cli 0.26.1+ and a C compiler.
 Additional languages need highlighting enabled with `vim.treesitter.start()`.
