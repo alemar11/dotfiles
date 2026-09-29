@@ -56,19 +56,10 @@ To install the standalone Codex and Cursor CLIs:
 - Prompt configuration is managed through `starship.toml`, which `dotfiles.sh` links to `~/.config/starship.toml`.
 - `zsh/prompt.zsh` only initializes Starship; prompt layout and custom segments live in `starship.toml`.
 
-## Vim
-
-Classic macOS Vim with a small [`vimrc`](vimrc) and no plugins. In Ghostty it
-matches macOS light/dark and the Starship palette via [`vim/colors/dotfiles.vim`](vim/colors/dotfiles.vim).
-Buffers, splits, search, and the file browser are built into Vim.
-
-Link it with `./dotfiles.sh install vimrc`. The shell aliases `vim` to `nvim`; run
-classic Vim with `command vim .` or `\vim .`.
-
 ## Neovim
 
-Neovim config in [`nvim/`](nvim/) reuses the same Ghostty/macOS appearance and
-[`vim/colors/dotfiles.vim`](vim/colors/dotfiles.vim) colorscheme, plus line numbers.
+Neovim config in [`nvim/`](nvim/) follows Ghostty/macOS appearance with its bundled
+[`nvim/colors/dotfiles.vim`](nvim/colors/dotfiles.vim) colorscheme, plus line numbers.
 It bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) only to install
 [WhichKey](https://github.com/folke/which-key.nvim); the lockfile is tracked as
 `nvim/lazy-lock.json`.

@@ -53,17 +53,17 @@ with tempfile.TemporaryDirectory(prefix="dotfiles-links-") as temp:
     assert link.is_symlink()
 
     # remove/clean without --yes fail outside a TTY.
-    denied = run("remove", "vimrc", ok=False, yes=False)
+    denied = run("remove", "gitconfig", ok=False, yes=False)
     assert "Re-run with --yes" in denied.stderr
 
     # Dangling managed symlink is replaced on install.
-    vimrc = target / ".vimrc"
-    vimrc.symlink_to(repo / "missing-vimrc-path")
-    assert vimrc.is_symlink() and not vimrc.exists()
-    run("install", "vimrc")
-    assert vimrc.is_symlink() and vimrc.resolve() == repo / "vimrc"
-    run("remove", "vimrc")
-    assert not vimrc.is_symlink()
+    gitconfig = target / ".gitconfig"
+    gitconfig.symlink_to(repo / "missing-gitconfig-path")
+    assert gitconfig.is_symlink() and not gitconfig.exists()
+    run("install", "gitconfig")
+    assert gitconfig.is_symlink() and gitconfig.resolve() == repo / "gitconfig"
+    run("remove", "gitconfig")
+    assert not gitconfig.is_symlink()
 
 print(
     "Scoped link tests passed: selection, idempotence, dangling repair, "

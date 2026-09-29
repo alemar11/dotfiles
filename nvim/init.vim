@@ -1,13 +1,13 @@
 " Neovim. Linked with: ./dotfiles.sh install nvim
-" Bare style match for classic Vim, with lazy.nvim for WhichKey:
+" Neovim appearance and lazy.nvim for WhichKey:
 " - Ghostty/macOS appearance + Starship colorscheme before the first redraw
 " - line numbers; ignorecase + smartcase search; WhichKey is the only plugin
 
 " Neovim detects the terminal background and reloads this colorscheme when
 " Ghostty reports a macOS light/dark theme change.
 
-" Reuse Vim's colorscheme from the sibling tree, without a second copy.
-execute 'set runtimepath^=' . fnameescape(fnamemodify(resolve(expand('<sfile>:p')), ':h:h') . '/vim')
+" Load the bundled colorscheme, including when this config is passed with -u.
+execute 'set runtimepath^=' . fnameescape(fnamemodify(resolve(expand('<sfile>:p')), ':h'))
 
 set termguicolors
 
@@ -26,7 +26,7 @@ if has('macunix')
     if vim.o.background ~= background then
       vim.o.background = background
       local vimrc = vim.fn.resolve(vim.fn.expand('$MYVIMRC'))
-      local colorscheme = vim.fn.fnamemodify(vimrc, ':h:h') .. '/vim/colors/dotfiles.vim'
+      local colorscheme = vim.fn.fnamemodify(vimrc, ':h') .. '/colors/dotfiles.vim'
       vim.cmd.source(colorscheme)
     end
   end

@@ -2,13 +2,13 @@
 # Hide the parent-folder pane; keep the current folder and preview.
 ratio = [0, 4, 3]
 
-# Open text files in Vim and use macOS handlers for previews/documents.
+# Open text files in Neovim and use macOS handlers for previews/documents.
 [opener]
 xcode = [
   { run = "xed %s", orphan = true, for = "macos", desc = "Xcode" },
 ]
 edit = [
-  { run = "vim %s", block = true, for = "macos", desc = "Vim" },
+  { run = "nvim %s", block = true, for = "macos", desc = "Neovim" },
 ]
 open = [
   { run = "open %s", orphan = true, for = "macos", desc = "Open" },
