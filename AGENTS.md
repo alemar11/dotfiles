@@ -52,8 +52,7 @@ Guidance for coding agents working in this repository.
 ### Other configurations
 - `gitconfig` - Git configuration
 - `gitignore_global` - global gitignore patterns
-- `nvim/colors/dotfiles.vim` - Starship/Ghostty colorscheme loaded by Neovim
-- `nvim/` - Neovim config (bundled colorscheme + line numbers + WhichKey via lazy.nvim), linked with `./dotfiles.sh install nvim`
+- `nvim/` - Neovim 0.12+ Lua config using built-in `vim.pack` with nvim-lspconfig, Mason, and nvim-treesitter; linked with `./dotfiles.sh install nvim`
 - `lldbinit`, `lldbinit-Xcode` - LLDB debugger configuration
 
 ## Common commands
@@ -77,4 +76,4 @@ Guidance for coding agents working in this repository.
 - `zshrc` derives `DOTFILES` from the `~/.zshrc` symlink target, with fallback to `~/Developer/dotfiles`.
 
 ## Maintenance notes
-- For terminal theming in this repo, Starship's palette is the source of truth; keep Ghostty's ANSI palette, Neovim's `dotfiles` colorscheme, `eza`/`LS_COLORS`/`EZA_COLORS`, and custom prompt helpers aligned to it rather than the reverse.
+- For terminal theming in this repo, Starship's palette is the source of truth; keep Ghostty's ANSI palette, any custom Neovim theme, `eza`/`LS_COLORS`/`EZA_COLORS`, and custom prompt helpers aligned to it rather than the reverse.

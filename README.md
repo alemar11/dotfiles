@@ -58,11 +58,21 @@ To install the standalone Codex and Cursor CLIs:
 
 ## Neovim
 
-Neovim config in [`nvim/`](nvim/) follows Ghostty/macOS appearance with its bundled
-[`nvim/colors/dotfiles.vim`](nvim/colors/dotfiles.vim) colorscheme, plus line numbers.
-It bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) only to install
-[WhichKey](https://github.com/folke/which-key.nvim); the lockfile is tracked as
-`nvim/lazy-lock.json`.
+Neovim 0.12+ config starts in [`nvim/init.lua`](nvim/init.lua) and uses the built-in
+`vim.pack` package manager. Plugins are declared and configured in
+[`nvim/lua/plugins.lua`](nvim/lua/plugins.lua): nvim-lspconfig for language-server
+presets, Mason for installing development tools, and nvim-treesitter for parsers.
+
+Use `:Mason` to install language servers, then enable their nvim-lspconfig names
+with `vim.lsp.enable(...)` in `lua/plugins.lua`. No servers are enabled yet.
+Use `:TSInstall <language>` to install parsers and `:TSUpdate` after updating
+nvim-treesitter. Parser compilation requires tree-sitter-cli 0.26.1+ and a C compiler.
+Additional languages need highlighting enabled with `vim.treesitter.start()`.
+
+Add plugin specifications in `lua/plugins.lua` to `vim.pack.add({ ... })` and restart Neovim to install
+them. Track the generated `nvim/nvim-pack-lock.json` with the configuration.
+Run `:lua vim.pack.update()` to review updates, then `:write` to apply them or
+`:quit` to discard them. See `:help vim.pack` for details.
 
 Link it with `./dotfiles.sh install nvim`, then open `nvim .` (or `vim .`).
 
