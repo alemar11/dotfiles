@@ -7,3 +7,5 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and center cursor"
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and center cursor" })
 vim.keymap.set("n", "n", "nzz", { desc = "Next search match and center cursor" })
 vim.keymap.set("n", "N", "Nzz", { desc = "Previous search match and center cursor" })
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
