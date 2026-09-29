@@ -90,6 +90,9 @@ mu() {
     mise upgrade --yes
 }
 
+# Update Homebrew first, then mise-managed tools.
+alias u='bu && mu'
+
 # npm
 alias nu='echo "⬆️ Updating global packages (including npm)..." && npm update -g && npm install -g npm'
 
