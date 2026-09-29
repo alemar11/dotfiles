@@ -12,7 +12,7 @@ clue.setup({
   clues = {
     clue.gen_clues.g(),
     clue.gen_clues.z(),
-    clue.gen_clues.windows(),
+    clue.gen_clues.windows({ submode_resize = true }),
     clue.gen_clues.square_brackets(),
     { mode = "n", keys = "<Leader>p", desc = "+Find" },
     { mode = "n", keys = "<Leader>v", desc = "+Help" },
