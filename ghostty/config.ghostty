@@ -18,7 +18,7 @@ background-blur            = 15
 cursor-opacity             = .8
 macos-titlebar-proxy-icon  = hidden
 #title                     = " "
-#unfocused-split-opacity   = 0.90
+unfocused-split-opacity    = 0.55
 #unfocused-split-fill      = #1e2030
 
 # --- Behavior ---
