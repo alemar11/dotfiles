@@ -77,6 +77,7 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
+  codex
   datagrip
   font-fira-code-nerd-font
   google-chrome
