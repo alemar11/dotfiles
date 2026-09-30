@@ -59,6 +59,7 @@ PACKAGES=(
   mkcert
   mole
   neovim
+  nginx
   pandoc
   pi-coding-agent
   ripgrep
