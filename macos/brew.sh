@@ -44,6 +44,7 @@ PACKAGES=(
   ffmpeg
   fzf
   gh
+  git
   git-lfs
   herdr
   hyperfine
