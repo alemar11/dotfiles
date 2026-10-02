@@ -22,25 +22,16 @@ alias tm='top -o vsize' # processes sorted by Memory
 alias g='git'
 alias ga='git add .'
 alias gb='git branch -a'
-alias gbclean='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gc='git commit -v'
 alias gca="git commit -v -a"
-alias gcount='git shortlog -sn'
 alias gcb='git checkout -b'
-alias gco='git checkout'
 alias gd='git branch -d'
 alias gD='git branch -D'
-alias gexport='git archive --format zip --output'
 alias gf='git fetch'
-alias gfp='git fetch --prune'
 alias gl='git log --graph --decorate --all'
-alias glp="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
-alias glr="git log --pretty=oneline --abbrev-commit --first-parent"
 alias gm="git mergetool"
 alias gp='git push'
 alias gs='git status'
-alias gsb='git status -sb'
-alias gt='git checkout -t'
 alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Lazygit and Lazydocker
