@@ -1,5 +1,7 @@
 # Dotfiles dark theme aligned to the Starship palette.
 background = #2c323c
+# Dim inactive panes with a half-brightness shade of the background.
+unfocused-split-fill = #16191e
 foreground = #dbe2ea
 cursor-color = #dbe2ea
 cursor-text = #2c323c

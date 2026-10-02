@@ -12,14 +12,14 @@ window-padding-x           = 10
 window-padding-y           = 8
 
 # --- Appearance ---
-background-opacity         = 0.90
+#background-opacity         = 0.90
 background-blur            = 15
 #background-blur           = macos-glass-clear
 cursor-opacity             = .8
 macos-titlebar-proxy-icon  = hidden
 #title                     = " "
 unfocused-split-opacity    = 0.55
-#unfocused-split-fill      = #1e2030
+unfocused-split-fill      = #1e2030
 
 # --- Behavior ---
 focus-follows-mouse        = true
