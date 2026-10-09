@@ -75,6 +75,7 @@ echo "🍺 Installing brew packages..."
 brew install "${PACKAGES[@]}"
 
 CASKS=(
+  android-cli
   appcleaner
   bruno
   chatgpt
