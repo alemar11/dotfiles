@@ -10,7 +10,6 @@ fi
 
 echo "Installing software"
 bash "./macos/brew.sh"
-bash "./macos/ai-cli.sh"
 bash "./macos/mise.sh"
 echo "Done."
 

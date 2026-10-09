@@ -14,7 +14,7 @@ These dotfiles are intended for Apple Silicon Macs only (M1/M2/M3 and newer). Th
 
 # macOS
 
-In the *macos* folder there are scripts to install Homebrew packages, the standalone Cursor CLI, mise-managed development tools, and apply `macOS` defaults. Codex CLI is managed by Homebrew.
+In the *macos* folder there are scripts to install Homebrew packages, mise-managed development tools, and apply `macOS` defaults. Codex CLI is managed by Homebrew.
 
 ```
 ./macos/install.sh
@@ -24,12 +24,6 @@ To install only the tools configured in `mise/config.toml`:
 
 ```
 ./macos/mise.sh
-```
-
-To install the standalone Cursor CLI:
-
-```
-./macos/ai-cli.sh
 ```
 
 # Interactive Steps and Permissions
