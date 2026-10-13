@@ -79,6 +79,7 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
+  claude
   claude-code
   codex
   datagrip
