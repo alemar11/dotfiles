@@ -39,6 +39,10 @@ alias ld='lazydocker'
 
 # Codex
 alias cx='codex --yolo'
+
+# Claude Code
+alias ccx='claude --dangerously-skip-permissions'
+
 alias ff='fastfetch'
 
 # Simulators

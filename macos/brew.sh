@@ -79,6 +79,7 @@ CASKS=(
   appcleaner
   bruno
   chatgpt
+  claude-code
   codex
   datagrip
   font-fira-code-nerd-font
