@@ -4,12 +4,14 @@ set -euo pipefail
 
 if [ $# -lt 1 ]; then
   echo "Usage: format-json FILES..."
-  exit 127
+  exit 2
 fi
+
+tmpdir=$(mktemp -d)
+trap 'rm -rf "$tmpdir"' EXIT
 
 for file in "$@"
 do
-  tmpdir=$(mktemp -d)
   cp "$file" "$tmpdir/input.json"
   python3 -m json.tool "$tmpdir/input.json" "$tmpdir/formatted.json"
   mv "$tmpdir/formatted.json" "$file"

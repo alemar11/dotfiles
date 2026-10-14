@@ -21,9 +21,9 @@ if [[ -n "$last_commit" ]]; then
   sub_hours=$((hours % 24))
   sub_minutes=$((minutes % 60))
 
-  if (( hours > 24 )); then
+  if (( hours >= 24 )); then
     age="${days}d${sub_hours}h${sub_minutes}m"
-  elif (( minutes > 60 )); then
+  elif (( minutes >= 60 )); then
     age="${hours}h${sub_minutes}m"
   else
     age="${minutes}m"

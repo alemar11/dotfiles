@@ -12,6 +12,9 @@ fi
 : "${DOTFILES:=$HOME/Developer/dotfiles}"
 export DOTFILES
 
+# Keep PATH entries unique across nested shells and `reload`.
+typeset -U path
+
 # Bootstrap PATH before sourcing feature modules that probe commands at load time.
 export PATH="$DOTFILES/bin:/opt/homebrew/bin:$PATH"
 
