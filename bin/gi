@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# Fetch gitignore from gitignore.io.
-# Usage: gi xcode
-
-curl "https://www.gitignore.io/api/${1:?usage: gi <template>}"
