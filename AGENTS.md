@@ -41,7 +41,6 @@ Guidance for coding agents working in this repository.
   - `mise.zsh` - mise activation when installed
   - `options.zsh` - zsh options
   - `prompt.zsh` - Starship bootstrap for the shell prompt
-  - `vscode.zsh` - VS Code functions
   - `window.zsh` - terminal window title helpers
   - `xcode.zsh` - Xcode functions
   - `zoxide.zsh` - zoxide init when installed
