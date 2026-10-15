@@ -8,8 +8,12 @@
   excludesfile = ~/.gitignore_global
 [merge]
   tool = nvimdiff
+[init]
+  defaultBranch = main
+  templateDir = ~/.git_template
 [push]
   default = upstream
+  autoSetupRemote = true
 [alias]
   a = add
   last = diff HEAD^ HEAD

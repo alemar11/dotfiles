@@ -35,7 +35,7 @@ alias gs='git status'
 alias gwip='git add -A && git commit --no-verify -m "--wip-- [skip ci]"'
 
 # Lazygit and Lazydocker
-alias ld='lazydocker'
+alias lzd='lazydocker'
 
 # Codex
 alias cx='codex --yolo'

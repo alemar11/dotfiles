@@ -1,9 +1,35 @@
 #!/bin/sh
 
-if grep -q -i -e "WIP" -e "work in progress" $1; then
-    read -p "You're about to add a WIP commit, do you want to run the CI? [y|n] " -n 1 -r < /dev/tty
-    echo
-    if echo $REPLY | grep -E '^[Nn]$' > /dev/null; then
-        echo "[skip ci]" >> $1
-    fi
-fi
+# Offer to skip CI for work-in-progress commits.
+# Installed into new repos via init.templateDir; run `git init` in an
+# existing repo to add it there.
+
+msg_file="$1"
+
+# Only look at the message itself: drop the `commit -v` diff below the
+# scissors line and comment lines, which git strips anyway.
+message=$(sed '/^# -* >8 -*$/,$d' "$msg_file" | grep -v '^#')
+
+printf '%s\n' "$message" | grep -qiwE 'wip|work in progress' || exit 0
+printf '%s\n' "$message" | grep -qiE '\[(skip ci|ci skip)\]' && exit 0
+
+# GUI clients (Tower, Xcode) have no terminal to ask on; leave CI enabled.
+{ exec 3</dev/tty; } 2>/dev/null || exit 0
+
+printf "You're about to add a WIP commit, do you want to run the CI? [y|n] "
+read -r reply <&3
+exec 3<&-
+
+case "$reply" in
+  [Nn]*) ;;
+  *) exit 0 ;;
+esac
+
+# Insert the tag before the first comment line so `commit -v` cleanup keeps it.
+tmp=$(mktemp) || exit 1
+awk '
+  !done && /^#/ { print "[skip ci]"; print ""; done = 1 }
+  { print }
+  END { if (!done) { print ""; print "[skip ci]" } }
+' "$msg_file" > "$tmp" && cat "$tmp" > "$msg_file"
+rm -f "$tmp"

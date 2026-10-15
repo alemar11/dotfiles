@@ -39,7 +39,7 @@ zstyle ":completion:*:commands" rehash 1
 # Process completion shows all processes with colors
 zstyle ':completion:*:*:*:*:processes' menu yes select
 zstyle ':completion:*:*:*:*:processes' force-list always
-zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,cmd'
+zstyle ':completion:*:*:*:*:processes' command 'ps -A -o pid,user,command'
 zstyle ':completion:*:*:*:*:processes' list-colors "=(#b) #([0-9]#)*=0=${color[green]}"
 zstyle ':completion:*:*:kill:*:processes' command 'ps -A -o pid,user,tty,command'
 # zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'

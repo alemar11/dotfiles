@@ -94,7 +94,9 @@ CASKS=(
   orbstack
   proxyman
   sketch
+  t3-code@nightly
   tower
+  visual-studio-code
   xcodes
   xcodes-app
 )

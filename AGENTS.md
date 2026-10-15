@@ -18,7 +18,7 @@ Guidance for coding agents working in this repository.
 - `dotfiles.sh` symlinks repo files into the home directory and manages install/remove/clean flows.
 
 ### macOS setup
-- `macos/install.sh` runs `brew.sh` and `defaults.sh`.
+- `macos/install.sh` runs `brew.sh`, `mise.sh`, and `defaults.sh`.
 - `macos/brew.sh` installs Homebrew packages and casks (includes `shellcheck`).
 - For Homebrew list additions, do not add a generic tap list; use default Homebrew package/cask names when they resolve from default taps, and use fully qualified third-party tokens only after verifying Homebrew can resolve them without a separate tap step.
 - `macos/defaults.sh` applies macOS preferences.
@@ -41,7 +41,6 @@ Guidance for coding agents working in this repository.
   - `mise.zsh` - mise activation when installed
   - `options.zsh` - zsh options
   - `prompt.zsh` - Starship bootstrap for the shell prompt
-  - `vscode.zsh` - VS Code functions
   - `window.zsh` - terminal window title helpers
   - `xcode.zsh` - Xcode functions
   - `zoxide.zsh` - zoxide init when installed

@@ -24,8 +24,19 @@ vim.opt.relativenumber = true
 -- Reserve space for diagnostic and Git signs, preventing sideways shifts.
 vim.opt.signcolumn = "yes"
 
--- Use the system clipboard for ordinary yank, delete, and paste operations.
-vim.opt.clipboard = "unnamedplus"
+-- Copy yanks (not deletes or changes) to the macOS clipboard.
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("DotfilesYankClipboard", { clear = true }),
+  callback = function()
+    local event = vim.v.event
+    if event.operator == "y" and event.regname == "" then
+      vim.fn.setreg("+", event.regcontents, event.regtype)
+    end
+  end,
+})
 
 -- Show one status line shared by all windows.
 vim.opt.laststatus = 3
+
+-- Show diagnostic messages at the end of the line, not only as gutter signs.
+vim.diagnostic.config({ virtual_text = true })

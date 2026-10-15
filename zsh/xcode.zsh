@@ -6,59 +6,31 @@ alias xcsel='sudo xcode-select --switch'
 
 # original author: @subdigital
 # source: http://gist.github.com/subdigital/5420709
-function xc {
-  local xcode_proj
-  if [[ $# == 0 ]]; then
-    xcode_proj=(*.{xcworkspace,xcodeproj,playground}(N))
-    if [ -f "Package.swift" ]; then
-      xcode_proj+=("Package.swift")
-    fi
-  else
-    xcode_proj=($1/*.{xcworkspace,xcodeproj,playground}(N))
-    if [ -f $1/"Package.swift" ]; then
-      xcode_proj+=( $1/"Package.swift")
-    fi
+# Open the first Xcode entrypoint (workspace, project, playground, or Package.swift)
+# in the given app. Usage: _xcode_open <app> [dir]
+function _xcode_open {
+  local app_name=$1 dir=${2:-.}
+  local -a xcode_proj
+  xcode_proj=($dir/*.{xcworkspace,xcodeproj,playground}(N))
+  if [[ -f $dir/Package.swift ]]; then
+    xcode_proj+=($dir/Package.swift)
   fi
 
-  if [[ ${#xcode_proj} -eq 0 ]]; then
-    if [[ $# == 0 ]]; then
+  if (( ${#xcode_proj} == 0 )); then
+    if [[ $dir == . ]]; then
       echo "⚠️  No Xcode entrypoint file found in the current directory."
     else
-      echo "⚠️  No Xcode entrypoint file found in $1."
+      echo "⚠️  No Xcode entrypoint file found in $dir."
     fi
     return 1
-  else
-    echo "✅ Found ${xcode_proj[1]}, opening with Xcode."
-    open -a "Xcode" "${xcode_proj[1]}"
-  fi
-}
-
-function xcb {
-  local xcode_proj
-  if [[ $# == 0 ]]; then
-    xcode_proj=(*.{xcworkspace,xcodeproj,playground}(N))
-    if [ -f "Package.swift" ]; then
-      xcode_proj+=("Package.swift")
-    fi
-  else
-    xcode_proj=($1/*.{xcworkspace,xcodeproj,playground}(N))
-    if [ -f $1/"Package.swift" ]; then
-      xcode_proj+=( $1/"Package.swift")
-    fi
   fi
 
-  if [[ ${#xcode_proj} -eq 0 ]]; then
-    if [[ $# == 0 ]]; then
-      echo "⚠️  No Xcode entrypoint file found in the current directory."
-    else
-      echo "⚠️  No Xcode entrypoint file found in $1."
-    fi
-    return 1
-  else
-    echo "✅ Found ${xcode_proj[1]}, opening with Xcode Beta."
-    open -a "Xcode-beta" "${xcode_proj[1]}"
-  fi
+  echo "✅ Found ${xcode_proj[1]:t}, opening with $app_name."
+  open -a "$app_name" "${xcode_proj[1]}"
 }
+
+function xc { _xcode_open "Xcode" "$@" }
+function xcb { _xcode_open "Xcode-beta" "$@" }
 
 # "Xcode select by version" - select Xcode by just version number
 # Uses naming convention:
@@ -89,7 +61,7 @@ function xcv {
     return 1
   fi
   # Main case: "xcv <version>" to select a version
-  local version=$1
+  local version=$1 app
   local -A xcode_versions
   xcode_locate_versions
   if [[ -z ${xcode_versions[$version]} ]]; then
@@ -200,7 +172,7 @@ function xcode_list_versions {
   fi
   versions=(${(kni)xcode_versions})
   for version ($versions); do
-    if [[ $#version > $width ]]; then
+    if (( $#version > width )); then
       width=$#version;
     fi
   done

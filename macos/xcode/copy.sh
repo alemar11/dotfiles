@@ -15,11 +15,6 @@ bindings="${user_data_directory}/KeyBindings"
 mkdir -p "$bindings"
 cp -rf "${xcode_backup_directory}/AM.idekeybindings" "$bindings"
 
-colors="${user_data_directory}/FontAndColorThemes"
-mkdir -p "$colors"
-cp -rf "${xcode_backup_directory}/AM.xccolortheme" "$colors"
-cp -rf "${xcode_backup_directory}/AM Dusk.xccolortheme" "$colors"
-
 breakpoints="${user_data_directory}/xcdebugger"
 mkdir -p "$breakpoints"
 cp -rf "${xcode_backup_directory}/Breakpoints_v2.xcbkptlist" "$breakpoints/Breakpoints_v2.xcbkptlist"
