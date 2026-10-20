@@ -1,6 +1,7 @@
 [mgr]
 # Hide the parent-folder pane; keep the current folder and preview.
 ratio = [0, 4, 3]
+show_hidden = true
 
 # Open text files in Neovim and use macOS handlers for previews/documents.
 [opener]
