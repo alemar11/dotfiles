@@ -4,11 +4,11 @@ alias reload='rm -f "${ZDOTDIR:-$HOME}/.zcompdump" && exec zsh -l'
 # cd
 alias ..='cd ..'
 
-# Listing: leave `ls` as the real binary so flags like `-t` keep working.
-# Fancy eza listings use short aliases instead.
-alias l='eza --icons --grid --group-directories-first --almost-all'
-alias ll='l -la'
-alias lt='l -s modified'
+# Listing
+alias ls='eza --icons --grid --group-directories-first --almost-all'
+alias l='ls'
+alias ll='ls -la'
+alias lt='ls -s modified'
 alias cat='bat'
 alias vim='nvim'
 alias cpwd='pwd | pbcopy' #copy working directory

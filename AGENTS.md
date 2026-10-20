@@ -34,7 +34,7 @@ Guidance for coding agents working in this repository.
 ### Shell configuration
 - `zshrc` sources all `zsh/*.zsh` files.
 - `zsh/` contains modular configuration:
-  - `aliases.zsh` - shell aliases (`vim` → `nvim`; fancy listing is `l`/`ll`/`lt`, not `ls`)
+  - `aliases.zsh` - shell aliases (`vim` → `nvim`; `ls`/`l`/`ll`/`lt` use `eza`)
   - `colors.zsh` - Starship-aligned `LS_COLORS` / `EZA_COLORS`
   - `completion.zsh` - completion settings
   - `history.zsh` - history options
