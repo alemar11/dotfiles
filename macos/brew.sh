@@ -46,7 +46,6 @@ PACKAGES=(
   gh
   git
   git-lfs
-  herdr
   hyperfine
   jq
   lazydocker
