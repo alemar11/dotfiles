@@ -94,6 +94,8 @@ CASKS=(
   proxyman
   sketch
   t3-code@nightly
+  tailscale-app
+  tcp-viewer
   tower
   visual-studio-code
   xcodes
