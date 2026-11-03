@@ -41,3 +41,7 @@ for file in ~/.zsh/*.zsh(N); do
     source "$file"
 done
 export PATH="$HOME/.local/bin:$PATH"
+
+# Android SDK
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/platform-tools"
