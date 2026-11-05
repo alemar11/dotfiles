@@ -73,6 +73,10 @@ PACKAGES=(
 echo "🍺 Installing brew packages..."
 brew install "${PACKAGES[@]}"
 
+echo "🐙 Installing GitHub CLI extensions..."
+gh extension install --force dlvhdr/gh-dash
+gh extension install --force github/gh-stack
+
 CASKS=(
   android-cli
   appcleaner

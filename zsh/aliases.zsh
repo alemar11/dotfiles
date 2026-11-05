@@ -84,8 +84,12 @@ mu() {
     mise upgrade --yes
 }
 
-# Update Homebrew first, then mise-managed tools.
-alias u='bu && mu'
+# GitHub CLI extensions
+alias ghd='gh dash'
+alias ghu='gh extension upgrade --all'
+
+# Update Homebrew, mise-managed tools, and GitHub CLI extensions.
+alias u='bu && mu && ghu'
 
 # npm
 alias nu='echo "⬆️ Updating global packages (including npm)..." && npm update -g && npm install -g npm'
