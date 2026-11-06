@@ -4,12 +4,15 @@ alias reload='rm -f "${ZDOTDIR:-$HOME}/.zcompdump" && exec zsh -l'
 # cd
 alias ..='cd ..'
 
-# Listing
-alias ls='eza --icons --grid --group-directories-first --almost-all'
-alias l='ls'
-alias ll='ls -la'
-alias lt='ls -s modified'
-alias cat='bat'
+# Listing and display aliases for interactive shells
+if [[ -o interactive ]]; then
+  alias ls=eza
+  alias l=ls
+  alias ll='ls -la'
+  alias lt='ls -s modified'
+  alias cat=bat
+fi
+
 alias vim='nvim'
 alias cpwd='pwd | pbcopy' #copy working directory
 alias cpdir=cpwd
