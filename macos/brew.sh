@@ -83,7 +83,7 @@ CASKS=(
   bruno
   chatgpt
   claude
-  claude-code
+  claude-code@latest
   codex
   datagrip
   font-fira-code-nerd-font
